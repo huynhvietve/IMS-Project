@@ -28,7 +28,6 @@ const BasicForm = () => {
       .post("http://192.168.43.30:5000/login", {
         username: enteredEmail,
         password: enteredPasword,
-        // returnSecureToken: true,
       })
       .then((res) => {
         console.log(res);
@@ -37,11 +36,7 @@ const BasicForm = () => {
         dispatch(authActions.setToken(data.accessToken));
       })
       .catch((err) => {
-        let errorMessage = " Đăng nhập thất bại!";
-        //show an error modal
-        console.log(err);
-        alert(err.message);
-        throw new Error(errorMessage);
+        alert(" bạn điền sai thông tin !");
       });
   };
 
