@@ -1,7 +1,7 @@
-import { API_LOGIN } from "./config";
+import { API_BASE } from "./config";
 import api from "./instance";
 export const loginAPI = (username, password) => {
-  return api.post(`${API_LOGIN}/login`, {
+  return api.post(`${API_BASE}/login`, {
     username: username,
     password: password,
   });

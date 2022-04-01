@@ -33,7 +33,8 @@ const BasicForm = () => {
         dispatch(authActions.getid(enteredEmail));
       })
       .catch((err) => {
-        alert(" bạn điền sai thông tin !");
+        const message = "Đăng nhập không thành công";
+        alert(message);
       });
   };
 
