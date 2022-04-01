@@ -7,6 +7,7 @@ import { authActions } from "../../redux/store";
 const Main = (props) => {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const token = useSelector((state) => state.auth.token);
+  const id = useSelector((state) => state.auth.id);
   const match = useRouteMatch();
   const dispatch = useDispatch();
   const logoutHandler = () => {
@@ -19,6 +20,7 @@ const Main = (props) => {
         <h1>Welcome</h1>
         <div>Login:{isLogin ? "true" : "false"}</div>
         <div>{token}</div>
+        <div>{id}</div>
         <button onClick={logoutHandler}>LOGOUT</button>
       </div>
       <section>{props.children}</section>
