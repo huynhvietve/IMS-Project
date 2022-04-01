@@ -3,7 +3,7 @@ import "../../asset/css/form.css";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../redux/store";
-import api from "../../api/api";
+import { loginAPI } from "../../api/service";
 import { useHistory } from "react-router-dom";
 
 const BasicForm = () => {
@@ -24,24 +24,17 @@ const BasicForm = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPasword = paswordInputRef.current.value;
 
-    api
-      .post("http://192.168.43.30:5000/login", {
-        username: enteredEmail,
-        password: enteredPasword,
-        // returnSecureToken: true,
-      })
+    loginAPI(enteredEmail, enteredPasword)
       .then((res) => {
         console.log(res);
         const data = res.data;
         dispatch(authActions.login());
         dispatch(authActions.setToken(data.accessToken));
+        dispatch(authActions.getid(enteredEmail));
       })
       .catch((err) => {
-        let errorMessage = " Đăng nhập thất bại!";
-        //show an error modal
-        console.log(err);
-        alert(err.message);
-        throw new Error(errorMessage);
+        const message = "Đăng nhập không thành công";
+        alert(message);
       });
   };
 
