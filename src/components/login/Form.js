@@ -30,7 +30,7 @@ const BasicForm = () => {
         const data = res.data;
         dispatch(authActions.login());
         dispatch(authActions.setToken(data.accessToken));
-        dispatch(authActions.getid(enteredEmail));
+        dispatch(authActions.setId(enteredEmail));
       })
       .catch((err) => {
         const message = "Đăng nhập không thành công";
