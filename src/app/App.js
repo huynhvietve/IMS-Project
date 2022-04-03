@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      <Switch>
+      {/* <Switch>
         <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
           {isAuthen && <Redirect to="/main" />}
@@ -24,7 +24,8 @@ function App() {
         <Route path="*">
           <Redirect to="/login" />
         </Route>
-      </Switch>
+      </Switch> */}
+      <Main/>
     </div>
   );
 }

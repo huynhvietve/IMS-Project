@@ -1,45 +1,31 @@
-import { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Switch, useRouteMatch, Link } from "react-router-dom";
-import User from "../../pages/User";
-import Profile from "../../pages/Profile";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import { authActions } from "../../redux/store";
-const Main = (props) => {
-  const isLogin = useSelector((state) => state.auth.isAuthenticated);
-  const token = useSelector((state) => state.auth.token);
-  const id = useSelector((state) => state.auth.id);
-  const match = useRouteMatch();
-  const dispatch = useDispatch();
-  const logoutHandler = () => {
-    dispatch(authActions.logout());
-  };
-  return (
-    <Fragment>
-      {/*TODO: Add header, navigator here, add layout, css here */}
-      <div>
-        <h1>Welcome</h1>
-        <div>Login:{isLogin ? "true" : "false"}</div>
-        <div>{token}</div>
-        <div>{id}</div>
-        <button onClick={logoutHandler}>LOGOUT</button>
-      </div>
-      <section>{props.children}</section>
-      <section>
-        <Link to={`${match.url}/user`}>User Link</Link>
-        <Link to={`${match.url}/profile`}>Profile</Link>
-      </section>
+import "../../asset/css/navbar.css";
+import "../../asset/css/header.css";
+// import "../../asset/css/candidate.css";
+// import "../../asset/css/delModal.css";
+// import "../../asset/css/pagination.css";
+import Navbar from "../../components/layout/navbar";
+import Header from "../../components/layout/header";
+import indexCandidate from "../table/indexCandidate";
+import indexMentor from "../table/indexMentor";
+import indexStudent from "../table/indexStudent";
+import indexHome from "../table/indexHome";
 
-      <section>
-        <Switch>
-          <Route path={`${match.path}/user`}>
-            <User />
-          </Route>
-          <Route path={`${match.path}/profile`}>
-            <Profile />
-          </Route>
-        </Switch>
-      </section>
-    </Fragment>
+function Main(){
+ 
+  return (
+    <BrowserRouter>
+    <Header />
+      <Navbar />  
+      <Switch>
+      <Route path="/" exact component={indexHome} />
+        <Route path="/candidate" exact component={indexCandidate} />
+        <Route path="/mentor" exact component={indexMentor} />
+        <Route path="/student" exact component={indexStudent} />
+      </Switch>
+    </BrowserRouter>
   );
 };
 export default Main;
