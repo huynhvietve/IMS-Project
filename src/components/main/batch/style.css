@@ -1,0 +1,13 @@
+.inputText{
+    margin-left:10px;
+    width:200px;
+    height:30px;
+  }
+  .table-getStarting {
+    background-color: #007bff;
+    border-radius: 10px 10px 10px 10px;
+    color: #fff;
+  }
+.label{
+  margin-left: 5px;
+}
