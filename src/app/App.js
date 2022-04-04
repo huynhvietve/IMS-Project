@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/" exact>
+        {/* <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
           {isAuthen && <Redirect to="/main" />}
         </Route>
@@ -27,7 +27,7 @@ function App() {
         )}
         <Route path="*">
           <Redirect to="/login" />
-        </Route>
+        </Route> */}
         <Route path="/indexCandidate" exact component={IndexCandidate} />
       </Switch>
     </div>

@@ -4,19 +4,20 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
 
 export default function AddCandidate() {
+  
+  const [candi, setCandi] = useState([]);
+  useEffect(() => {
+    candidateAPI("GetListCandidate/batch9", "Get", null).then((res) => {
+      setCandi(res.data);
+    });
+  });
+
   const [dg, setdg] = useState([]);
   useEffect(() => {
     candidateAPI("GetListDG", "Get", null).then((res) => {
       setdg(res.data);
     });
   }, []);
-
-  const [candi, setCandi] = useState([]);
-  useEffect(() => {
-    candidateAPI("candidate", "Get", null).then((res) => {
-      setCandi(res.data);
-    });
-  });
 
   const [Batch, setBatch] = useState([]);
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function AddCandidate() {
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name");
+    const fieldName = event.target.getAttribute("name","value");
     const fieldValue = event.target.value;
     const newFormData = { ...addCandi };
     newFormData[fieldName] = fieldValue;
@@ -96,7 +97,7 @@ export default function AddCandidate() {
       CertificationDate: addCandi.CertificationDate,
     };
 
-    candidateAPI("candidate", "POST", newCadidate).then((res) => {
+    candidateAPI("CreateCandidate", "POST", newCadidate).then((res) => {
       console.log(res);
     });
     const newCadidates = [...candi, newCadidate];
@@ -138,6 +139,7 @@ export default function AddCandidate() {
                         type="text"
                         name="fullName"
                         onChange={handleAddFormChange}
+                        required="required"
                       />
                     </td>
                     <td className="right-modal">
@@ -148,6 +150,7 @@ export default function AddCandidate() {
                         type="text"
                         name="tel"
                         onChange={handleAddFormChange}
+                        required="required"
                       />
                     </td>
                   </tr>
@@ -160,6 +163,7 @@ export default function AddCandidate() {
                         type="text"
                         name="email"
                         onChange={handleAddFormChange}
+                        required="required"
                       />
                     </td>
                     <td className="right-modal">
@@ -269,12 +273,16 @@ export default function AddCandidate() {
                       <label>{constCandidate.CRRYEAR}</label>
                     </td>
                     <td>
-                      <input
+                      <select
                         name="currentYearofStudy"
                         id="year-study"
                         onChange={handleAddFormChange}
-                        placeholder="Example: Năm 1"
-                      ></input>
+                        >
+                        <option value="Năm 1">Năm 1</option>
+                        <option value="Năm 2">Năm 2</option>
+                        <option value="Năm 3">Năm 3</option>
+                        <option value="Năm 4">Năm 4</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -314,11 +322,13 @@ export default function AddCandidate() {
                       <label>{constCandidate.TYPEPC}</label>
                     </td>
                     <td>
-                      <input
+                      <select
                         name="pcType"
-                        placeholder="Example: Laptop"
                         onChange={handleAddFormChange}
-                      ></input>
+                      >
+                      <option value="PC">PC</option>
+                      <option value="Laptop">Laptop</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -341,10 +351,10 @@ export default function AddCandidate() {
                         id="inter-duration"
                         onChange={handleAddFormChange}
                       >
-                        <option value="8tuan" selected>
+                        <option value="8 Tuần">
                           8 tuần
                         </option>
-                        <option value="12tuan">12 tuần</option>
+                        <option value="12 Tuần">12 tuần</option>
                       </select>
                     </td>
                   </tr>
@@ -358,8 +368,10 @@ export default function AddCandidate() {
                         id="intern-schehdule"
                         onChange={handleAddFormChange}
                       >
-                        <option value="fulltime">Full time</option>
-                        <option value="parttimem">Part time</option>
+                        <option value="Full time">
+                          Full time
+                        </option>
+                        <option value="Part time">Part time</option>
                       </select>
                     </td>
                     <td className="right-modal">

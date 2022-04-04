@@ -17,6 +17,6 @@ export function candidateAPI(endpoint, method = 'GET',body) {
       data: body
   })
   .catch ((e) => {
-    alert.error('Lỗi kết nối');
+    console.log('Lỗi kết nối');
   })
 }
