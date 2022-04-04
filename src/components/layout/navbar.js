@@ -67,7 +67,7 @@ export default function Navbar() {
                   style={
                     { color: "#007bff" }}
                 >
-                  Chức năng này sẽ được hỗ trợ sau
+                  Chức năng này sẽ được hỗ trợ sau.
                 </h5>
               </div>
             </div>
