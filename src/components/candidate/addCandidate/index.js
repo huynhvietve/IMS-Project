@@ -169,18 +169,6 @@ export default function AddCandidate() {
                     <td className="right-modal">
                       <label>{constCandidate.DGNAME}</label>
                     </td>
-                    {/* <td>
-                    <select
-                      name="idDG"
-                      id="name-dg"
-                      onChange={handleAddFormChange}
-                    >
-                      <option value="dg1">DG 1</option>
-                      <option value="dg2">DG 2</option>
-                      <option value="dg3">...</option>
-                    </select>
-                  </td> */}
-
                     <td>
                       <select
                         className="inputText"
@@ -199,17 +187,6 @@ export default function AddCandidate() {
                     <td className="left-modal">
                       <label>{constCandidate.MTNAME}</label>
                     </td>
-                    {/* <td>
-                    <select
-                      name="idMentor"
-                      id="name-mentor"
-                      onChange={handleAddFormChange}
-                    >
-                      <option value="mentor1">Mentor 1</option>
-                      <option value="mentor2">Mentor 2</option>
-                      <option value="menter3">...</option>
-                    </select>
-                  </td> */}
                     <td>
                       <select
                         className="inputText"
@@ -377,16 +354,6 @@ export default function AddCandidate() {
                     <td className="right-modal">
                       <label>{constCandidate.INTERNBATCH}</label>
                     </td>
-                    {/* <td>
-                    <select
-                      name="idInternshipCourse"
-                      id="batch"
-                      onChange={handleAddFormChange}
-                    >
-                      <option value="batch8">Batch 8</option>
-                      <option value="batch9">Batch 9</option>
-                    </select>
-                  </td> */}
                     <td>
                       <select
                         className="inputText"
