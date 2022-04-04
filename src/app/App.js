@@ -2,6 +2,10 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import BasicForm from "../components/login/Form";
 import Main from "../components/main/Main";
 import { useSelector } from "react-redux";
+import "../asset/css/crudModal.css";
+import "../asset/css/tableCandidate.css";
+import "../asset/css/pagination.css";
+import IndexCandidate from "../components/candidate/tableCandidate";
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -24,6 +28,7 @@ function App() {
         <Route path="*">
           <Redirect to="/login" />
         </Route>
+        <Route path="/indexCandidate" exact component={IndexCandidate} />
       </Switch>
     </div>
   );
