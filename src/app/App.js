@@ -1,7 +1,8 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import BasicForm from "../components/login/Form";
-import Main from "../components/main/Main";
 import { useSelector } from "react-redux";
+import GetStarting from "../components/getstarting/getStarting";
+
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -11,14 +12,14 @@ function App() {
       <Switch>
         <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
-          {isAuthen && <Redirect to="/main" />}
+          {isAuthen && <Redirect to="/getstarting" />}
         </Route>
         <Route path="/login" exact>
           <BasicForm />
         </Route>
         {isAuthen && (
-          <Route path="/main">
-            <Main />
+          <Route path="/getstarting">
+            <GetStarting/>
           </Route>
         )}
         <Route path="*">
