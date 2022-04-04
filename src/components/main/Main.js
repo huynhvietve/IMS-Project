@@ -20,7 +20,7 @@ function Main(){
     <Header />
       <Navbar />  
       <Switch>
-      <Route path="/" exact component={indexHome} />
+      <Route path="/" exact component={indexHome}  />
         <Route path="/candidate" exact component={indexCandidate} />
         <Route path="/mentor" exact component={indexMentor} />
         <Route path="/student" exact component={indexStudent} />
