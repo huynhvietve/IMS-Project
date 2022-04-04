@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  background-color: #3f3f3f;
+  /* background-color: #3f3f3f; */
 }
 
 .app {
@@ -117,4 +117,9 @@ button:disabled:active {
 .logo {
   width: 50%;
   height: 200px;
+}
+
+.form-control{
+      border: 0px solid #ced4da;
+
 }
