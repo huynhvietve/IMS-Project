@@ -14,21 +14,21 @@ export default function AddCandidate() {
 
   const [dg, setdg] = useState([]);
   useEffect(() => {
-    candidateAPI("dg", "Get", null).then((res) => {
+    candidateAPI("candidate/dg", "Get", null).then((res) => {
       setdg(res.data);
     });
   }, []);
 
   const [Batch, setBatch] = useState([]);
   useEffect(() => {
-    candidateAPI("intershipcouse", "Get", null).then((res) => {
+    candidateAPI("candidate/intershipcouse", "Get", null).then((res) => {
       setBatch(res.data);
     });
   }, []);
 
   const [Mentor, setMentor] = useState([]);
   useEffect(() => {
-    candidateAPI("mentor", "Get", null).then((res) => {
+    candidateAPI("candidate/mentor", "Get", null).then((res) => {
       setMentor(res.data);
     });
   }, []);
