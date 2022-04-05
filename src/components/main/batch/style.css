@@ -1,0 +1,20 @@
+.inputText{
+    margin-left:10px;
+    width:200px;
+    height:30px;
+  }
+  .table-getStarting {
+    background-color: #007bff;
+    border-radius: 10px 10px 10px 10px;
+    color: #fff;
+  }
+.modal-backdrop.show{
+  opacity: 0;
+
+}
+.label-batch{
+  padding-right: 20px;
+}
+.select-batch{
+  width:150px;
+}
