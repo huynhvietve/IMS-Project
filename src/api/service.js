@@ -8,12 +8,9 @@ export const loginAPI = (username, password) => {
     password: password,
   });
 };
-export function  batchAPI(endpoint, method = "GET", body) {
-  return axios({
-    method: method,
-    url: `${Config.API_BASE}/${endpoint}`,
-    data: body,
-  }).catch((e) => {
-    console.error("lỗi kết nối");
-  });
-}
+export function batchAPI( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
+export function batchCreate( endpoint, body)  {
+  return api.post(`${API_BASE}/${endpoint}`,body);
+};

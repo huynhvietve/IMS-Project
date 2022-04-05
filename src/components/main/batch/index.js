@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {batchAPI} from "../../../api/service";
+// import {batchAPI} from "../../../api/service";
 import { useHistory } from "react-router-dom";
+import * as apiaxios from "../../../api/service";
 import "./style.css";
 export default function Batch(props) {
   let history = useHistory();
   const [idTemp, setIdTemp] = useState();
   const [posts, setPosts] = useState([]);
-  useEffect( () => {
-    batchAPI('internshipcourse','Get',null)
-     .then( (res) => {
-      setPosts(res.data)
-     });
-   },[]);
-    // {getIT()};
+   useEffect( () => {
+    apiaxios.batchAPI('internshipcourse') 
+          .then( (res) => {
+            setPosts(res.data)
+          });
+  }, []);
    const [addFormData, setAddFormData] = useState({
     nameCoure: "",
     dateStart: "",
@@ -37,9 +37,8 @@ export default function Batch(props) {
       status: addFormData.status,
       kindOfInternship: addFormData.kindOfInternship,
     };
-    batchAPI('internshipcourse/create','POST',newContact)
+    apiaxios.batchCreate('internshipcourse/create', newContact) 
     .then( (res) => {
-    console.log(res);
     });
     const newContacts = [...posts, newContact];
     setPosts(newContacts);
@@ -224,6 +223,7 @@ export default function Batch(props) {
                           Hủy
                         </button>
                         <button
+                          // onClick={handleSubmit}
                           id="md-them2"
                           type="submit"
                           className="btn btn-primary"
