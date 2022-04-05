@@ -7,10 +7,10 @@ export default function AddCandidate() {
   
   const [candi, setCandi] = useState([]);
   useEffect(() => {
-    candidateAPI("GetListCandidate/batch9", "Get", null).then((res) => {
+    candidateAPI("candidate/get", "Get", null).then((res) => {
       setCandi(res.data);
     });
-  });
+  },[candi]);
 
   const [dg, setdg] = useState([]);
   useEffect(() => {
@@ -97,7 +97,7 @@ export default function AddCandidate() {
       CertificationDate: addCandi.CertificationDate,
     };
 
-    candidateAPI("CreateCandidate", "POST", newCadidate).then((res) => {
+    candidateAPI("create", "POST", newCadidate).then((res) => {
       console.log(res);
     });
     const newCadidates = [...candi, newCadidate];
@@ -175,7 +175,7 @@ export default function AddCandidate() {
                         name="idDG"
                         id="cars"
                         onChange={handleAddFormChange}
-                        required="required"
+                        // required="required"
                       >
                         {dg?.map((itemDG) => (
                           <option value={itemDG.idDG}>{itemDG.nameDG}</option>
@@ -193,7 +193,7 @@ export default function AddCandidate() {
                         name="idMentor"
                         id="cars"
                         onChange={handleAddFormChange}
-                        required="required"
+                        // required="required"
                       >
                         {Mentor?.map((itemMentor) => (
                           <option value={itemMentor.idMentor}>
@@ -360,7 +360,7 @@ export default function AddCandidate() {
                         name="idInternshipCourse"
                         id="cars"
                         onChange={handleAddFormChange}
-                        required="required"
+                        // required="required"
                       >
                         {Batch?.map((itemBatch) => (
                           <option value={itemBatch.idInternshipCourse}>

@@ -8,7 +8,7 @@ import AddCandidate from "../addCandidate/index";
 function TableCandidate(props) {
   const [candi, setCandi] = useState([]);
   const [currPage, setCurrPage] = useState(1);
-  const [candiPerPage, setCandiPerPage] = useState(20);
+  const [candiPerPage, setCandiPerPage] = useState(3);
 
   // Get current candidate
   const indexOfLastCandi = currPage * candiPerPage;
@@ -17,11 +17,11 @@ function TableCandidate(props) {
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   useEffect(() => {
-    candidateAPI("GetListCandidate/batch9", "Get", null).then((res) => {
+    candidateAPI("candidate/get", "Get", null).then((res) => {
       setCandi(res.data);
     });
-  }, []);
-
+  }, [candi]);
+  // /page${paginate}
   return (
     <div>
       <h3>{constTable.H3}</h3>

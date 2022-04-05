@@ -13,7 +13,7 @@ const Pagination = ({ candiPerPage, totalCandis, paginate }) => {
       <ul className="pagination pagination-sm">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
-            <NavLink onClick={() => paginate(number)} to="/indexCandidate" className="page-link">
+            <NavLink onClick={() => paginate(number)} to="/tableCandidate" className="page-link">
               {number}
             </NavLink>
           </li>
