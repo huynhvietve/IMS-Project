@@ -10,10 +10,6 @@
   }
   .modal-content{
     margin-top: 150px;
-    height: 234px;
-  }
-  .modal-body{
-    padding: 30px;
   }
 .modal-backdrop.show{
   opacity: 0.5;
