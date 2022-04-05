@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import BasicForm from "../components/login/form";
+import BasicForm from "../components/login/Form";
 import { useSelector } from "react-redux";
 import "../asset/css/navbar.css";
 import "../asset/css/header.css";
