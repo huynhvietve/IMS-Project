@@ -49,13 +49,13 @@ export default function Batch(props) {
     <div>
       <div
         id="load"
-        style={{ display: "block" }}
+        style={{display:"block"}}
         className="modal"
         tabIndex={-1}
         role="dialog"
       >
         <div className="modal-dialog" role="document">
-          <div className="modal-content" style={{ marginTop: "150px" }}>
+          <div className="modal-content">
             <div className="modal-header">
               <h4 className="modal-title">Internship management system</h4>
             </div>

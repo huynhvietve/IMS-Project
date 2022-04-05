@@ -8,8 +8,17 @@
     border-radius: 10px 10px 10px 10px;
     color: #fff;
   }
+  .modal-content{
+    margin-top: 150px;
+    height: 234px;
+  }
+  .modal-body{
+    padding: 30px;
+  }
 .modal-backdrop.show{
-  opacity: 0;
+  opacity: 0.5;
+  width:1px;
+  height:1px;
 
 }
 .label-batch{
