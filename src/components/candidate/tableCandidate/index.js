@@ -5,8 +5,7 @@ import { withRouter } from "react-router-dom";
 import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
 
-function IndexCandidate(props) {
-
+function TableCandidate(props) {
   const [candi, setCandi] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [candiPerPage, setCandiPerPage] = useState(20);
@@ -22,7 +21,7 @@ function IndexCandidate(props) {
       setCandi(res.data);
     });
   }, []);
-  
+
   return (
     <div>
       <h3>{constTable.H3}</h3>
@@ -42,7 +41,7 @@ function IndexCandidate(props) {
       </div>
       <div className="grid wide home-candidate">
         <div className="row home-candidate--list">
-          <span className="col l-2-8 ">{constTable.STT}</span>
+          {/* <span className="col l-2-8 ">{constTable.STT}</span> */}
           <span className="col l-2-8 ">{constTable.NAME}</span>
           <span className="col l-2-8 ">{constTable.EMAIL}</span>
           <span className="col l-2-8 ">{constTable.MTNAME}</span>
@@ -55,7 +54,7 @@ function IndexCandidate(props) {
         <div className="table-body">
           {currCandi?.map((candidate) => (
             <ul className="row sm-gutter sm-gutter--list" key={candidate.id}>
-              <li className="col l-2-8"></li>
+              {/* <li className="col l-2-8"></li> */}
               <li className="col l-2-8">{candidate.fullName}</li>
               <li className="col l-2-8">{candidate.email}</li>
               <li className="col l-2-8">{candidate.fullNameMentor}</li>
@@ -83,33 +82,25 @@ function IndexCandidate(props) {
                 </label>
               </li>
               <li className="col l-2-8">
-                <button
-                  id="delete"
-                  className="btn-icon"
+                <i
+                  className="fa fa-trash-o"
+                  aria-hidden="true"
                   data-toggle="modal"
                   data-target="#exampleModal3"
-                >
-                  <i className="fa fa-trash-o" aria-hidden="true"></i>
-                </button>
-                <button
-                  id="edit"
-                  className="btn-icon"
+                ></i>
+                <i
+                  className="fa fa-pencil-square-o"
+                  aria-hidden="true"
                   data-toggle="modal"
                   data-target="#exampleModal"
-                >
-                  <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>
-                <button
-                  id="detail"
-                  className="btn-icon"
+                ></i>
+                <i
+                  className="fa fa-eye"
+                  aria-hidden="true"
                   data-toggle="modal"
                   data-target="#exampleModal4"
-                >
-                  <i className="fa fa-eye" aria-hidden="true"></i>
-                </button>
-                <button id="calendar-plus" className="btn-icon">
-                  <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
-                </button>
+                ></i>
+                <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
               </li>
             </ul>
           ))}
@@ -129,35 +120,8 @@ function IndexCandidate(props) {
       >
         Thêm
       </button>
-      {/* Delete Modal */}
-      <div
-        class="modal fade"
-        id="exampleModal3"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <p class="text-muted">{constTable.DELBODY}</p>
-            </div>
-
-            <div class="modal-footer">
-              {" "}
-              <button type="button" class="btn btn-light" data-dismiss="modal">
-                Hủy
-              </button>{" "}
-              <button id="del-candi" type="button" class="btn btn-danger-del">
-                Xóa
-              </button>{" "}
-            </div>
-          </div>
-        </div>
-      </div>
       {AddCandidate()}
     </div>
   );
 }
-export default withRouter(IndexCandidate);
+export default withRouter(TableCandidate);

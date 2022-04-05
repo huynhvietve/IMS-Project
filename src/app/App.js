@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import "../asset/css/crudModal.css";
 import "../asset/css/tableCandidate.css";
 import "../asset/css/pagination.css";
-import IndexCandidate from "../components/candidate/tableCandidate";
+import TableCandidate from "../components/candidate/tableCandidate";
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <Switch>
-        {/* <Route path="/" exact>
+        <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
           {isAuthen && <Redirect to="/main" />}
         </Route>
@@ -27,8 +27,8 @@ function App() {
         )}
         <Route path="*">
           <Redirect to="/login" />
-        </Route> */}
-        <Route path="/indexCandidate" exact component={IndexCandidate} />
+        </Route>
+        <Route path="/tableCandidate" exact component={TableCandidate}/>
       </Switch>
     </div>
   );
