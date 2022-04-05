@@ -1,7 +1,10 @@
 import { Route, Switch, Redirect } from "react-router-dom";
 import BasicForm from "../components/login/Form";
-import Main from "../components/main/Main";
 import { useSelector } from "react-redux";
+import Batch from "../components/main/batch";
+import Home from "../components/main/batch/home";
+
+
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -9,19 +12,24 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/" exact>
+      <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
-          {isAuthen && <Redirect to="/main" />}
+          {isAuthen && <Redirect to="/batch" />}
         </Route>
         <Route path="/login" exact>
           <BasicForm />
         </Route>
         {isAuthen && (
-          <Route path="/main">
-            <Main />
+          <Route path="/batch" exact>
+            <Batch/>
           </Route>
         )}
-        <Route path="*">
+        {isAuthen && (
+          <Route path="/home/Batch" exact>
+            <Home/>
+          </Route>
+        )}
+        <Route path="*" exact>
           <Redirect to="/login" />
         </Route>
       </Switch>

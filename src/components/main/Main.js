@@ -37,6 +37,7 @@ const Main = (props) => {
           <Route path={`${match.path}/profile`}>
             <Profile />
           </Route>
+          
         </Switch>
       </section>
     </Fragment>
