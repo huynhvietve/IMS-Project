@@ -14,21 +14,21 @@ export default function AddCandidate() {
 
   const [dg, setdg] = useState([]);
   useEffect(() => {
-    candidateAPI("GetListDG", "Get", null).then((res) => {
+    candidateAPI("dg", "Get", null).then((res) => {
       setdg(res.data);
     });
   }, []);
 
   const [Batch, setBatch] = useState([]);
   useEffect(() => {
-    candidateAPI("GetListInternshipCourse", "Get", null).then((res) => {
+    candidateAPI("intershipcouse", "Get", null).then((res) => {
       setBatch(res.data);
     });
   }, []);
 
   const [Mentor, setMentor] = useState([]);
   useEffect(() => {
-    candidateAPI("GetListMentor", "Get", null).then((res) => {
+    candidateAPI("mentor", "Get", null).then((res) => {
       setMentor(res.data);
     });
   }, []);
@@ -98,7 +98,7 @@ export default function AddCandidate() {
     };
 
     candidateAPI("create", "POST", newCadidate).then((res) => {
-      console.log(res);
+      setCandi(res.data);
     });
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
