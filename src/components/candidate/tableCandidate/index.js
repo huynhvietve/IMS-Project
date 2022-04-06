@@ -8,7 +8,7 @@ import AddCandidate from "../addCandidate/index";
 function TableCandidate(props) {
   const [candi, setCandi] = useState([]);
   const [currPage, setCurrPage] = useState(1);
-  const [candiPerPage, setCandiPerPage] = useState(3);
+  const [candiPerPage, setCandiPerPage] = useState(10);
 
   // Get current candidate
   const indexOfLastCandi = currPage * candiPerPage;

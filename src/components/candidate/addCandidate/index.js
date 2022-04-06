@@ -97,7 +97,7 @@ export default function AddCandidate() {
       CertificationDate: addCandi.CertificationDate,
     };
 
-    candidateAPI("create", "POST", newCadidate).then((res) => {
+    candidateAPI("candidate/create", "POST", newCadidate).then((res) => {
       setCandi(res.data);
     });
     const newCadidates = [...candi, newCadidate];

@@ -1,4 +1,4 @@
-import { API_BASE, API_CANDI } from "./config";
+import { API_BASE } from "./config";
 import api from "./instance";
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ export const loginAPI = (username, password) => {
 export function candidateAPI(endpoint, method = 'GET',body) {
   return   axios({
       method: method,
-      url: `${API_CANDI}/${endpoint}`,
+      url: `${API_BASE}/${endpoint}`,
       data: body
   })
 }
