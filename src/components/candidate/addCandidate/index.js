@@ -4,7 +4,7 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
 
 export default function AddCandidate() {
-  
+
   const [candi, setCandi] = useState([]);
   useEffect(() => {
     candidateAPI("candidate/get", "Get", null).then((res) => {
