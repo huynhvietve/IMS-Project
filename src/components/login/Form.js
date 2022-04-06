@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../redux/store";
 import { loginAPI } from "../../api/service";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BasicForm = () => {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
@@ -33,8 +34,7 @@ const BasicForm = () => {
         dispatch(authActions.setId(enteredEmail));
       })
       .catch((err) => {
-        const message = "Đăng nhập không thành công";
-        alert(message);
+        Swal.fire("Đăng nhập thất bại");
       });
   };
 
