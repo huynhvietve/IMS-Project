@@ -17,3 +17,4 @@ export function candidateAPI(endpoint, method = 'GET',body) {
       data: body
   })
 }
+

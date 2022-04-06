@@ -21,7 +21,7 @@ function TableCandidate(props) {
       setCandi(res.data);
     });
   }, [candi]);
-  // /page${paginate}
+  
   return (
     <div>
       <h3>{constTable.H3}</h3>
@@ -41,7 +41,6 @@ function TableCandidate(props) {
       </div>
       <div className="grid wide home-candidate">
         <div className="row home-candidate--list">
-          {/* <span className="col l-2-8 ">{constTable.STT}</span> */}
           <span className="col l-2-8 ">{constTable.NAME}</span>
           <span className="col l-2-8 ">{constTable.EMAIL}</span>
           <span className="col l-2-8 ">{constTable.MTNAME}</span>
@@ -54,7 +53,6 @@ function TableCandidate(props) {
         <div className="table-body">
           {currCandi?.map((candidate) => (
             <ul className="row sm-gutter sm-gutter--list" key={candidate.id}>
-              {/* <li className="col l-2-8"></li> */}
               <li className="col l-2-8">{candidate.fullName}</li>
               <li className="col l-2-8">{candidate.email}</li>
               <li className="col l-2-8">{candidate.fullNameMentor}</li>
