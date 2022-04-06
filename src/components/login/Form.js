@@ -16,7 +16,7 @@ const BasicForm = () => {
   const history = useHistory();
   useEffect(() => {
     if (isLogin) {
-      history.push("/main");
+      history.push("/batch");
     }
   }, [isLogin]);
 
