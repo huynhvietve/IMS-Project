@@ -14,7 +14,7 @@ export default function Home() {
     <>
     {idcourse?.map((idcourse) => (
   <div>
-    <h1>Chào mừng bạn đến với {idcourse.nameCoure}</h1>
+    <h1 className="h1-batch">Chào mừng bạn đến với {idcourse.nameCoure}</h1>
   </div>
     ))}
     </>
