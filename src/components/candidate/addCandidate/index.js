@@ -442,19 +442,19 @@ export default function AddCandidate() {
                 <div className="modal-footer">
                   {" "}
                   <button
-                    type="button"
-                    className="btn btn-light"
-                    data-dismiss="modal"
-                  >
-                    Hủy
-                  </button>{" "}
-                  <button
                     id="add-candi"
                     type="submit"
                     className="btn btn-danger-del"
                     onSubmit={handleAddFormSubmit}
                   >
                     Thêm
+                  </button>{" "}
+                  <button
+                    type="button"
+                    className="btn btn-light"
+                    data-dismiss="modal"
+                  >
+                    Hủy
                   </button>{" "}
                 </div>
               </form>
