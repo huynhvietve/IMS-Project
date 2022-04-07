@@ -5,10 +5,10 @@ import { withRouter } from "react-router-dom";
 import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
 
-function TableCandidate(props) {
+function TableCandidate() {
   const [candi, setCandi] = useState([]);
   const [currPage, setCurrPage] = useState(1);
-  const [candiPerPage, setCandiPerPage] = useState(10);
+  const [candiPerPage, setCandiPerPage] = useState(7);
 
   // Get current candidate
   const indexOfLastCandi = currPage * candiPerPage;
@@ -17,7 +17,7 @@ function TableCandidate(props) {
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   useEffect(() => {
-    candidateAPI("candidate/get", "Get", null).then((res) => {
+    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
       setCandi(res.data);
     });
   }, [candi]);
