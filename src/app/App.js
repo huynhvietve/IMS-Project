@@ -27,7 +27,7 @@ function App() {
           <BasicForm />
         </Route>
         {isAuthen && (
-          <Route path="/">
+          <Route>
             <Header />
             <Navbar />
             <Switch>
@@ -47,5 +47,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
