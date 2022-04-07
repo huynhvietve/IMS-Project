@@ -7,26 +7,26 @@ export default function AddCandidate() {
 
   const [candi, setCandi] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/get", "Get", null).then((res) => {
+    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
       setCandi(res.data);
     });
   },[candi]);
 
-  const [dg, setdg] = useState([]);
+  const [dg, setDg] = useState([]);
   useEffect(() => {
     candidateAPI("candidate/dg", "Get", null).then((res) => {
-      setdg(res.data);
+      setDg(res.data);
     });
   }, []);
 
-  const [Batch, setBatch] = useState([]);
+  const [batch, setBatch] = useState([]);
   useEffect(() => {
     candidateAPI("candidate/intershipcouse", "Get", null).then((res) => {
       setBatch(res.data);
     });
   }, []);
 
-  const [Mentor, setMentor] = useState([]);
+  const [mentor, setMentor] = useState([]);
   useEffect(() => {
     candidateAPI("candidate/mentor", "Get", null).then((res) => {
       setMentor(res.data);
@@ -160,7 +160,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
-                        type="text"
+                        type="email"
                         name="email"
                         onChange={handleAddFormChange}
                         required="required"
@@ -195,7 +195,7 @@ export default function AddCandidate() {
                         onChange={handleAddFormChange}
                         // required="required"
                       >
-                        {Mentor?.map((itemMentor) => (
+                        {mentor?.map((itemMentor) => (
                           <option value={itemMentor.idMentor}>
                             {itemMentor.fullNameMentor}
                           </option>
@@ -362,7 +362,7 @@ export default function AddCandidate() {
                         onChange={handleAddFormChange}
                         // required="required"
                       >
-                        {Batch?.map((itemBatch) => (
+                        {batch?.map((itemBatch) => (
                           <option value={itemBatch.idInternshipCourse}>
                             {itemBatch.nameCoure}
                           </option>
