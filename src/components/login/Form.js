@@ -1,10 +1,11 @@
-import logo from "../../asset/LOGO.png";
 import "../../asset/css/form.css";
+import Logo from "./img/logo.png";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../../redux/store";
 import { loginAPI } from "../../api/service";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BasicForm = () => {
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
@@ -15,7 +16,7 @@ const BasicForm = () => {
   const history = useHistory();
   useEffect(() => {
     if (isLogin) {
-      history.push("/main");
+      history.push("/batch");
     }
   }, [isLogin]);
 
@@ -33,38 +34,49 @@ const BasicForm = () => {
         dispatch(authActions.getid(enteredEmail));
       })
       .catch((err) => {
-        const message = "Đăng nhập không thành công";
-        alert(message);
+        Swal.fire({
+          icon: 'error',
+          text: 'Sai thông tin đăng nhập!',
+        })
       });
   };
 
   return (
-    <div className="app">
+    <div>
+    <div className="form-login">
       <form onSubmit={submitHandler}>
-        <div>
-          <img src={logo} alt="logo" className="logo"></img>
-        </div>
-        <h1>ĐĂNG NHẬP</h1>
-        <div className="control-group">
-          <div className="form-control">
-            <label htmlFor="name">Tài Khoản</label>
-            <input type="text" id="name" ref={emailInputRef} required />
-          </div>
-        </div>
-        <div className="form-control">
-          <label htmlFor="password">Mật Khẩu</label>
-          <input
-            style={{ marginLeft: "54px" }}
-            type="password"
+        <div className="grid">
+          <div className="login">
+            <div className="login__headgier">
+            </div>
+            <div className="login__form">
+              <div className="login__content">
+              <img src={Logo} alt="logo" className="logo" style={{width:"300px"}}></img>
+                <h2 className="login__content-heading">
+                  Đăng Nhập
+                </h2>
+                <div className="login__import">
+                  <div className="form-field">
+                    <input type="text" id="name" ref={emailInputRef} required className="form-input" placeholder=" " />
+                    <lable htmlFor="name" className="form-lable">Tên Đăng Nhập</lable>
+                  </div>
+                  <div className="form-field">
+                    <input type="password"
             id="password"
             ref={paswordInputRef}
-            required
-          />
+            required className="form-input" placeholder=" " />
+                    <lable htmlFor="password" className="form-lable">Mật Khẩu</lable>
+                  </div>
+                  <button className="login__import-btn" type="submit">
+                    Đăng Nhập
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="form-actions">
-          <button type="submit">ĐĂNG NHẬP</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
