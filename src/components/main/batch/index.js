@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import * as apiaxios from "../../../api/service";
 import "./style.css";
+import Swal from "sweetalert2";
+
 export default function Batch(props) {
   let history = useHistory();
   const [idTemp, setIdTemp] = useState();
@@ -37,9 +39,12 @@ export default function Batch(props) {
     };
     apiaxios.batchCreate("internshipcourse/create", newContact).then((res) => {
       history.push(`/Home/batch?id=${res.data.idInternshipCourse}`);
+    }).catch((err) => {
+      Swal.fire({
+        icon: 'error',
+        text: 'Vui lòng nhập chính xác!',
+      })
     });
-    const newContacts = [...posts, newContact];
-    setPosts(newContacts);
   };
   //chon khoa thuc tap theo id
   const handleSubmit = () => {
@@ -64,6 +69,7 @@ export default function Batch(props) {
               <select
                 className="select-batch"
                 onChange={(e) => setIdTemp(e.currentTarget.value)}
+                
               >
                 {" "}
                 <option value="">Chọn...</option>
@@ -147,7 +153,7 @@ export default function Batch(props) {
                           type="text"
                           name="nameCoure"
                           required="required"
-                          placeholder="Nhập tên khóa..."
+                          placeholder="VD: Batch 1"
                           onChange={handleAddFormChange}
                         />
                       </td>
