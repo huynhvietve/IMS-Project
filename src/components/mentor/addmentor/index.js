@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import { mentorAPI } from "../../../api/service";
 
 export default function AddMentor() {
-  const [posts, setPosts] = useState([]);
   const [mentors, setMentor] = useState([]);
-  const [valueGendle, setValue] = useState("");
   const [Batch, setBatch] = useState([]);
   const [dg, setdg] = useState([]);
-  const [names, setNames] = useState([]);
 
   useEffect(() => {
     mentorAPI("GetListInternshipCourse", "Get", null).then((res) => {
@@ -28,10 +25,9 @@ export default function AddMentor() {
   const [addFormData, setAddFormData] = useState({
     fullNameMentor: "",
     dayOfBirth: "",
-    gender: "",
     address: "",
     email: "",
-    postion: "",
+    position: "",
     idDG: "",
     idMentor: "",
     workplace: "",
@@ -50,10 +46,9 @@ export default function AddMentor() {
     const newContact = {
       fullNameMentor: addFormData.fullNameMentor,
       dayOfBirth: addFormData.dayOfBirth,
-      gender: valueGendle,
       address: addFormData.address,
       email: addFormData.email,
-      postion: addFormData.postion,
+      position: addFormData.position,
       idDG: addFormData.idDG,
       idMentor: addFormData.idMentor,
       workplace: addFormData.workplace,
@@ -120,7 +115,7 @@ export default function AddMentor() {
                     <input
                       className="inputText"
                       type="text"
-                      name="postion"
+                      name="position"
                       required="required"
                       placeholder="Nhập chức vụ..."
                       onChange={handleAddFormChange}
@@ -157,48 +152,23 @@ export default function AddMentor() {
                 </tr>
                 <tr>
                   <td className="left-modal">
-                    <label>Giới tính:</label>
+                    <label>Batch:</label>
                   </td>
                   <td>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio1"
-                        onChange={() => setValue("0")}
-                        value="0"
-                      ></input>
-                      <label class="form-check-label" for="inlineRadio1">
-                        Nam
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio2"
-                        onChange={() => setValue("1")}
-                        value="1"
-                      ></input>
-                      <label class="form-check-label" for="inlineRadio2">
-                        Nữ
-                      </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="inlineRadioOptions"
-                        id="inlineRadio2"
-                        onChange={() => setValue("2")}
-                        value="2"
-                      ></input>
-                      <label class="form-check-label" for="inlineRadio2">
-                        Khác
-                      </label>
-                    </div>
+                    <select
+                      className="inputText"
+                      name="idInternshipCourse"
+                      id="cars"
+                      onChange={handleAddFormChange}
+                      required="required"
+                      style={{ width: "200px" }}
+                    >
+                      {Batch?.map((itemBatch) => (
+                        <option value={itemBatch.idInternshipCourse}>
+                          {itemBatch.nameCoure}
+                        </option>
+                      ))}
+                    </select>
                   </td>
                   <td className="right-modal">
                     <label>Tên DG:</label>
@@ -244,27 +214,6 @@ export default function AddMentor() {
                       placeholder="Nhập địa chỉ..."
                       onChange={handleAddFormChange}
                     />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="left-modal">
-                    <label>Batch:</label>
-                  </td>
-                  <td>
-                    <select
-                      className="inputText"
-                      name="idInternshipCourse"
-                      id="cars"
-                      onChange={handleAddFormChange}
-                      required="required"
-                      style={{ width: "200px" }}
-                    >
-                      {Batch?.map((itemBatch) => (
-                        <option value={itemBatch.idInternshipCourse}>
-                          {itemBatch.nameCoure}
-                        </option>
-                      ))}
-                    </select>
                   </td>
                 </tr>
               </table>

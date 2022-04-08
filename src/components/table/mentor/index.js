@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { mentorAPI } from "../../../api/service";
 import { deleteMentor, getMentor } from "../../../redux/action/mentor.action";
-import AddMentor from "../../../components/mentor/addMentor/index";
+import AddMentor from "../../mentor/addMentor/index";
+import Pagination from "../../../components/mentor/pagination/index";
 
 function Index(props) {
   const dispatch = useDispatch();
@@ -12,6 +13,13 @@ function Index(props) {
   }, []);
   const [mentors, setMentor] = useState([]);
   const [posts, setPosts] = useState([]);
+
+  const [currPage, setCurrPage] = useState(1);
+  const [mentorPerPage, setMentorPerPage] = useState(20);
+  const indexOfLastMentor = currPage * mentorPerPage;
+  const indexOfFirstMentor = indexOfLastMentor - mentorPerPage;
+  const currMentor = mentors.slice(indexOfFirstMentor, indexOfLastMentor);
+  const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   useEffect(() => {
     mentorAPI("mentor/batch/9", "Get", null).then((res) => {
@@ -27,13 +35,13 @@ function Index(props) {
           <span className="col l-2-7 ">DG</span>
           <span className="col l-2-8 ">Khóa thực tập</span>
           <span className="col l-2-8 ">Nơi công tác</span>
-          <span className="col l-2-8 ">Email</span>
-          <span className="col l-2-8 ">Địa chỉ</span>
-          <span className="col l-2-8 ">Chức vụ</span>
-          <span className="col l-2-8 ">Tác vụ</span>
+          <span className="col l-2-7 ">Email</span>
+          <span className="col l-2-6 ">Địa chỉ</span>
+          <span className="col l-2-7 ">Chức vụ</span>
+          <span className="col l-2-7 ">Tác vụ</span>
         </div>
         <div className="table-body">
-          {mentors.map((mentor) => (
+          {currMentor.map((mentor) => (
             <ul className="row sm-gutter sm-gutter--list" key={mentor.id}>
               <li className="col l-2-9">{mentor.fullNameMentor}</li>
               <li className="col l-2-7">{mentor.nameDG}</li>
@@ -41,7 +49,7 @@ function Index(props) {
               <li className="col l-2-8">{mentor.workplace}</li>
               <li className="col l-2-8">{mentor.email}</li>
               <li className="col l-2-8">{mentor.address}</li>
-              <li className="col l-2-8">{mentor.postion}</li>
+              <li className="col l-2-7">{mentor.position}</li>
               <li className="col l-2-8">
                 <i
                   onClick={() => {
@@ -68,6 +76,11 @@ function Index(props) {
           ))}
         </div>
       </div>
+      <Pagination
+        candiPerPage={mentorPerPage}
+        totalCandis={mentors.length}
+        paginate={paginate}
+      />
       <button
         className="btn-add"
         type="submit"
