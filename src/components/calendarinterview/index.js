@@ -35,11 +35,7 @@ const CalendarInterview = () => {
                           <label>Họ tên *:</label>
                         </td>
                         <td>
-                          <input
-                            type="text"
-                            required
-                            placeholder="nhập họ và tên"
-                          />
+                          <input type="text" required />
                         </td>
                         <td classname="right-modal">
                           <label>Ngày phỏng vấn *:</label>
@@ -50,7 +46,7 @@ const CalendarInterview = () => {
                       </tr>
                       <tr>
                         <td classname="left-modal">
-                          <label>Email Inter *:</label>
+                          <label>Email Ứng Viên *:</label>
                         </td>
                         <td>
                           <input
@@ -81,7 +77,14 @@ const CalendarInterview = () => {
                           <label>Người phỏng vấn *:</label>
                         </td>
                         <td>
-                          <input type="text" required />
+                          <select className="cart">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="vw">VW</option>
+                            <option value="audi" selected>
+                              Audi
+                            </option>
+                          </select>
                         </td>
                       </tr>
                       <tr>
@@ -96,8 +99,9 @@ const CalendarInterview = () => {
                   </table>
                   <div className="taolichpvfooter">
                     <button type="submit" className="btn2">
-                      Thêm
+                      Gửi
                     </button>
+                    <button>Xem trước</button>
                     <button type="submit" className="btn1">
                       Hủy
                     </button>
@@ -105,8 +109,6 @@ const CalendarInterview = () => {
                 </form>
               </div>
             </div>
-
-            <div class="modal-footer"></div>
           </div>
         </div>
       </div>
