@@ -1,0 +1,40 @@
+select{
+    width: 100px;
+} 
+.right-modal{
+    padding-left: 20px;
+    font-weight: 600;
+}
+.left-modal{
+    font-weight: 600;
+}
+.container.justify-content-center {
+    margin-top: 400px
+}
+
+.modal-header {
+    border: none
+}
+
+.modal-footer {
+    justify-content: center;
+    border: none
+}
+
+.btn-danger-del,
+.btn-danger-del:hover {
+    color:white;
+    background: #007bff;
+    border: 1px solid #007bff
+}
+
+.btn-light {
+    border: 1px solid #007bff
+}
+
+.btn:focus {
+    box-shadow: none
+}
+.text-muted{
+    text-align: center;
+}
