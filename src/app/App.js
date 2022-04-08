@@ -9,14 +9,17 @@ import BasicForm from "../components/login/Form";
 import { useSelector } from "react-redux";
 import "../asset/css/navbar.css";
 import "../asset/css/header.css";
+import "../asset/css/crudModal.css";
+import "../asset/css/tableCandidate.css";
+import "../asset/css/pagination.css";
 import "../asset/css/mentor.css";
 import Navbar from "../components/home/navbar/index";
 import Header from "../components/home/header/index";
-import Batch from "../components/main/batch/index";
-import indexCandidate from "../components/table/candidate/index";
-import indexStudent from "../components/table/student/index";
+import indexCandidate from "../components/candidate/tableCandidate/index";
 import indexMentor from "../components/table/mentor/index";
+import indexStudent from "../components/table/student/index";
 import Home from "../components/table/home/index";
+import Batch from "../components/main/batch/index";
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -54,5 +57,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
