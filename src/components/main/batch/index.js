@@ -10,7 +10,8 @@ export default function Batch(props) {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     apiaxios.batchAPI("internshipcourse").then((res) => {
-      setPosts(res.data);
+      console.log(res)
+      setPosts(res.data.data);
     });
   }, []);
   const [addFormData, setAddFormData] = useState({
