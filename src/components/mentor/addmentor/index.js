@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { callAPI } from "../../../api/service";
+import { mentorAPI } from "../../../api/service";
 
 export default function AddMentor() {
   const [posts, setPosts] = useState([]);
@@ -10,18 +10,18 @@ export default function AddMentor() {
   const [names, setNames] = useState([]);
 
   useEffect(() => {
-    callAPI("GetListInternshipCourse", "Get", null).then((res) => {
+    mentorAPI("GetListInternshipCourse", "Get", null).then((res) => {
       setBatch(res.data);
     });
   }, []);
   useEffect(() => {
-    callAPI("GetListDG", "Get", null).then((res) => {
+    mentorAPI("GetListDG", "Get", null).then((res) => {
       setdg(res.data);
     });
   }, []);
   useEffect(() => {
-    callAPI("mentor/batch9", "Get", null).then((res) => {
-      setMentor(res.data);
+    mentorAPI("mentor/batch/9", "Get", null).then((res) => {
+      setMentor(res.data.data);
     });
   }, [mentors]);
 
@@ -59,7 +59,7 @@ export default function AddMentor() {
       workplace: addFormData.workplace,
       idInternshipCourse: addFormData.idInternshipCourse,
     };
-    callAPI("mentor/create", "POST", newContact).then((res) => {
+    mentorAPI("mentor", "POST", newContact).then((res) => {
       setMentor(res.data);
     });
     const newContacts = [...mentors, newContact];
@@ -83,7 +83,8 @@ export default function AddMentor() {
                 className="modal-title ml-2"
                 id="exampleModalLabel"
                 style={{ color: "#007bff" }}
-              >THÊM NGƯỜI HƯỚNG DẪN
+              >
+                THÊM NGƯỜI HƯỚNG DẪN
               </h5>
             </div>{" "}
             <button
@@ -190,11 +191,11 @@ export default function AddMentor() {
                         class="form-check-input"
                         type="radio"
                         name="inlineRadioOptions"
-                        id="inlineRadio3"
-                        onChange={() => setValue("Khác")}
-                        value="3"
+                        id="inlineRadio2"
+                        onChange={() => setValue("2")}
+                        value="2"
                       ></input>
-                      <label class="form-check-label" for="inlineRadio3">
+                      <label class="form-check-label" for="inlineRadio2">
                         Khác
                       </label>
                     </div>

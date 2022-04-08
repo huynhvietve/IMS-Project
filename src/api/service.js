@@ -1,6 +1,6 @@
 import { API_BASE } from "./config";
 import api from "./instance";
-import * as Config from "./config";
+// import * as Config from "./config";
 import axios from "axios";
 export const loginAPI = (username, password) => {
   return api.post(`${API_BASE}/auth/login`, {
@@ -20,10 +20,7 @@ export function batchCreate( endpoint, body)  {
 export function mentorAPI(endpoint, method = "GET", body) {
   return axios({
     method: method,
-    url: `${Config.API_BASE}/${endpoint}`,
+    url: `${API_BASE}/${endpoint}`,
     data: body,
-  }).catch((e) => {
-    alert.error("Lỗi kết nối");
-    console.log(e);
-  });
+  })
 }

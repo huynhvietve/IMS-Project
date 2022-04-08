@@ -14,8 +14,8 @@ function Index(props) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    mentorAPI("mentor/batch9", "Get", null).then((res) => {
-      setMentor(res.data);
+    mentorAPI("mentor/batch/9", "Get", null).then((res) => {
+      setMentor(res.data.data);
     });
   }, [mentors]);
   return (
