@@ -6,6 +6,7 @@ import "../asset/css/header.css";
 import "../asset/css/crudModal.css";
 import "../asset/css/tableCandidate.css";
 import "../asset/css/pagination.css";
+import "../asset/css/mentor.css";
 import Navbar from "../components/home/navbar/index";
 import Header from "../components/home/header/index";
 import indexCandidate from "../components/candidate/tableCandidate/index";
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Switch>
+      {/* <Switch>
         <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
           {isAuthen && <Redirect to="/batch" />}
@@ -29,7 +30,7 @@ function App() {
           <BasicForm />
         </Route>
           {isAuthen && (
-            <>
+            <> */}
               <Header/>
               <Navbar/>
             
@@ -42,12 +43,12 @@ function App() {
                 <Route path="/batch" exact component={Batch} />
                 </Route>
               </Switch>
-          </>
+          {/* </>
             )}
         <Route path="*">
           <Redirect to="/login" />
         </Route>
-      </Switch>
+      </Switch> */}
     </BrowserRouter>
   );
 }
