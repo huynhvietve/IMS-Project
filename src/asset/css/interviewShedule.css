@@ -45,6 +45,8 @@ select {
   background-color: #6c757d;
 }
 .btn2 {
+  background-color: #007bff;
+  color: white;
 }
 .cart {
   width: 150px;

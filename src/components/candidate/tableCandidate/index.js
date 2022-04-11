@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as constTable from "../../../constant/constTable";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
 import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
+import CalendarInterview from "../../calendarinterview";
+import { popUpActions } from "../../../redux/store/popup";
 
+import "../../../asset/css/interviewShedule.css";
 function TableCandidate() {
+  const dispatch = useDispatch();
   const [candi, setCandi] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [candiPerPage, setCandiPerPage] = useState(7);
+  const showModal = (data) => {
+    console.log(data);
+    dispatch(popUpActions.show());
+    dispatch(popUpActions.getData(data));
+  };
 
   // Get current candidate
   const indexOfLastCandi = currPage * candiPerPage;
@@ -17,13 +27,14 @@ function TableCandidate() {
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   useEffect(() => {
-    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
+    candidateAPI("ve1", "Get", null).then((res) => {
       setCandi(res.data);
     });
   }, [candi]);
-  
+
   return (
     <div>
+      {CalendarInterview()}
       <h3>{constTable.H3}</h3>
       <div className="input-toolbar">
         <div className="uploader">
@@ -98,7 +109,17 @@ function TableCandidate() {
                   data-toggle="modal"
                   data-target="#exampleModal4"
                 ></i>
-                <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                <i
+                  className="fa fa-calendar-plus-o"
+                  aria-hidden="true"
+                  onClick={() =>
+                    showModal({
+                      id: candidate.id,
+                      fullName: candidate.fullName,
+                      email: candidate.email,
+                    })
+                  }
+                ></i>
               </li>
             </ul>
           ))}
