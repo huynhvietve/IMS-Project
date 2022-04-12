@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { candidateAPI } from "../../../api/service";
 import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
-
 export default function AddCandidate() {
 
   const [candi, setCandi] = useState([]);
@@ -14,21 +13,21 @@ export default function AddCandidate() {
 
   const [dg, setDg] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/dg", "Get", null).then((res) => {
+    candidateAPI("dg", "Get", null).then((res) => {
       setDg(res.data);
     });
   }, []);
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/intershipcouse", "Get", null).then((res) => {
+    candidateAPI("internshipcourse", "Get", null).then((res) => {
       setBatch(res.data);
     });
   }, []);
 
   const [mentor, setMentor] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/mentor", "Get", null).then((res) => {
+    candidateAPI("mentor", "Get", null).then((res) => {
       setMentor(res.data);
     });
   }, []);
@@ -115,7 +114,7 @@ export default function AddCandidate() {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg" style={{ width: "1500px" }}>
-          <div className="modal-content">
+          <div className="modal-content modal-content-top">
             <div className="modal-header">
               <div className="container d-flex pl-0">
                 <h5
@@ -171,7 +170,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idDG"
                         id="cars"
                         onChange={handleAddFormChange}
@@ -189,7 +188,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idMentor"
                         id="cars"
                         onChange={handleAddFormChange}
@@ -356,7 +355,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
                         onChange={handleAddFormChange}

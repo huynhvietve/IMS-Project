@@ -11,7 +11,9 @@ select{
 .container.justify-content-center {
     margin-top: 400px
 }
-
+.modal-content-top{
+margin-top: 10px !important;
+}
 .modal-header {
     border: none
 }

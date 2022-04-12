@@ -4,6 +4,8 @@ import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
 import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
+import { useDispatch } from "react-redux";
+import {deleteCandi} from "../../../redux/action/candi.action";
 
 function TableCandidate() {
   const [candi, setCandi] = useState([]);
@@ -18,9 +20,11 @@ function TableCandidate() {
 
   useEffect(() => {
     candidateAPI("candidate/batch/9", "Get", null).then((res) => {
-      setCandi(res.data);
+      setCandi(res.data.data);
     });
   }, [candi]);
+
+  const dispatch = useDispatch();
   
   return (
     <div>
@@ -52,7 +56,7 @@ function TableCandidate() {
         </div>
         <div className="table-body">
           {currCandi?.map((candidate) => (
-            <ul className="row sm-gutter sm-gutter--list" key={candidate.id}>
+            <ul className="row sm-gutter sm-gutter--list" key={candidate.idCandidate}>
               <li className="col l-2-8">{candidate.fullName}</li>
               <li className="col l-2-8">{candidate.email}</li>
               <li className="col l-2-8">{candidate.fullNameMentor}</li>
@@ -83,8 +87,9 @@ function TableCandidate() {
                 <i
                   className="fa fa-trash-o"
                   aria-hidden="true"
-                  data-toggle="modal"
-                  data-target="#exampleModal3"
+                  onClick={() => {
+                    dispatch(deleteCandi(candidate.idCandidate));
+                  }}
                 ></i>
                 <i
                   className="fa fa-pencil-square-o"
