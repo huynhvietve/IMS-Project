@@ -2,13 +2,13 @@ import "../../asset/css/interviewShedule.css";
 import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalTitle from "react-bootstrap/ModalTitle";
+
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { popUpActions } from "../../redux/store/popup";
 import { useEffect, useState } from "react";
-import { getInterview } from "../../api/service";
+import { sendEmail } from "../../api/service";
+
 const CalendarInterview = () => {
   const dispatch = useDispatch();
   const showPopUp = useSelector((state) => state.popup.showModal);
@@ -16,27 +16,57 @@ const CalendarInterview = () => {
     dispatch(popUpActions.hide());
   };
   const dataIntern = useSelector((state) => state.popup.data);
-  const [options, setOptions] = useState([
-    { id: 1, name: "AAA", email: "aaa@gmail.com" },
-    { id: 2, name: "BBB", email: "bbb@gmail.com" },
-  ]);
-  useEffect(async () => {
-    // get data from server
-    const res = await getInterview(1);
-    console.log(res.data);
-    const transformedOptions = res.data.map((item) => {
-      return { id: item.id, name: item.mentor, email: item.email };
-    });
-    setOptions(transformedOptions);
+
+  useEffect(() => {
+    setEnterInternName(dataIntern?.fullName);
+    setEnterInternEmail(dataIntern?.email);
   }, [dataIntern]);
 
-  const selectEmail = (email) => {
-    console.log("select email");
-    console.log(email, email.target.value);
+  const [enterEmail, setEnterEmail] = useState("");
+  const [enterName, setEnterName] = useState("");
+  const [enterLink, setEnterLink] = useState("");
+  const [enterInternName, setEnterInternName] = useState("");
+  const [enterInternEmail, setEnterInternEmail] = useState("");
+  const [enterTime, setEnterTime] = useState();
+  const [enterDate, setEnterDate] = useState();
+  const addUserHandler = async (event) => {
+    event.preventDefault();
+    const data = {
+      email: enterEmail,
+      name: enterName,
+      link: enterLink,
+      internName: enterInternName,
+      time: enterTime,
+      date: enterDate,
+      internEmail: enterInternEmail,
+    };
+    try {
+      const result = await sendEmail(data);
+      console.log(result.data);
+      if (result.data) {
+        alert("email send");
+      }
+    } catch (e) {
+      console.log("error send email: ", e);
+      alert("can not send email");
+    }
   };
-  const fullName = dataIntern?.fullName;
-  const changeFullName = (event) => {};
+  const enterEmailChangeHandler = (event) => {
+    setEnterEmail(event.target.value);
+  };
+  const enterNameChangeHandler = (event) => {
+    setEnterName(event.target.value);
+  };
+  const enterLinkChangHanler = (event) => {
+    setEnterLink(event.target.value);
+  };
 
+  const enterTimeHandler = (event) => {
+    setEnterTime(event.target.value);
+  };
+  const enterDateHandler = (event) => {
+    setEnterDate(event.target.value);
+  };
   return (
     <Modal show={showPopUp}>
       <ModalHeader>
@@ -56,7 +86,7 @@ const CalendarInterview = () => {
       <ModalBody>
         <div>
           <div className="modal-header1">
-            <form>
+            <form onSubmit={addUserHandler}>
               <table className="taolichpv">
                 <tbody>
                   <tr>
@@ -64,18 +94,18 @@ const CalendarInterview = () => {
                       <label>Họ tên *:</label>
                     </td>
                     <td>
-                      <input
-                        type="text"
-                        required
-                        value={fullName}
-                        onChange={changeFullName}
-                      />
+                      <input type="text" required value={enterInternName} />
                     </td>
                     <td classname="right-modal">
                       <label>Ngày phỏng vấn *:</label>
                     </td>
                     <td>
-                      <input type="date" required />
+                      <input
+                        type="date"
+                        required
+                        onChange={enterDateHandler}
+                        value={enterDate}
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -87,14 +117,19 @@ const CalendarInterview = () => {
                         type="text"
                         required
                         placeholder="Nhập email"
-                        value={dataIntern?.email}
+                        value={enterInternEmail}
                       />
                     </td>
                     <td classname="right-modal">
                       <label>Giờ bắt đầu *:</label>
                     </td>
                     <td>
-                      <input type="time" required />
+                      <input
+                        type="time"
+                        required
+                        onChange={enterTimeHandler}
+                        value={enterTime}
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -102,17 +137,25 @@ const CalendarInterview = () => {
                       <label>Email Mentor *:</label>
                     </td>
                     <td>
-                      <input type="text" required placeholder="Nhập email" />
+                      <input
+                        type="text"
+                        required
+                        placeholder="Nhập email"
+                        onChange={enterEmailChangeHandler}
+                        value={enterEmail}
+                      />
                     </td>
                     <td classname="right-modal">
                       <label>Người phỏng vấn *:</label>
                     </td>
                     <td>
-                      <select className="cart" onChange={selectEmail}>
-                        {options.map((item) => (
-                          <option value={item.id}>{item.name}</option>
-                        ))}
-                      </select>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Nhập Tên Người Phỏng vấn"
+                        onChange={enterNameChangeHandler}
+                        value={enterName}
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -120,7 +163,11 @@ const CalendarInterview = () => {
                       <label>Link phỏng vấn *:</label>
                     </td>
                     <td>
-                      <input type="link" />
+                      <input
+                        type="link"
+                        onChange={enterLinkChangHanler}
+                        value={enterLink}
+                      />
                     </td>
                   </tr>
                 </tbody>
@@ -130,7 +177,7 @@ const CalendarInterview = () => {
                   Gửi
                 </button>
                 <button type="button">Xem trước</button>
-                <button type="submit" className="btn1" onClick={hidePopUp}>
+                <button type="button" className="btn1" onClick={hidePopUp}>
                   Hủy
                 </button>
               </div>
