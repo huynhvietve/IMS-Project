@@ -107,7 +107,7 @@ export default function AddCandidate() {
     <>
       <div
         class="modal fade"
-        id="exampleModal2"
+        id="exampleModalAdd"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"

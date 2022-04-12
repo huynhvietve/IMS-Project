@@ -4,6 +4,7 @@ import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
 import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
+import EditCandidate from "../editCandidate/index";
 import { useDispatch } from "react-redux";
 import {deleteCandi} from "../../../redux/action/candi.action";
 
@@ -95,7 +96,7 @@ function TableCandidate() {
                   className="fa fa-pencil-square-o"
                   aria-hidden="true"
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#exampleModalEdit"
                 ></i>
                 <i
                   className="fa fa-eye"
@@ -119,11 +120,12 @@ function TableCandidate() {
         className="btn-add"
         type="submit"
         data-toggle="modal"
-        data-target="#exampleModal2"
+        data-target="#exampleModalAdd"
       >
         Thêm
       </button>
       {AddCandidate()}
+      {EditCandidate()}
     </div>
   );
 }
