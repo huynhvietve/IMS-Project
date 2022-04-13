@@ -33,7 +33,7 @@ function TableCandidate() {
 
   return (
     <div>
-      {CalendarInterview()}
+      <CalendarInterview />
       <h3>{constTable.H3}</h3>
       <div className="input-toolbar">
         <div className="uploader">
