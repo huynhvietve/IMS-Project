@@ -27,3 +27,6 @@ export function candidateAPI(endpoint, method = "GET", body) {
 export const sendEmail = (data) => {
   return api.post(`https://jsonplaceholder.typicode.com/posts`, data);
 };
+export const saveDataInterview = (data) => {
+  return api.post(`https://jsonplaceholder.typicode.com/posts`, data);
+};

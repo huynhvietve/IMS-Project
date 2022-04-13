@@ -4,11 +4,7 @@
 .modal-content {
   width: 800px;
   height: 400px;
-  /* margin-left: 50px; */
-}
-.header_1 {
-  color: #007bff;
-  margin: 3% 0 0 37%;
+  margin-left: -32%;
 }
 
 .right-modal {
@@ -47,4 +43,16 @@ select {
 .btn2 {
   background-color: #007bff;
   color: white;
+}
+
+.swal-title {
+  margin: 10% 30%;
+  font-size: 16px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+  margin-bottom: 28px;
+}
+/* class="swal2-popup swal2-modal swal2-icon-success swal2-show" */
+
+.swal2-popup {
+  margin: 200px 500px;
 }

@@ -13,7 +13,7 @@ const popUpSlice = createSlice({
     hide(state) {
       state.showModal = false;
     },
-    getData(state, action) {
+    setData(state, action) {
       state.data = action.payload;
     },
   },

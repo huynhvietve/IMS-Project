@@ -5,7 +5,7 @@ import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
 import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
-import CalendarInterview from "../../calendarinterview";
+import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
 
 import "../../../asset/css/interviewShedule.css";
@@ -15,9 +15,8 @@ function TableCandidate() {
   const [currPage, setCurrPage] = useState(1);
   const [candiPerPage, setCandiPerPage] = useState(7);
   const showModal = (data) => {
-    console.log(data);
     dispatch(popUpActions.show());
-    dispatch(popUpActions.getData(data));
+    dispatch(popUpActions.setData(data));
   };
 
   // Get current candidate

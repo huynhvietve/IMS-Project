@@ -1,13 +1,14 @@
-import "../../asset/css/interviewShedule.css";
+import "../../../asset/css/interviewShedule.css";
 import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
 
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { popUpActions } from "../../redux/store/popup";
+import { popUpActions } from "../../../redux/store/popup";
 import { useEffect, useState } from "react";
-import { sendEmail } from "../../api/service";
+import { sendEmail, saveDataInterview } from "../../../api/service";
+import Swal from "sweetalert2";
 
 const CalendarInterview = () => {
   const dispatch = useDispatch();
@@ -27,11 +28,17 @@ const CalendarInterview = () => {
   const [enterLink, setEnterLink] = useState("");
   const [enterInternName, setEnterInternName] = useState("");
   const [enterInternEmail, setEnterInternEmail] = useState("");
+
   const [enterTime, setEnterTime] = useState();
   const [enterDate, setEnterDate] = useState();
   const addUserHandler = async (event) => {
     event.preventDefault();
-    const data = {
+    const saveData = {
+      email: enterEmail,
+      name: enterName,
+      link: enterLink,
+    };
+    const emailData = {
       email: enterEmail,
       name: enterName,
       link: enterLink,
@@ -41,14 +48,27 @@ const CalendarInterview = () => {
       internEmail: enterInternEmail,
     };
     try {
-      const result = await sendEmail(data);
+      const result = await saveDataInterview(saveData);
+      const emailResult = await sendEmail(emailData);
+
       console.log(result.data);
+      console.log(emailResult.data);
       if (result.data) {
-        alert("email send");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Tạo lịch phỏng vấn thành công",
+          showConfirmButton: false,
+          timer: 1500,
+          style: "display:block",
+        });
       }
     } catch (e) {
-      console.log("error send email: ", e);
-      alert("can not send email");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Tạo lịch phỏng vấn thất bại",
+      });
     }
   };
   const enterEmailChangeHandler = (event) => {
@@ -70,8 +90,8 @@ const CalendarInterview = () => {
   return (
     <Modal show={showPopUp}>
       <ModalHeader>
-        <div classname="header_1">
-          <h3 style={{ color: "#007bff", margin: "2% 0 0 10%" }}>
+        <div classname="header_2">
+          <h3 style={{ color: "#007bff", margin: "2% 0 0 10%", width: "249%" }}>
             TẠO LỊCH PHỎNG VẤN
           </h3>
         </div>
@@ -94,7 +114,12 @@ const CalendarInterview = () => {
                       <label>Họ tên *:</label>
                     </td>
                     <td>
-                      <input type="text" required value={enterInternName} />
+                      <input
+                        type="text"
+                        required
+                        value={enterInternName}
+                        disabled
+                      />
                     </td>
                     <td classname="right-modal">
                       <label>Ngày phỏng vấn *:</label>
@@ -118,6 +143,7 @@ const CalendarInterview = () => {
                         required
                         placeholder="Nhập email"
                         value={enterInternEmail}
+                        disabled
                       />
                     </td>
                     <td classname="right-modal">
@@ -173,11 +199,17 @@ const CalendarInterview = () => {
                 </tbody>
               </table>
               <div className="taolichpvfooter">
-                <button type="submit" className="btn2">
+                <button type="submit" class="btn btn-primary">
                   Gửi
                 </button>
-                <button type="button">Xem trước</button>
-                <button type="button" className="btn1" onClick={hidePopUp}>
+                <button type="button" class="btn btn-success">
+                  Xem trước
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onClick={hidePopUp}
+                >
                   Hủy
                 </button>
               </div>
