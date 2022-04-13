@@ -40,3 +40,8 @@ margin-top: 10px !important;
 .text-muted{
     text-align: center;
 }
+.modal-body-edit{
+    max-height: 450px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

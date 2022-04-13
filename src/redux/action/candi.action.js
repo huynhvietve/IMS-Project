@@ -4,6 +4,7 @@ import { candirService } from "../../redux/services";
 import {
   DELETE_CANDI,
   FETCH_CANDI,
+  UPDATE_CANDI,
 
 } from "../type/type";
 
@@ -44,5 +45,17 @@ export const deleteCandi = (idCandidate) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+export const updateCandi = (id, item) => {
+  return (dispatch) => {
+    candirService
+      .updateCandi(id, item)
+      .then((res) => {
+        dispatch(createAction(UPDATE_CANDI, res.data));
+        dispatch(getCandi());
+        Swal.fire("Cập nhật thành công");
+      })
+      .catch((err) => console.log(err));
   };
 };

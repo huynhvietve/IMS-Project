@@ -3,10 +3,81 @@ import * as constTable from "../../../constant/constTable";
 import { candidateAPI } from "../../../api/service";
 
 function EditCandidate() {
+  const [candi, setCandi] = useState([]);
+  useEffect(() => {
+    candidateAPI("candidate", "Get", null).then((res) => {
+      setCandi(res.data);
+    });
+  },[candi]);
+
+  const [dg, setDg] = useState([]);
+  useEffect(() => {
+    candidateAPI("dg", "Get", null).then((res) => {
+      setDg(res.data);
+    });
+  }, []);
+
+  const [batch, setBatch] = useState([]);
+  useEffect(() => {
+    candidateAPI("internshipcourse", "Get", null).then((res) => {
+      setBatch(res.data);
+    });
+  }, []);
+
+  const [mentor, setMentor] = useState([]);
+  useEffect(() => {
+    candidateAPI("mentor", "Get", null).then((res) => {
+      setMentor(res.data);
+    });
+  }, []);
+
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
+    
+  };
+
+  const [open, setOpen] = useState(false)
+  const [values, setValues] = useState({
+    fullName: "",
+    tel: "",
+    email: "",
+    idDG: "",
+    idMentor: "",
+    interviewDate: "",
+    interviewTime: "",
+    internshipDomain: "",
+    preferredSkills: "",
+    university: "",
+    faculty: "",
+    currentYearofStudy: "",
+    studentID: "",
+    GPA: "",
+    graduationYear: "",
+    preferredInternshipStartDate: "",
+    preferredInternshipDuration: "",
+    internshipSchedule: "",
+    idInternshipCourse: "",
+    pcType: "",
+    status: "",
+    remark: "",
+    technicalComments: "",
+    technicalScore: "",
+    attitude: "",
+    englishCommunication: "",
+    comments: "",
+    remarks: "",
+    projectExperience: "",
+    expectedGraduationSchedule: "",
+    remainingSubjects: "",
+    covidVaccinationiInformation: "",
+    covidVaccinationCertificate: "",
+    certificationDate: "",
+  });
+
   return (
     <>
       <div
-        class="modal fade"
+        className="modal fade"
         id="exampleModalEdit"
         tabindex="-1"
         role="dialog"
@@ -14,7 +85,7 @@ function EditCandidate() {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg">
-          <div className="modal-content">
+          <div className="modal-content modal-content-top">
             <div className="modal-header">
               <div className="container d-flex pl-0">
                 <h5
@@ -26,144 +97,291 @@ function EditCandidate() {
                 </h5>
               </div>{" "}
             </div>
-            <div className="modal-body">
+            <div className="modal-body modal-body-edit">
               <table>
                 <tr>
                   <td className="left-modal">
                     <label>Họ tên*:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="text"
+                        name="fullName"
+                        onChange={handleAddFormChange}
+                        required="required"
+                      />
+                    </td>
                   <td className="right-modal">
                     <label>SDT*:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="text"
+                        name="tel"
+                        onChange={handleAddFormChange}
+                        required="required"
+                      />
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Email*:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="email"
+                        name="email"
+                        onChange={handleAddFormChange}
+                        required="required"
+                      />
+                    </td>
                   <td className="right-modal">
                     <label>Tên DG*:</label>
                   </td>
                   <td>
-                    <select name="name-dg" id="name-dg">
-                      <option value="dg1">DG 1</option>
-                      <option value="dg2">DG 2</option>
-                      <option value="dg3">...</option>
-                    </select>
-                  </td>
+                      <select
+                        className="inputTextCandi"
+                        name="idDG"
+                        id="cars"
+                        onChange={handleAddFormChange}
+                        // required="required"
+                      >
+                        {dg?.map((itemDG) => (
+                          <option value={itemDG.idDG}>{itemDG.nameDG}</option>
+                        ))}
+                      </select>
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Tên Mentor:</label>
                   </td>
                   <td>
-                    <select name="name-mentor" id="name-mentor">
-                      <option value="mentor1">Mentor 1</option>
-                      <option value="mentor2">Mentor 2</option>
-                      <option value="menter3">...</option>
-                    </select>
-                  </td>
+                      <select
+                        className="inputTextCandi"
+                        name="idMentor"
+                        id="cars"
+                        onChange={handleAddFormChange}
+                        // required="required"
+                      >
+                        {mentor?.map((itemMentor) => (
+                          <option value={itemMentor.idMentor}>
+                            {itemMentor.fullNameMentor}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
                   <td className="right-modal">
                     <label>Vị trí thực tập*:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                      <input
+                        type="text"
+                        name="internshipDomain"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                </tr>
+                <tr>
+                  <td className="left-modal">
+                    <label>Ngày phỏng vấn:</label>
                   </td>
+                  <td>
+                      <input
+                        type="text"
+                        name="interviewDate"
+                        onChange={handleAddFormChange}
+                        required="required"
+                      />
+                    </td>
+                  <td className="right-modal">
+                    <label>Giờ phỏng vấn:</label>
+                  </td>
+                  <td>
+                      <input
+                        type="text"
+                        name="interviewTime"
+                        onChange={handleAddFormChange}
+                        required="required"
+                      />
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Kĩ năng:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="text"
+                        name="preferredSkills"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
                   <td className="right-modal">
                     <label>Trường:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="text"
+                        name="university"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Ngành:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="text"
+                        name="faculty"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
                   <td className="right-modal">
                     <label>Năm học hiện tại:</label>
                   </td>
                   <td>
-                    <select name="year-study" id="year-study">
-                      <option value="nam1">Năm 1</option>
-                      <option value="nam2">Năm 2</option>
-                      <option value="nam3">Năm 3</option>
-                      <option value="nam4">Năm 4</option>
-                    </select>
-                  </td>
+                      <select
+                        name="currentYearofStudy"
+                        id="year-study"
+                        onChange={handleAddFormChange}
+                        >
+                        <option value="Năm 1">Năm 1</option>
+                        <option value="Năm 2">Năm 2</option>
+                        <option value="Năm 3">Năm 3</option>
+                        <option value="Năm 4">Năm 4</option>
+                      </select>
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Mã SV:</label>
                   </td>
                   <td>
-                    <input type="text" />
-                  </td>
+                      <input
+                        type="text"
+                        name="studentID"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
                   <td className="right-modal">
                     <label>Điểm trung bình (Hệ 10)*:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="GPA"/>
                   </td>
+                </tr>
+                <tr>
+                <td className="left-modal">
+                      <label>Năm tốt nghiệp:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="GraduationYear"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>Dự kiến tốt nghiệp:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="ExpectedGraduationSchedule"
+                        onChange={handleAddFormChange}
+                        maxLength={1000}
+                      />
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Ngày bắt đầu thực tập*:</label>
                   </td>
                   <td>
-                    <input type="date" />
-                  </td>
+                      <input
+                        type="date"
+                        name="preferredInternshipStartDate"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
                   <td className="right-modal">
                     <label>Thời gian thực tập:</label>
                   </td>
                   <td>
-                    <select name="inter-duration" id="inter-duration">
-                      <option value="">chưa biết</option>
-                      <option value="" selected>
-                        8 tuần
-                      </option>
-                      <option value="">12 tuần</option>
-                    </select>
-                  </td>
+                      <select
+                        name="preferredInternshipDuration"
+                        id="inter-duration"
+                        onChange={handleAddFormChange}
+                      >
+                        <option value="8 Tuần">
+                          8 tuần
+                        </option>
+                        <option value="12 Tuần">12 tuần</option>
+                      </select>
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
                     <label>Loại thực tập:</label>
                   </td>
                   <td>
-                    <select name="intern-schehdule" id="intern-schehdule">
-                      <option value="fulltime">Full time</option>
-                      <option value="parttimem">Part time</option>
-                    </select>
-                  </td>
+                      <select
+                        name="internshipSchedule"
+                        id="intern-schehdule"
+                        onChange={handleAddFormChange}
+                      >
+                        <option value="Full time">
+                          Full time
+                        </option>
+                        <option value="Part time">Part time</option>
+                      </select>
+                    </td>
                   <td className="right-modal">
                     <label>Khóa thực tập:</label>
                   </td>
                   <td>
-                    <select name="batch" id="batch">
-                      <option value="batch8">Batch 8</option>
-                      <option value="batch9">Batch 9</option>
-                    </select>
-                  </td>
+                      <select
+                        className="inputTextCandi"
+                        name="idInternshipCourse"
+                        id="cars"
+                        onChange={handleAddFormChange}
+                        // required="required"
+                      >
+                        {batch?.map((itemBatch) => (
+                          <option value={itemBatch.idInternshipCourse}>
+                            {itemBatch.nameCoure}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                </tr>
+                <tr>
+                <td className="left-modal">
+                      <label>Loại PC:</label>
+                    </td>
+                    <td>
+                      <select
+                        name="pcType"
+                        onChange={handleAddFormChange}
+                      >
+                      <option value="PC">PC</option>
+                      <option value="Laptop">Laptop</option>
+                      </select>
+                    </td>
+                    <td className="right-modal">
+                      <label>Môn học còn lại:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="RemainingSubjects"
+                        onChange={handleAddFormChange}
+                        maxLength={1000}
+                      />
+                    </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
@@ -179,35 +397,35 @@ function EditCandidate() {
                     <label>Remark:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="remark"/>
                   </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
-                    <label>Technical comments:</label>
+                    <label>Nhận xét kỹ thuật:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="technicalComments"/>
                   </td>
                   <td className="right-modal">
-                    <label>Technical score:</label>
+                    <label>Điểm kỹ thuật:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="technicalScore"/>
                   </td>
                 </tr>
                 <tr>
                   <td className="left-modal">
-                    <label>Attitude:</label>
+                    <label>Thái độ:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="attitude"/>
                   </td>
                   <td className="right-modal">
-                    <label>English communication:</label>
+                    <label>Giao tiếp TA:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="englishCommunication"/>
                   </td>
                 </tr>
                 <tr>
@@ -215,32 +433,76 @@ function EditCandidate() {
                     <label>Comments:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="comments"/>
                   </td>
                   <td className="right-modal">
                     <label>Remarks:</label>
                   </td>
                   <td>
-                    <input type="text" />
+                    <input type="text" name="remarks"/>
                   </td>
                 </tr>
+                <tr>
+                    <td className="left-modal">
+                      <label>Dự án đã tham gia:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="ProjectExperience"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>Thông tin tiêm chủng Covid:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="CovidVaccinationiInformation"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>Giấy chứng nhận:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="CovidVaccinationCertificate"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>Ngày chứng nhận:</label>
+                    </td>
+                    <td>
+                      <input
+                        type="date"
+                        name="CertificationDate"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                  </tr>
               </table>
             </div>
             <div className="modal-footer">
               {" "}
-              <button
-                type="button"
-                className="btn btn-light"
-                data-dismiss="modal"
-              >
-                Hủy
-              </button>{" "}
               <button
                 id="edit-candi"
                 type="button"
                 className="btn btn-danger-del"
               >
                 Sửa
+              </button>{" "}
+              <button
+                type="button"
+                className="btn btn-light"
+                data-dismiss="modal"
+              >
+                Hủy
               </button>{" "}
             </div>
           </div>
