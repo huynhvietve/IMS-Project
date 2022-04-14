@@ -16,6 +16,11 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+.mess-table-candidate{
+  color: #007bff;
+  font-weight: bold; 
+  text-align: center;
+}
 .fa-trash-o,
 .fa-pencil-square-o,
 .fa-eye,

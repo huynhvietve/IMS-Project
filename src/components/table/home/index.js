@@ -7,6 +7,7 @@ export default function Home() {
    useEffect( () => {
     apiaxios.batchHome(`internshipcourse/${urlParams.get("id")}`, null )
     .then( (res) => {
+      localStorage.setItem("idBatch",urlParams.get("id"));
       setIdcourse(res.data.data)
       });
 }, {});

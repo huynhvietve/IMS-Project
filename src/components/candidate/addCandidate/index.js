@@ -7,7 +7,8 @@ export default function AddCandidate() {
 
   const [candi, setCandi] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
+    const idBatch = localStorage.getItem("idBatch");
+    candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
       setCandi(res.data);
     });
   },[candi]);
@@ -115,7 +116,7 @@ export default function AddCandidate() {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg" style={{ width: "1500px" }}>
-          <div className="modal-content">
+          <div className="modal-content modal-content-top">
             <div className="modal-header">
               <div className="container d-flex pl-0">
                 <h5
@@ -171,7 +172,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idDG"
                         id="cars"
                         onChange={handleAddFormChange}
@@ -189,7 +190,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idMentor"
                         id="cars"
                         onChange={handleAddFormChange}
@@ -356,7 +357,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
                         onChange={handleAddFormChange}
