@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { candidateAPI } from "../../../api/service";
 import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
+import * as apiaxios from "../../../api/service";
 export default function AddCandidate() {
 
   const [candi, setCandi] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
-      setCandi(res.data);
+    const idBatch = localStorage.getItem("idBatch");
+    candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
+      setCandi(res.data.data);
     });
-  },[candi]);
+  }, [candi]);
 
   const [dg, setDg] = useState([]);
   useEffect(() => {
@@ -20,8 +22,8 @@ export default function AddCandidate() {
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
-    candidateAPI("internshipcourse", "Get", null).then((res) => {
-      setBatch(res.data);
+    apiaxios.batchAPI("internshipcourse").then((res) => {
+      setBatch(res.data.data);
     });
   }, []);
 

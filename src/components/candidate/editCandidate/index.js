@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as constTable from "../../../constant/constTable";
 import { candidateAPI } from "../../../api/service";
+import * as apiaxios from "../../../api/service"; 
 
 function EditCandidate() {
   const [candi, setCandi] = useState([]);
   useEffect(() => {
     candidateAPI("candidate", "Get", null).then((res) => {
-      setCandi(res.data);
+      setCandi(res.data.data);
     });
   },[candi]);
 
@@ -19,8 +20,8 @@ function EditCandidate() {
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
-    candidateAPI("internshipcourse", "Get", null).then((res) => {
-      setBatch(res.data);
+    apiaxios.batchAPI("internshipcourse").then((res) => {
+      setBatch(res.data.data);
     });
   }, []);
 
@@ -31,16 +32,10 @@ function EditCandidate() {
     });
   }, []);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-    
-  };
-
-  const [open, setOpen] = useState(false)
   const [values, setValues] = useState({
     fullName: "",
     tel: "",
-    email: "",
+    emailCandidate: "",
     idDG: "",
     idMentor: "",
     interviewDate: "",
@@ -73,6 +68,14 @@ function EditCandidate() {
     covidVaccinationCertificate: "",
     certificationDate: "",
   });
+
+  function handleUpdate(event) {
+    const { name, value } = event.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  }
 
   return (
     <>
@@ -107,8 +110,9 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="fullName"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         required="required"
+                        value={values.fullName}
                       />
                     </td>
                   <td className="right-modal">
@@ -118,7 +122,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="tel"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         required="required"
                       />
                     </td>
@@ -130,8 +134,8 @@ function EditCandidate() {
                   <td>
                       <input
                         type="email"
-                        name="email"
-                        onChange={handleAddFormChange}
+                        name="emailCandidate"
+                        onChange={handleUpdate}
                         required="required"
                       />
                     </td>
@@ -143,7 +147,7 @@ function EditCandidate() {
                         className="inputTextCandi"
                         name="idDG"
                         id="cars"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         // required="required"
                       >
                         {dg?.map((itemDG) => (
@@ -161,7 +165,7 @@ function EditCandidate() {
                         className="inputTextCandi"
                         name="idMentor"
                         id="cars"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         // required="required"
                       >
                         {mentor?.map((itemMentor) => (
@@ -178,7 +182,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="internshipDomain"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                 </tr>
@@ -190,7 +194,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="interviewDate"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         required="required"
                       />
                     </td>
@@ -201,7 +205,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="interviewTime"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         required="required"
                       />
                     </td>
@@ -214,7 +218,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="preferredSkills"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                   <td className="right-modal">
@@ -224,7 +228,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="university"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                 </tr>
@@ -236,7 +240,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="faculty"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                   <td className="right-modal">
@@ -246,7 +250,7 @@ function EditCandidate() {
                       <select
                         name="currentYearofStudy"
                         id="year-study"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         >
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
@@ -263,7 +267,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="studentID"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                   <td className="right-modal">
@@ -281,7 +285,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="GraduationYear"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                     <td className="right-modal">
@@ -291,7 +295,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="ExpectedGraduationSchedule"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         maxLength={1000}
                       />
                     </td>
@@ -304,7 +308,7 @@ function EditCandidate() {
                       <input
                         type="date"
                         name="preferredInternshipStartDate"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                   <td className="right-modal">
@@ -314,7 +318,7 @@ function EditCandidate() {
                       <select
                         name="preferredInternshipDuration"
                         id="inter-duration"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       >
                         <option value="8 Tuần">
                           8 tuần
@@ -331,7 +335,7 @@ function EditCandidate() {
                       <select
                         name="internshipSchedule"
                         id="intern-schehdule"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       >
                         <option value="Full time">
                           Full time
@@ -347,7 +351,7 @@ function EditCandidate() {
                         className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         // required="required"
                       >
                         {batch?.map((itemBatch) => (
@@ -365,7 +369,7 @@ function EditCandidate() {
                     <td>
                       <select
                         name="pcType"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       >
                       <option value="PC">PC</option>
                       <option value="Laptop">Laptop</option>
@@ -378,7 +382,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="RemainingSubjects"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                         maxLength={1000}
                       />
                     </td>
@@ -450,7 +454,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="ProjectExperience"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                     <td className="right-modal">
@@ -460,7 +464,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="CovidVaccinationiInformation"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                   </tr>
@@ -472,7 +476,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="CovidVaccinationCertificate"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                     <td className="right-modal">
@@ -482,7 +486,7 @@ function EditCandidate() {
                       <input
                         type="date"
                         name="CertificationDate"
-                        onChange={handleAddFormChange}
+                        onChange={handleUpdate}
                       />
                     </td>
                   </tr>
