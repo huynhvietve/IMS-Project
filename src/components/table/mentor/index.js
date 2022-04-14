@@ -6,16 +6,13 @@ import { deleteMentor, getMentor } from "../../../redux/action/mentor.action";
 import { popUpActions } from "../../../redux/store/popup";
 import AddMentor from "../../mentor/addMentors/index";
 import Pagination from "../../../components/mentor/pagination/index";
-import EditMentor from "../../mentor/editMentors/index";
 
-function Index(props) {
+function TableMentor(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMentor());
   }, []);
   const [mentors, setMentor] = useState([]);
-  const [posts, setPosts] = useState([]);
-
   const [currPage, setCurrPage] = useState(1);
   const [mentorPerPage, setMentorPerPage] = useState(20);
   const indexOfLastMentor = currPage * mentorPerPage;
@@ -36,7 +33,6 @@ function Index(props) {
   }, [mentors]);
   return (
     <div>
-      {EditMentor()}
       <h3>DANH SÁCH NGƯỜI HƯỚNG DẪN</h3>
       <div className="grid wide home-candidate">
         <div className="row home-candidate--list">
@@ -119,4 +115,4 @@ function Index(props) {
     </div>
   );
 }
-export default withRouter(Index);
+export default withRouter(TableMentor);
