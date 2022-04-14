@@ -57,62 +57,61 @@ function TableCandidate() {
           <span className="col l-2-8 ">{constTable.ACTION}</span>
         </div>
         <div className="table-body">
-          {currCandi.length > 0 ? (
+        {currCandi.length > 0 ? (
             currCandi?.map((candidate) => (
               <ul
                 className="row sm-gutter sm-gutter--list"
                 key={candidate.idCandidate}
               >
-                <li className="col l-2-8">{candidate.fullName}</li>
-                <li className="col l-2-8">{candidate.emailCandidate}</li>
-                <li className="col l-2-8">{candidate.fullNameMentor}</li>
-                <li className="col l-2-8">{candidate.nameDG}</li>
-                <li className="col l-2-8">{candidate.internshipDomain}</li>
-                <li className="col l-2-8">{candidate.nameCoure}</li>
-                <li className="col l-2-8">
-                  <label class="checkbox-inline">
-                    <input
-                      id="checkpass"
-                      type="checkbox"
-                      value={candidate.status}
-                      checked={candidate.status == "pass"}
-                    />
-                    Pass
-                  </label>
-                  <label clasNames="checkbox-inline">
-                    <input
-                      id="checkfail"
-                      type="checkbox"
-                      value={candidate.status}
-                      checked={candidate.status == "fail"}
-                    />
-                    Fail
-                  </label>
-                </li>
-                <li className="col l-2-8">
-                  <i
-                    className="fa fa-trash-o"
-                    aria-hidden="true"
-                    onClick={() => {
-                      dispatch(deleteCandi(candidate.idCandidate));
-                    }}
-                  ></i>
-                  <i
-                    className="fa fa-pencil-square-o"
-                    aria-hidden="true"
-                    data-toggle="modal"
-                    data-target="#exampleModalEdit"
-                  ></i>
-                  <i
-                    className="fa fa-eye"
-                    aria-hidden="true"
-                    data-toggle="modal"
-                    data-target="#exampleModalDetail"
-                  ></i>
-                  <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
-                </li>
-              </ul>
-            ))
+              <li className="col l-2-8">{candidate.fullName}</li>
+              <li className="col l-2-8">{candidate.emailCandidate}</li>
+              <li className="col l-2-8">{candidate.fullNameMentor}</li>
+              <li className="col l-2-8">{candidate.nameDG}</li>
+              <li className="col l-2-8">{candidate.internshipDomain}</li>
+              <li className="col l-2-8">{candidate.nameCoure}</li>
+              <li className="col l-2-8">
+                <label class="checkbox-inline">
+                  <input
+                    id="checkpass"
+                    type="checkbox"
+                    value={candidate.status}
+                    checked={candidate.status == "pass"}
+                  />
+                  Pass
+                </label>
+                <label clasNames="checkbox-inline">
+                  <input
+                    id="checkfail"
+                    type="checkbox"
+                    value={candidate.status}
+                    checked={candidate.status == "fail"}
+                  />
+                  Fail
+                </label>
+              </li>
+              <li className="col l-2-8">
+                <i
+                  className="fa fa-trash-o"
+                  aria-hidden="true"
+                  data-toggle="modal"
+                  data-target="#exampleModal3"
+                ></i>
+                <i
+                  className="fa fa-pencil-square-o"
+                  aria-hidden="true"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                ></i>
+                <i
+                  className="fa fa-eye"
+                  aria-hidden="true"
+                  data-toggle="modal"
+                  data-target="#exampleModal4"
+                ></i>
+                <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
+              </li>
+            </ul>
+          ))
           ) : (
             <div>
               <p className="mess-table-candidate">Chưa có dữ liệu</p>

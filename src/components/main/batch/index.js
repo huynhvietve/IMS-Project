@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import * as apiaxios from "../../../api/service";
 import "./style.css";
 import Swal from "sweetalert2";
-
 export default function Batch(props) {
   let history = useHistory();
   const [idTemp, setIdTemp] = useState();
@@ -38,17 +37,53 @@ export default function Batch(props) {
       kindOfInternship: addFormData.kindOfInternship,
     };
     apiaxios.batchCreate("internshipcourse/create", newContact).then((res) => {
-      history.push(`/Home/batch?id=${res.data.idInternshipCourse}`);
-    }).catch((err) => {
-      Swal.fire({
-        icon: 'error',
-        text: 'Vui lòng nhập chính xác!',
-      })
+      if(res.data.error){
+        Swal.fire({
+          icon: 'error',
+          text: res.data.error,
+          confirmButtonText: "Xác nhận",
+        })
+      }else{
+        history.push(`/Home/batch/?id=${res.data.idInternshipCourse}`);
+      }
+    }).catch((error) => {
+      if (error.response) {
+        Swal.fire({
+          icon: 'error',
+          text: error.response.data.error,
+          confirmButtonText: "Xác nhận",
+        })
+      } else if (error.request) {
+        Swal.fire({
+          icon: 'error',
+          text: error.request,
+          confirmButtonText: "Xác nhận",
+        })
+      } else {
+        console.log('Error', error.message);
+        Swal.fire({
+          icon: 'error',
+          text: error.message,
+          confirmButtonText: "Xác nhận",
+        })
+      }
     });
   };
-  //chon khoa thuc tap theo id
   const handleSubmit = () => {
-    history.push(`/Home/batch?id=${idTemp}`);
+    try {
+      if(idTemp !== undefined) {
+        history.push(`/Home/batch/?id=${idTemp}`);
+      }else{ Swal.fire({
+        icon: 'error',
+        text: 'Bạn cần chọn Batch !',
+        confirmButtonText: "Xác nhận",
+      })}
+    } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          text: error.response.status.error,
+        })
+    } 
   };
   return (
     <div>
@@ -62,16 +97,14 @@ export default function Batch(props) {
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">Internship management system</h4>
+              <h4 className="modal-title">Hệ thống quản lý thực tập</h4>
             </div>
             <div className="modal-body">
               <label className="label-batch">Chọn khóa thực tập : </label>
               <select
-                className="select-batch"
+                className="select-batch"      
                 onChange={(e) => setIdTemp(e.currentTarget.value)}
-                
               >
-                {" "}
                 <option value="">Chọn...</option>
                 {posts?.map((item) => (
                   <option
@@ -101,7 +134,7 @@ export default function Batch(props) {
                 className="btn btn-primary"
                 style={{ width: "156px", float: "right", marginRight: "50px" }}
               >
-                xác nhận
+                Xác nhận
               </button>
             </div>
           </div>
@@ -152,7 +185,7 @@ export default function Batch(props) {
                           className="inputText"
                           type="text"
                           name="nameCoure"
-                          required="required"
+                          
                           placeholder="VD: Batch 1"
                           onChange={handleAddFormChange}
                         />
@@ -166,7 +199,6 @@ export default function Batch(props) {
                           name="status"
                           id="cars"
                           onChange={handleAddFormChange}
-                          required="required"
                         >
                           <option value="">Chọn...</option>
                           <option value="Done">Done</option>
@@ -181,7 +213,6 @@ export default function Batch(props) {
                       <td>
                         <input
                           className="inputText"
-                          required="required"
                           type="date"
                           name="dateStart"
                           onChange={handleAddFormChange}
@@ -196,7 +227,6 @@ export default function Batch(props) {
                           name="kindOfInternship"
                           id="cars"
                           onChange={handleAddFormChange}
-                          required="required"
                         >
                           <option value="">Chọn...</option>
                           <option value="Full time">Full time</option>
@@ -211,7 +241,6 @@ export default function Batch(props) {
                       <td>
                         <input
                           className="inputText"
-                          required="required"
                           type="date"
                           name="dateEnd"
                           onChange={handleAddFormChange}
@@ -220,6 +249,13 @@ export default function Batch(props) {
                       </td>
                     </tr>
                     <div className="modal-footer">
+                    <button
+                        id="md-them2"
+                        type="submit"
+                        className="btn btn-primary"
+                      >
+                        Thêm
+                      </button>
                       <button
                         id="md-huy"
                         type="button"
@@ -227,13 +263,6 @@ export default function Batch(props) {
                         data-dismiss="modal"
                       >
                         Hủy
-                      </button>
-                      <button
-                        id="md-them2"
-                        type="submit"
-                        className="btn btn-primary"
-                      >
-                        Thêm
                       </button>
                     </div>
                   </form>
