@@ -21,6 +21,7 @@ const CalendarInterview = () => {
   useEffect(() => {
     setEnterInternName(dataIntern?.fullName);
     setEnterInternEmail(dataIntern?.email);
+    setId(dataIntern?.id);
   }, [dataIntern]);
 
   const [enterEmail, setEnterEmail] = useState("");
@@ -28,7 +29,7 @@ const CalendarInterview = () => {
   const [enterLink, setEnterLink] = useState("");
   const [enterInternName, setEnterInternName] = useState("");
   const [enterInternEmail, setEnterInternEmail] = useState("");
-
+  const [id, setId] = useState("");
   const [enterTime, setEnterTime] = useState();
   const [enterDate, setEnterDate] = useState();
   const addUserHandler = async (event) => {
@@ -50,8 +51,8 @@ const CalendarInterview = () => {
       internEmail: enterInternEmail,
     };
     try {
-      const result = await saveDataInterview(saveData);
-      const emailResult = await sendEmail(emailData);
+      const result = await saveDataInterview(id, saveData);
+      const emailResult = await sendEmail(id, emailData);
 
       console.log(result.data);
       console.log(emailResult.data);

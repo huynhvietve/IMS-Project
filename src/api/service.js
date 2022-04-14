@@ -33,10 +33,10 @@ export function mentorCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
 }
 
-export const sendEmail = (data) => {
-  return api.post(`https://jsonplaceholder.typicode.com/posts`, data);
+export const sendEmail = (id, data) => {
+  return api.post(`https://jsonplaceholder.typicode.com/posts/${id}`, data);
 };
 
-export const saveDataInterview = (data) => {
-  return api.put(`http://192.168.178.165:5000/candidate/13`, data);
+export const saveDataInterview = (id, data) => {
+  return api.put(`http://192.168.178.165:5000/candidate/${id}`, data);
 };
