@@ -28,5 +28,5 @@ export const sendEmail = (data) => {
   return api.post(`https://jsonplaceholder.typicode.com/posts`, data);
 };
 export const saveDataInterview = (data) => {
-  return api.post(`https://jsonplaceholder.typicode.com/posts`, data);
+  return api.put(`http://192.168.178.165:5000/candidate/13`, data);
 };

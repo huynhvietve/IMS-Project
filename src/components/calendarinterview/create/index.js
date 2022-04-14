@@ -34,9 +34,11 @@ const CalendarInterview = () => {
   const addUserHandler = async (event) => {
     event.preventDefault();
     const saveData = {
-      email: enterEmail,
-      name: enterName,
-      link: enterLink,
+      interviewTime: enterTime,
+      interviewDate: enterDate,
+      interviewLink: enterLink,
+      interviewer: enterName,
+      emailInterviewer: enterEmail,
     };
     const emailData = {
       email: enterEmail,
@@ -135,7 +137,7 @@ const CalendarInterview = () => {
                   </tr>
                   <tr>
                     <td classname="left-modal">
-                      <label>Email Ứng Viên *:</label>
+                      <label>Email ứng viên *:</label>
                     </td>
                     <td>
                       <input
@@ -160,7 +162,7 @@ const CalendarInterview = () => {
                   </tr>
                   <tr>
                     <td classname="left-modal">
-                      <label>Email Mentor *:</label>
+                      <label>Email người phỏng vấn *:</label>
                     </td>
                     <td>
                       <input
