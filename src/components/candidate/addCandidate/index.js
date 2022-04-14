@@ -4,13 +4,13 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
 
 export default function AddCandidate() {
-
   const [candi, setCandi] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
+    const idBatch = localStorage.getItem("idBatch");
+    candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
       setCandi(res.data);
     });
-  },[candi]);
+  }, [candi]);
 
   const [dg, setDg] = useState([]);
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function AddCandidate() {
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name","value");
+    const fieldName = event.target.getAttribute("name", "value");
     const fieldValue = event.target.value;
     const newFormData = { ...addCandi };
     newFormData[fieldName] = fieldValue;
@@ -115,7 +115,7 @@ export default function AddCandidate() {
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg" style={{ width: "1500px" }}>
-          <div className="modal-content">
+          <div className="modal-content modal-content-top">
             <div className="modal-header">
               <div className="container d-flex pl-0">
                 <h5
@@ -171,7 +171,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idDG"
                         id="cars"
                         onChange={handleAddFormChange}
@@ -189,7 +189,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idMentor"
                         id="cars"
                         onChange={handleAddFormChange}
@@ -254,7 +254,7 @@ export default function AddCandidate() {
                         name="currentYearofStudy"
                         id="year-study"
                         onChange={handleAddFormChange}
-                        >
+                      >
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
                         <option value="Năm 3">Năm 3</option>
@@ -299,12 +299,9 @@ export default function AddCandidate() {
                       <label>{constCandidate.TYPEPC}</label>
                     </td>
                     <td>
-                      <select
-                        name="pcType"
-                        onChange={handleAddFormChange}
-                      >
-                      <option value="PC">PC</option>
-                      <option value="Laptop">Laptop</option>
+                      <select name="pcType" onChange={handleAddFormChange}>
+                        <option value="PC">PC</option>
+                        <option value="Laptop">Laptop</option>
                       </select>
                     </td>
                   </tr>
@@ -328,9 +325,7 @@ export default function AddCandidate() {
                         id="inter-duration"
                         onChange={handleAddFormChange}
                       >
-                        <option value="8 Tuần">
-                          8 tuần
-                        </option>
+                        <option value="8 Tuần">8 tuần</option>
                         <option value="12 Tuần">12 tuần</option>
                       </select>
                     </td>
@@ -345,9 +340,7 @@ export default function AddCandidate() {
                         id="intern-schehdule"
                         onChange={handleAddFormChange}
                       >
-                        <option value="Full time">
-                          Full time
-                        </option>
+                        <option value="Full time">Full time</option>
                         <option value="Part time">Part time</option>
                       </select>
                     </td>
@@ -356,7 +349,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
-                        className="inputText"
+                        className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
                         onChange={handleAddFormChange}

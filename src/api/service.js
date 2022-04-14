@@ -24,9 +24,19 @@ export function candidateAPI(endpoint, method = "GET", body) {
     data: body,
   });
 }
+
+export function mentorAPI(endpoint) {
+  return api.get(`${API_BASE}/${endpoint}`, null);
+}
+
+export function mentorCreate(endpoint, body) {
+  return api.post(`${API_BASE}/${endpoint}`, body);
+}
+
 export const sendEmail = (data) => {
   return api.post(`https://jsonplaceholder.typicode.com/posts`, data);
 };
+
 export const saveDataInterview = (data) => {
   return api.put(`http://192.168.178.165:5000/candidate/13`, data);
 };

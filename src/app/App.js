@@ -13,6 +13,7 @@ import "../asset/css/crudModal.css";
 import "../asset/css/tableCandidate.css";
 import "../asset/css/pagination.css";
 import "../asset/css/interviewShedule.css";
+import "../asset/css/mentor.css";
 import Navbar from "../components/home/navbar/index";
 import Header from "../components/home/header/index";
 import indexCandidate from "../components/candidate/tableCandidate/index";
