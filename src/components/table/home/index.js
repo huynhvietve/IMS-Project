@@ -1,6 +1,5 @@
 import React, {useState, useEffect } from "react";
 import * as apiaxios from "../../../api/service";
-import {useLocation} from "react-router-dom";
 
 export default function Home() {
   const urlParams = new URLSearchParams(window.location.search);
