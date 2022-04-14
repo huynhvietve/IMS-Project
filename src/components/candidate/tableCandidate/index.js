@@ -93,8 +93,9 @@ function TableCandidate() {
                 <i
                   className="fa fa-trash-o"
                   aria-hidden="true"
-                  data-toggle="modal"
-                  data-target="#exampleModal3"
+                  onClick={() => {
+                    dispatch(deleteCandi(candidate.idCandidate));
+                  }}
                 ></i>
                 <i
                   className="fa fa-pencil-square-o"
