@@ -21,7 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Switch>
+      <Switch>
         <Route path="/" exact>
           {!isAuthen && <Redirect to="/login" />}
           {isAuthen && <Redirect to="/batch" />}
@@ -30,7 +30,7 @@ function App() {
           <BasicForm />
         </Route>
           {isAuthen && (
-            <> */}
+            <>
               <Header/>
               <Navbar/>
             
@@ -43,12 +43,12 @@ function App() {
                 <Route path="/batch" exact component={Batch} />
                 </Route>
               </Switch>
-          {/* </>
+          </>
             )}
         <Route path="*">
           <Redirect to="/login" />
         </Route>
-      </Switch> */}
+      </Switch>
     </BrowserRouter>
   );
 }

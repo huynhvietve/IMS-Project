@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { mentorAPI } from "../../../api/service";
+import * as apiaxios from "../../../api/service";
+import Swal from "sweetalert2";
 
 export default function AddMentor() {
   const [mentors, setMentor] = useState([]);
@@ -7,19 +8,20 @@ export default function AddMentor() {
   const [dg, setdg] = useState([]);
 
   useEffect(() => {
-    mentorAPI("GetListInternshipCourse", "Get", null).then((res) => {
+    apiaxios.mentorAPI("internshipCourse", "Get", null).then((res) => {
       setBatch(res.data);
     });
   }, []);
 
   useEffect(() => {
-    mentorAPI("GetListDG", "Get", null).then((res) => {
+    apiaxios.mentorAPI("dg", "Get", null).then((res) => {
       setdg(res.data);
     });
   }, []);
-  
+
   useEffect(() => {
-    mentorAPI("mentor/batch/9", "Get", null).then((res) => {
+    const idBatch = localStorage.getItem("idBatch");
+    apiaxios.mentorAPI(`mentor/batch/${idBatch}`, null).then((res) => {
       setMentor(res.data.data);
     });
   }, [mentors]);
@@ -56,11 +58,42 @@ export default function AddMentor() {
       workplace: addFormData.workplace,
       idInternshipCourse: addFormData.idInternshipCourse,
     };
-    mentorAPI("mentor", "POST", newContact).then((res) => {
-      setMentor(res.data);
-    });
-    const newContacts = [...mentors, newContact];
-    setMentor(newContacts);
+    apiaxios
+      .mentorCreate("mentor", newContact)
+      .then((res) => {
+        if (res.data.erro) {
+          Swal.fire({
+            icon: "error",
+            text: res.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        }
+        setMentor(res.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        } else if (error.request) {
+          Swal.fire({
+            icon: "error",
+            text: error.request,
+            confirmButtonText: "Xác nhận",
+          });
+        } else {
+          console.log("Error", error.message);
+          Swal.fire({
+            icon: "error",
+            text: error.message,
+            confirmButtonText: "Xác nhận",
+          });
+        }
+        const newContacts = [...mentors, newContact];
+        setMentor(newContacts);
+      });
   };
 
   return (
@@ -105,8 +138,7 @@ export default function AddMentor() {
                       className="inputText"
                       type="text"
                       name="fullNameMentor"
-                      required="required"
-                      placeholder="Nhập tên người hướng dẫn..."
+                      placeholder="Nhập trên 5 kí tự..."
                       onChange={handleAddFormChange}
                     />
                   </td>
@@ -118,7 +150,6 @@ export default function AddMentor() {
                       className="inputText"
                       type="text"
                       name="position"
-                      required="required"
                       placeholder="Nhập chức vụ..."
                       onChange={handleAddFormChange}
                     />
@@ -132,7 +163,6 @@ export default function AddMentor() {
                     <input
                       style={{ width: "200px" }}
                       className="inputText"
-                      required="required"
                       type="date"
                       name="dayOfBirth"
                       onChange={handleAddFormChange}
@@ -146,8 +176,7 @@ export default function AddMentor() {
                       className="inputText"
                       name="email"
                       type="text"
-                      required="required"
-                      placeholder="Nhập email..."
+                      placeholder="VD: abc@gmail.com"
                       onChange={handleAddFormChange}
                     />
                   </td>
@@ -162,7 +191,6 @@ export default function AddMentor() {
                       name="idInternshipCourse"
                       id="cars"
                       onChange={handleAddFormChange}
-                      required="required"
                       style={{ width: "200px" }}
                     >
                       {Batch?.map((itemBatch) => (
@@ -199,7 +227,6 @@ export default function AddMentor() {
                       className="inputText"
                       name="workplace"
                       type="text"
-                      required="required"
                       placeholder="Nhập nơi công tác..."
                       onChange={handleAddFormChange}
                     />
@@ -212,7 +239,6 @@ export default function AddMentor() {
                       className="inputText"
                       name="address"
                       type="text"
-                      required="required"
                       placeholder="Nhập địa chỉ..."
                       onChange={handleAddFormChange}
                     />

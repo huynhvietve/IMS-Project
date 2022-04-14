@@ -26,10 +26,10 @@ export function candidateAPI(endpoint, method = 'GET',body) {
   })
 }
 
-export function mentorAPI(endpoint, method = "GET", body) {
-  return axios({
-    method: method,
-    url: `${API_BASE}/${endpoint}`,
-    data: body,
-  })
-}
+export function mentorAPI( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
+
+export function mentorCreate( endpoint,body)  {
+  return api.post(`${API_BASE}/${endpoint}`,body);
+};

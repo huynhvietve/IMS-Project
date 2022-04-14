@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { mentorAPI } from "../../../api/service";
+import * as apiaxios from "../../../api/service";
 import { deleteMentor, getMentor } from "../../../redux/action/mentor.action";
+import { popUpActions } from "../../../redux/store/popup";
 import AddMentor from "../../mentor/addMentors/index";
 import Pagination from "../../../components/mentor/pagination/index";
+import EditMentor from "../../mentor/editMentors/index";
 
 function Index(props) {
   const dispatch = useDispatch();
@@ -20,14 +22,21 @@ function Index(props) {
   const indexOfFirstMentor = indexOfLastMentor - mentorPerPage;
   const currMentor = mentors.slice(indexOfFirstMentor, indexOfLastMentor);
   const paginate = (pageNumber) => setCurrPage(pageNumber);
+  const showModal = (data) => {
+    console.log(data);
+    dispatch(popUpActions.show());
+    dispatch(popUpActions.getData(data));
+  };
 
   useEffect(() => {
-    mentorAPI("mentor/batch/9", "Get", null).then((res) => {
+    const idBatch = localStorage.getItem("idBatch");
+    apiaxios.mentorAPI(`mentor/batch/${idBatch}`, null).then((res) => {
       setMentor(res.data.data);
     });
   }, [mentors]);
   return (
     <div>
+      {EditMentor()}
       <h3>DANH SÁCH NGƯỜI HƯỚNG DẪN</h3>
       <div className="grid wide home-candidate">
         <div className="row home-candidate--list">
@@ -60,7 +69,7 @@ function Index(props) {
                 ></i>
                 <i
                   data-toggle="modal"
-                  data-target="#exampleModaEdit"
+                  data-target="#deltaiMentor"
                   className="fa fa-pencil-square-o"
                   aria-hidden="true"
                 ></i>
@@ -68,9 +77,26 @@ function Index(props) {
                   className="fa fa-eye"
                   aria-hidden="true"
                   data-toggle="modal"
-                  data-target="#exampleModal4"
+                  data-target="#exampleModal1"
+                >
+                  Xem
+                </i>
+                <i
+                  className="fa fa-calendar-plus-o"
+                  aria-hidden="true"
+                  onClick={() =>
+                    showModal({
+                      id: mentor.id,
+                      fullNameMentor: mentor.fullNameMentor,
+                      email: mentor.email,
+                      nameDG: mentor.nameDG,
+                      nameCoure: mentor.nameCoure,
+                      workplace: mentor.workplace,
+                      address: mentor.address,
+                      position: mentor.position,
+                    })
+                  }
                 ></i>
-                <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
               </li>
             </ul>
           ))}
