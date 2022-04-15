@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import * as apiaxios from "../../../api/service";
 import { deleteMentor, getMentor } from "../../../redux/action/mentor.action";
-import { popUpActions } from "../../../redux/store/popup";
 import AddMentor from "../../mentor/addMentors/index";
 import Pagination from "../../../components/mentor/pagination/index";
 
@@ -19,11 +18,6 @@ function TableMentor(props) {
   const indexOfFirstMentor = indexOfLastMentor - mentorPerPage;
   const currMentor = mentors.slice(indexOfFirstMentor, indexOfLastMentor);
   const paginate = (pageNumber) => setCurrPage(pageNumber);
-  const showModal = (data) => {
-    console.log(data);
-    dispatch(popUpActions.show());
-    dispatch(popUpActions.getData(data));
-  };
 
   useEffect(() => {
     const idBatch = localStorage.getItem("idBatch");
@@ -74,25 +68,8 @@ function TableMentor(props) {
                   aria-hidden="true"
                   data-toggle="modal"
                   data-target="#exampleModal1"
-                >
-                  Xem
-                </i>
-                <i
-                  className="fa fa-calendar-plus-o"
-                  aria-hidden="true"
-                  onClick={() =>
-                    showModal({
-                      id: mentor.id,
-                      fullNameMentor: mentor.fullNameMentor,
-                      email: mentor.email,
-                      nameDG: mentor.nameDG,
-                      nameCoure: mentor.nameCoure,
-                      workplace: mentor.workplace,
-                      address: mentor.address,
-                      position: mentor.position,
-                    })
-                  }
                 ></i>
+                <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
               </li>
             </ul>
           ))}

@@ -24,19 +24,19 @@ export function candidateAPI(endpoint, method = "GET", body) {
     data: body,
   });
 }
-
 export function mentorAPI(endpoint) {
   return api.get(`${API_BASE}/${endpoint}`, null);
 }
-
+export function mentorCreate(endpoint, body) {
+  return api.post(`${API_BASE}/${endpoint}`, body);
+}
+export function mentorDG(endpoint) {
+  return api.get(`${API_BASE}/${endpoint}`, null);
+}
 export function mentorCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
 }
 
 export const sendEmail = (data) => {
   return api.post(`http://10.78.0.165:5000/sendeMail/`, data);
-};
-
-export const saveDataInterview = (id, data) => {
-  return api.put(`http://10.78.0.165:5000/candidate/${id}`, data);
 };
