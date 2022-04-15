@@ -16,13 +16,7 @@ function Index() {
          setPosts(res.data.data);
         })
      }
-      if (interviews.length === 0 || interviews.length > 0) 
-      try {
-      fetchData();
-    } catch (error) {
-      console.log(error.response.status.error);
-      console.log(error.response.data.error);
-    } 
+      if (interviews.length === 0 || interviews.length > 0) fetchData();
   }, [interviews]);
 
   return (
