@@ -8,14 +8,14 @@ export default function AddMentor() {
   const [dg, setdg] = useState([]);
 
   useEffect(() => {
-    apiaxios.mentorAPI("internshipCourse", "Get", null).then((res) => {
-      setBatch(res.data);
+    apiaxios.batchAPI("internshipcourse", "Get", null).then((res) => {
+      setBatch(res.data.data);
     });
   }, []);
 
   useEffect(() => {
-    apiaxios.mentorAPI("dg", "Get", null).then((res) => {
-      setdg(res.data);
+    apiaxios.mentorDG("dg", "Get", null).then((res) => {
+      setdg(res.data.data);
     });
   }, []);
 
@@ -209,7 +209,6 @@ export default function AddMentor() {
                       name="idDG"
                       id="cars"
                       onChange={handleAddFormChange}
-                      required="required"
                       style={{ width: "200px" }}
                     >
                       {dg?.map((itemDG) => (
