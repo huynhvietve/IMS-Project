@@ -1,4 +1,4 @@
-import { API_BASE } from "./config";
+import { API_BASE, API_BASE1 } from "./config";
 import api from "./instance";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ export function batchCreate(endpoint, body) {
 export function candidateAPI(endpoint, method = "GET", body) {
   return axios({
     method: method,
-    url: `${API_BASE}/${endpoint}`,
+    url: `${API_BASE1}/${endpoint}`,
     data: body,
   });
 }
@@ -33,10 +33,10 @@ export function mentorCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
 }
 
-export const sendEmail = (id, data) => {
-  return api.post(`https://jsonplaceholder.typicode.com/posts/${id}`, data);
+export const sendEmail = (data) => {
+  return api.post(`http://10.78.0.165:5000/sendeMail/`, data);
 };
 
 export const saveDataInterview = (id, data) => {
-  return api.put(`http://192.168.178.165:5000/candidate/${id}`, data);
+  return api.put(`http://10.78.0.165:5000/candidate/${id}`, data);
 };

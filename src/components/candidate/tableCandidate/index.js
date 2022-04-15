@@ -26,9 +26,6 @@ function TableCandidate() {
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   useEffect(() => {
-    candidateAPI("ve1", "Get", null).then((res) => {
-      setCandi(res.data);
-    });
     const idBatch = localStorage.getItem("idBatch");
     candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
       setCandi(res.data.data);
@@ -121,9 +118,9 @@ function TableCandidate() {
                     aria-hidden="true"
                     onClick={() =>
                       showModal({
-                        id: candidate.id,
+                        id: candidate.idCandidate,
                         fullName: candidate.fullName,
-                        email: candidate.email,
+                        email: candidate.emailCandidate,
                       })
                     }
                   ></i>

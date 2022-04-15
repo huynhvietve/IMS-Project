@@ -42,17 +42,17 @@ const CalendarInterview = () => {
       emailInterviewer: enterEmail,
     };
     const emailData = {
-      email: enterEmail,
-      name: enterName,
-      link: enterLink,
-      internName: enterInternName,
-      time: enterTime,
-      date: enterDate,
-      internEmail: enterInternEmail,
+      emailCandidate: enterInternEmail,
+      fullName: enterInternName,
+      interviewer: enterName,
+      emailInterviewer: enterEmail,
+      interviewTime: enterTime,
+      interviewDate: enterDate,
+      interviewLink: enterLink,
     };
     try {
       const result = await saveDataInterview(id, saveData);
-      const emailResult = await sendEmail(id, emailData);
+      const emailResult = await sendEmail(emailData);
 
       console.log(result.data);
       console.log(emailResult.data);
