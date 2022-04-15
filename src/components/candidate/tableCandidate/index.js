@@ -39,10 +39,11 @@ function TableCandidate() {
           </button>
         </div>
         <div className="search-box">
-          <input className="inputSearch" id="search" placeholder="Tìm..." />
-          <button className="btn-search" type="submit" id="search">
+          <label>Tim kiem</label>
+          <input type="text" className="inputSearch" id="search" placeholder="Tìm..."/>
+          {/* <button className="btn-search" type="submit" id="search">
             Tìm kiếm
-          </button>
+          </button> */}
         </div>
       </div>
       <div className="grid wide home-candidate">
@@ -101,7 +102,7 @@ function TableCandidate() {
                   className="fa fa-pencil-square-o"
                   aria-hidden="true"
                   data-toggle="modal"
-                  data-target="#exampleModal"
+                  data-target="#exampleModalEdit"
                 ></i>
                 <i
                   className="fa fa-eye"

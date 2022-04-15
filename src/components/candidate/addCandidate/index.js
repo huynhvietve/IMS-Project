@@ -3,6 +3,7 @@ import { candidateAPI } from "../../../api/service";
 import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
 import * as apiaxios from "../../../api/service";
+import Swal from "sweetalert2";
 export default function AddCandidate() {
 
   const [candi, setCandi] = useState([]);
@@ -13,13 +14,6 @@ export default function AddCandidate() {
     });
   }, [candi]);
 
-  const [dg, setDg] = useState([]);
-  useEffect(() => {
-    candidateAPI("dg", "Get", null).then((res) => {
-      setDg(res.data);
-    });
-  }, []);
-
   const [batch, setBatch] = useState([]);
   useEffect(() => {
     apiaxios.batchAPI("internshipcourse").then((res) => {
@@ -27,38 +21,29 @@ export default function AddCandidate() {
     });
   }, []);
 
-  const [mentor, setMentor] = useState([]);
-  useEffect(() => {
-    candidateAPI("mentor", "Get", null).then((res) => {
-      setMentor(res.data);
-    });
-  }, []);
-
   const [addCandi, setAddCandi] = useState({
     fullName: "",
     tel: "",
-    email: "",
-    idDG: "",
-    idMentor: "",
+    emailCandidate: "",
     internshipDomain: "",
     preferredSkills: "",
     university: "",
     faculty: "",
     currentYearofStudy: "",
     studentID: "",
-    GraduationYear: "",
+    graduationYear: "",
     GPA: "",
     pcType: "",
     preferredInternshipStartDate: "",
     preferredInternshipDuration: "",
     internshipSchedule: "",
     idInternshipCourse: "",
-    ProjectExperience: "",
-    ExpectedGraduationSchedule: "",
-    CovidVaccinationiInformation: "",
-    RemainingSubjects: "",
-    CovidVaccinationCertificate: "",
-    CertificationDate: "",
+    projectExperience: "",
+    expectedGraduationSchedule: "",
+    covidVaccinationiInformation: "",
+    remainingSubjects: "",
+    covidVaccinationCertificate: "",
+    certificationDate: "",
   });
 
   const handleAddFormChange = (event) => {
@@ -74,32 +59,60 @@ export default function AddCandidate() {
     const newCadidate = {
       fullName: addCandi.fullName,
       tel: addCandi.tel,
-      email: addCandi.email,
-      idDG: addCandi.idDG,
-      idMentor: addCandi.idMentor,
+      emailCandidate: addCandi.emailCandidate,
       internshipDomain: addCandi.internshipDomain,
       preferredSkills: addCandi.preferredSkills,
       university: addCandi.university,
       faculty: addCandi.faculty,
       currentYearofStudy: addCandi.currentYearofStudy,
       studentID: addCandi.studentID,
-      GraduationYear: addCandi.GraduationYear,
+      graduationYear: addCandi.graduationYear,
       GPA: addCandi.GPA,
       pcType: addCandi.pcType,
       preferredInternshipStartDate: addCandi.preferredInternshipStartDate,
       preferredInternshipDuration: addCandi.preferredInternshipDuration,
       internshipSchedule: addCandi.internshipSchedule,
       idInternshipCourse: addCandi.idInternshipCourse,
-      ProjectExperience: addCandi.ProjectExperience,
-      ExpectedGraduationSchedule: addCandi.ExpectedGraduationSchedule,
-      CovidVaccinationiInformation: addCandi.CovidVaccinationiInformation,
-      RemainingSubjects: addCandi.RemainingSubjects,
-      CovidVaccinationCertificate: addCandi.CovidVaccinationCertificate,
-      CertificationDate: addCandi.CertificationDate,
+      projectExperience: addCandi.projectExperience,
+      expectedGraduationSchedule: addCandi.expectedGraduationSchedule,
+      covidVaccinationiInformation: addCandi.covidVaccinationiInformation,
+      remainingSubjects: addCandi.remainingSubjects,
+      covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
+      certificationDate: addCandi.certificationDate,
     };
 
     candidateAPI("candidate/create", "POST", newCadidate).then((res) => {
       setCandi(res.data);
+      if (res.data.erro) {
+        Swal.fire({
+          icon: "error",
+          text: res.data.error,
+          confirmButtonText: "Xác nhận",
+        });
+      }
+      setCandi(res.data);
+    })
+    .catch((error) => {
+      if (error.response) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.error,
+          confirmButtonText: "Xác nhận",
+        });
+      } else if (error.request) {
+        Swal.fire({
+          icon: "error",
+          text: error.request,
+          confirmButtonText: "Xác nhận",
+        });
+      } else {
+        console.log("Error", error.message);
+        Swal.fire({
+          icon: "error",
+          text: error.message,
+          confirmButtonText: "Xác nhận",
+        });
+      }
     });
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
@@ -140,7 +153,7 @@ export default function AddCandidate() {
                         type="text"
                         name="fullName"
                         onChange={handleAddFormChange}
-                        required="required"
+                        // required="required"
                       />
                     </td>
                     <td className="right-modal">
@@ -151,7 +164,7 @@ export default function AddCandidate() {
                         type="text"
                         name="tel"
                         onChange={handleAddFormChange}
-                        required="required"
+                        // required="required"
                       />
                     </td>
                   </tr>
@@ -162,46 +175,10 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="email"
-                        name="email"
+                        name="emailCandidate"
                         onChange={handleAddFormChange}
-                        required="required"
+                        // required="required"
                       />
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.DGNAME}</label>
-                    </td>
-                    <td>
-                      <select
-                        className="inputTextCandi"
-                        name="idDG"
-                        id="cars"
-                        onChange={handleAddFormChange}
-                        // required="required"
-                      >
-                        {dg?.map((itemDG) => (
-                          <option value={itemDG.idDG}>{itemDG.nameDG}</option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.MTNAME}</label>
-                    </td>
-                    <td>
-                      <select
-                        className="inputTextCandi"
-                        name="idMentor"
-                        id="cars"
-                        onChange={handleAddFormChange}
-                        // required="required"
-                      >
-                        {mentor?.map((itemMentor) => (
-                          <option value={itemMentor.idMentor}>
-                            {itemMentor.fullNameMentor}
-                          </option>
-                        ))}
-                      </select>
                     </td>
                     <td className="right-modal">
                       <label>{constCandidate.ITDOMAIN}</label>
@@ -280,7 +257,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="GraduationYear"
+                        name="graduationYear"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -378,7 +355,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="ProjectExperience"
+                        name="projectExperience"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -388,9 +365,9 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="ExpectedGraduationSchedule"
+                        name="expectedGraduationSchedule"
                         onChange={handleAddFormChange}
-                        maxLength={1000}
+                        maxLength="1000"
                       />
                     </td>
                   </tr>
@@ -401,7 +378,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="CovidVaccinationiInformation"
+                        name="covidVaccinationiInformation"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -411,9 +388,9 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="RemainingSubjects"
+                        name="remainingSubjects"
                         onChange={handleAddFormChange}
-                        maxLength={1000}
+                        maxLength="1000"
                       />
                     </td>
                   </tr>
@@ -424,7 +401,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="CovidVaccinationCertificate"
+                        name="covidVaccinationCertificate"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -434,7 +411,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="date"
-                        name="CertificationDate"
+                        name="certificationDate"
                         onChange={handleAddFormChange}
                       />
                     </td>

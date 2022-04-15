@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as constTable from "../../../constant/constTable";
 import { candidateAPI } from "../../../api/service";
 import * as apiaxios from "../../../api/service"; 
@@ -31,7 +32,7 @@ function EditCandidate() {
       setMentor(res.data);
     });
   }, []);
-
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     fullName: "",
     tel: "",
@@ -69,7 +70,7 @@ function EditCandidate() {
     certificationDate: "",
   });
 
-  function handleUpdate(event) {
+  function handleChange(event) {
     const { name, value } = event.target;
     setValues({
       ...values,
@@ -77,6 +78,7 @@ function EditCandidate() {
     });
   }
 
+  
   return (
     <>
       <div
@@ -110,7 +112,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="fullName"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         required="required"
                         value={values.fullName}
                       />
@@ -122,7 +124,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="tel"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         required="required"
                       />
                     </td>
@@ -135,7 +137,7 @@ function EditCandidate() {
                       <input
                         type="email"
                         name="emailCandidate"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         required="required"
                       />
                     </td>
@@ -147,7 +149,7 @@ function EditCandidate() {
                         className="inputTextCandi"
                         name="idDG"
                         id="cars"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         // required="required"
                       >
                         {dg?.map((itemDG) => (
@@ -165,7 +167,7 @@ function EditCandidate() {
                         className="inputTextCandi"
                         name="idMentor"
                         id="cars"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         // required="required"
                       >
                         {mentor?.map((itemMentor) => (
@@ -182,7 +184,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="internshipDomain"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                 </tr>
@@ -194,7 +196,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="interviewDate"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         required="required"
                       />
                     </td>
@@ -205,7 +207,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="interviewTime"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         required="required"
                       />
                     </td>
@@ -218,7 +220,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="preferredSkills"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                   <td className="right-modal">
@@ -228,7 +230,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="university"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                 </tr>
@@ -240,7 +242,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="faculty"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                   <td className="right-modal">
@@ -250,7 +252,7 @@ function EditCandidate() {
                       <select
                         name="currentYearofStudy"
                         id="year-study"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         >
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
@@ -267,7 +269,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="studentID"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                   <td className="right-modal">
@@ -285,7 +287,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="GraduationYear"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="right-modal">
@@ -295,7 +297,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="ExpectedGraduationSchedule"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         maxLength={1000}
                       />
                     </td>
@@ -308,7 +310,7 @@ function EditCandidate() {
                       <input
                         type="date"
                         name="preferredInternshipStartDate"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                   <td className="right-modal">
@@ -318,7 +320,7 @@ function EditCandidate() {
                       <select
                         name="preferredInternshipDuration"
                         id="inter-duration"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       >
                         <option value="8 Tuần">
                           8 tuần
@@ -335,7 +337,7 @@ function EditCandidate() {
                       <select
                         name="internshipSchedule"
                         id="intern-schehdule"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       >
                         <option value="Full time">
                           Full time
@@ -351,7 +353,7 @@ function EditCandidate() {
                         className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         // required="required"
                       >
                         {batch?.map((itemBatch) => (
@@ -369,7 +371,7 @@ function EditCandidate() {
                     <td>
                       <select
                         name="pcType"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       >
                       <option value="PC">PC</option>
                       <option value="Laptop">Laptop</option>
@@ -382,7 +384,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="RemainingSubjects"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                         maxLength={1000}
                       />
                     </td>
@@ -454,7 +456,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="ProjectExperience"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="right-modal">
@@ -464,7 +466,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="CovidVaccinationiInformation"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                   </tr>
@@ -476,7 +478,7 @@ function EditCandidate() {
                       <input
                         type="text"
                         name="CovidVaccinationCertificate"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                     <td className="right-modal">
@@ -486,7 +488,7 @@ function EditCandidate() {
                       <input
                         type="date"
                         name="CertificationDate"
-                        onChange={handleUpdate}
+                        onChange={handleChange}
                       />
                     </td>
                   </tr>
