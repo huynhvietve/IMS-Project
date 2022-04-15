@@ -11,7 +11,7 @@ import { deleteCandi } from "../../../redux/action/candi.action";
 function TableCandidate() {
   const [candi, setCandi] = useState([]);
   const [currPage, setCurrPage] = useState(1);
-  const [candiPerPage, setCandiPerPage] = useState(2);
+  const [candiPerPage, setCandiPerPage] = useState(10);
 
   // Get current candidate
   const indexOfLastCandi = currPage * candiPerPage;
@@ -50,8 +50,8 @@ function TableCandidate() {
         <div className="row home-candidate--list">
           <span className="col l-2-8 ">{constTable.NAME}</span>
           <span className="col l-2-8 ">{constTable.EMAIL}</span>
-          <span className="col l-2-8 ">{constTable.MTNAME}</span>
-          <span className="col l-2-8 ">{constTable.DGNAME}</span>
+          <span className="col l-2-8 ">{constTable.STID}</span>
+          <span className="col l-2-8 ">{constTable.UNI}</span>
           <span className="col l-2-8 ">{constTable.ITDOMAIN}</span>
           <span className="col l-2-8 ">{constTable.ITBATCH}</span>
           <span className="col l-2-8 ">{constTable.ITRESULT}</span>
@@ -66,8 +66,8 @@ function TableCandidate() {
               >
               <li className="col l-2-8">{candidate.fullName}</li>
               <li className="col l-2-8">{candidate.emailCandidate}</li>
-              <li className="col l-2-8">{candidate.fullNameMentor}</li>
-              <li className="col l-2-8">{candidate.nameDG}</li>
+              <li className="col l-2-8">{candidate.studentID}</li>
+              <li className="col l-2-8">{candidate.university}</li>
               <li className="col l-2-8">{candidate.internshipDomain}</li>
               <li className="col l-2-8">{candidate.nameCoure}</li>
               <li className="col l-2-8">

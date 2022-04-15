@@ -4,8 +4,8 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
 import * as apiaxios from "../../../api/service";
 import Swal from "sweetalert2";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 export default function AddCandidate() {
-
   const [candi, setCandi] = useState([]);
   useEffect(() => {
     const idBatch = localStorage.getItem("idBatch");
@@ -54,6 +54,7 @@ export default function AddCandidate() {
     newFormData[fieldName] = fieldValue;
     setAddCandi(newFormData);
   };
+
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
     const newCadidate = {
@@ -83,6 +84,11 @@ export default function AddCandidate() {
 
     candidateAPI("candidate/create", "POST", newCadidate).then((res) => {
       setCandi(res.data);
+      Swal.fire({
+        icon: "success",
+        text: "Thêm thành công!",
+        confirmButtonText: "Xác nhận",
+      });
       if (res.data.erro) {
         Swal.fire({
           icon: "error",
@@ -106,7 +112,6 @@ export default function AddCandidate() {
           confirmButtonText: "Xác nhận",
         });
       } else {
-        console.log("Error", error.message);
         Swal.fire({
           icon: "error",
           text: error.message,
@@ -117,6 +122,9 @@ export default function AddCandidate() {
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
   };
+  function close(){
+    
+  }
 
   return (
     <>
