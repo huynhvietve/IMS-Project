@@ -6,6 +6,7 @@ import "../asset/css/header.css";
 import "../asset/css/crudModal.css";
 import "../asset/css/tableCandidate.css";
 import "../asset/css/pagination.css";
+import "../asset/css/mentor.css";
 import "../asset/css/interview.css"
 import Navbar from "../components/home/navbar/index";
 import Header from "../components/home/header/index";

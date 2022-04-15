@@ -38,3 +38,6 @@ select{
 .text-muted{
     text-align: center;
 }
+.modal-content-top{
+    margin-top: 10px !important;
+    }

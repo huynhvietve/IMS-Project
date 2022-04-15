@@ -17,8 +17,9 @@ function TableCandidate() {
   const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   useEffect(() => {
-    candidateAPI("candidate/batch/9", "Get", null).then((res) => {
-      setCandi(res.data);
+    const idBatch = localStorage.getItem("idBatch");
+    candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
+      setCandi(res.data.data);
     });
   }, [candi]);
   
@@ -51,10 +52,14 @@ function TableCandidate() {
           <span className="col l-2-8 ">{constTable.ACTION}</span>
         </div>
         <div className="table-body">
-          {currCandi?.map((candidate) => (
-            <ul className="row sm-gutter sm-gutter--list" key={candidate.id}>
+        {currCandi.length > 0 ? (
+            currCandi?.map((candidate) => (
+              <ul
+                className="row sm-gutter sm-gutter--list"
+                key={candidate.idCandidate}
+              >
               <li className="col l-2-8">{candidate.fullName}</li>
-              <li className="col l-2-8">{candidate.email}</li>
+              <li className="col l-2-8">{candidate.emailCandidate}</li>
               <li className="col l-2-8">{candidate.fullNameMentor}</li>
               <li className="col l-2-8">{candidate.nameDG}</li>
               <li className="col l-2-8">{candidate.internshipDomain}</li>
@@ -101,7 +106,12 @@ function TableCandidate() {
                 <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
               </li>
             </ul>
-          ))}
+          ))
+          ) : (
+            <div>
+              <p className="mess-table-candidate">Chưa có dữ liệu</p>
+            </div>
+          )}
         </div>
       </div>
       <Pagination

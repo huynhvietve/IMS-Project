@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+export const typesIntern = {
+  DELETE_INTERN: "DELETE_INTERN",
+};
 const initialAuthState = {
   isAuthenticated: localStorage.getItem("isAuthenticated"),
   token: localStorage.getItem("token"),
