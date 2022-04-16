@@ -51,6 +51,7 @@ function App() {
             </Switch>
           </>
         )}
+
         <Route path="*">
           <Redirect to="/login" />
         </Route>

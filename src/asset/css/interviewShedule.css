@@ -1,17 +1,21 @@
 .background {
   position: absolute;
 }
-.modal-content {
-  width: 800px;
-  height: 400px;
-  margin-left: -32%;
+.modal-content1 {
+  width: 774px;
+  height: 340px;
+  /* margin-left: -32%; */
 }
 
-.right-modal {
-  padding-left: 20px;
+.modal-content2 {
+  width: 82%;
 }
 
-label {
+.right-modal2 {
+  padding-left: 80px;
+  font-weight: 600;
+}
+.left-modal2 {
   font-weight: 600;
 }
 
@@ -23,10 +27,6 @@ label {
 }
 select {
   width: 100px;
-}
-.taolichpv {
-  margin-left: 11%;
-  margin-top: 5%;
 }
 .taolichpvfooter {
   display: flex;
@@ -55,4 +55,8 @@ select {
 
 .swal2-popup {
   margin: 200px 500px;
+}
+
+.lable-right {
+  margin-left: -63px;
 }

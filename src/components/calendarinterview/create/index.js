@@ -34,6 +34,11 @@ const CalendarInterview = () => {
   const [enterDate, setEnterDate] = useState();
   const addUserHandler = async (event) => {
     event.preventDefault();
+    setEnterEmail("");
+    setEnterName("");
+    setEnterLink("");
+    setEnterTime("");
+    setEnterDate("");
     const saveData = {
       interviewTime: enterTime,
       interviewDate: enterDate,
@@ -53,6 +58,7 @@ const CalendarInterview = () => {
     try {
       const result = await saveDataInterview(id, saveData);
       const emailResult = await sendEmail(emailData);
+      console.log(result.status);
 
       console.log(result.data);
       console.log(emailResult.data);
@@ -66,12 +72,27 @@ const CalendarInterview = () => {
           style: "display:block",
         });
       }
-    } catch (e) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Tạo lịch phỏng vấn thất bại",
-      });
+    } catch (error) {
+      if (error.response) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.error,
+          confirmButtonText: "Xác nhận",
+        });
+      } else if (error.request) {
+        Swal.fire({
+          icon: "error",
+          text: error.request,
+          confirmButtonText: "Xác nhận",
+        });
+      } else {
+        console.log("Error", error.message);
+        Swal.fire({
+          icon: "error",
+          text: error.message,
+          confirmButtonText: "Xác nhận",
+        });
+      }
     }
   };
   const enterEmailChangeHandler = (event) => {
@@ -91,104 +112,94 @@ const CalendarInterview = () => {
     setEnterDate(event.target.value);
   };
   return (
-    <Modal show={showPopUp}>
+    <Modal
+      show={showPopUp}
+      className="modal-content2"
+      contentClassName="modal-content1"
+    >
       <ModalHeader>
-        <div classname="header_2">
-          <h3 style={{ color: "#007bff", margin: "2% 0 0 10%", width: "249%" }}>
-            TẠO LỊCH PHỎNG VẤN
-          </h3>
+        <div className="header_2">
+          <h5 style={{ color: "#007bff" }}>TẠO LỊCH PHỎNG VẤN</h5>
         </div>
 
-        <div style={{ borderBottom: "0px solid" }}>
-          <button type="button" class="close" onClick={hidePopUp}>
-            &times;
-          </button>
-        </div>
+        <div style={{ borderBottom: "0px solid" }}></div>
       </ModalHeader>
 
       <ModalBody>
         <div>
           <div className="modal-header1">
             <form onSubmit={addUserHandler}>
-              <table className="taolichpv">
+              <table>
                 <tbody>
                   <tr>
-                    <td className="left-modal">
+                    <td className="left-modal2">
                       <label>Họ tên *:</label>
                     </td>
                     <td>
-                      <input
-                        type="text"
-                        required
-                        value={enterInternName}
-                        disabled
-                      />
+                      <input type="text" value={enterInternName} disabled />
                     </td>
-                    <td classname="right-modal">
-                      <label>Ngày phỏng vấn *:</label>
+                    <td className="right-modal2">
+                      <label className="lable-right">Ngày phỏng vấn *:</label>
                     </td>
                     <td>
                       <input
                         type="date"
-                        required
+                        style={{ width: "190px" }}
                         onChange={enterDateHandler}
                         value={enterDate}
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td classname="left-modal">
+                    <td className="left-modal2">
                       <label>Email ứng viên *:</label>
                     </td>
                     <td>
                       <input
                         type="text"
-                        required
                         placeholder="Nhập email"
                         value={enterInternEmail}
                         disabled
                       />
                     </td>
-                    <td classname="right-modal">
-                      <label>Giờ bắt đầu *:</label>
+                    <td className="right-modal2">
+                      <label className="lable-right">Giờ bắt đầu *:</label>
                     </td>
                     <td>
                       <input
                         type="time"
-                        required
+                        style={{ width: "190px" }}
                         onChange={enterTimeHandler}
                         value={enterTime}
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td classname="left-modal">
+                    <td className="left-modal2">
                       <label>Email người phỏng vấn *:</label>
                     </td>
                     <td>
                       <input
                         type="text"
-                        required
                         placeholder="Nhập email"
                         onChange={enterEmailChangeHandler}
                         value={enterEmail}
                       />
                     </td>
-                    <td classname="right-modal">
-                      <label>Người phỏng vấn *:</label>
+                    <td className="right-modal2">
+                      <label className="lable-right">Người phỏng vấn *:</label>
                     </td>
                     <td>
                       <input
                         type="text"
-                        required
-                        placeholder="Nhập Tên Người Phỏng vấn"
+                        placeholder="Nhập họ tên..."
                         onChange={enterNameChangeHandler}
                         value={enterName}
                       />
                     </td>
                   </tr>
                   <tr>
-                    <td classname="left-modal">
+                    <td className="left-modal2">
                       <label>Link phỏng vấn *:</label>
                     </td>
                     <td>
@@ -202,7 +213,7 @@ const CalendarInterview = () => {
                 </tbody>
               </table>
               <div className="taolichpvfooter">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" className="btn btn-danger-del">
                   Gửi
                 </button>
                 <button type="button" class="btn btn-success">
@@ -210,7 +221,8 @@ const CalendarInterview = () => {
                 </button>
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-light"
+                  data-dismiss="modal"
                   onClick={hidePopUp}
                 >
                   Hủy

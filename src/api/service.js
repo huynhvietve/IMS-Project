@@ -33,10 +33,10 @@ export function mentorCreate(endpoint, body) {
 export function mentorDG(endpoint) {
   return api.get(`${API_BASE}/${endpoint}`, null);
 }
-export function mentorCreate(endpoint, body) {
-  return api.post(`${API_BASE}/${endpoint}`, body);
-}
 
 export const sendEmail = (data) => {
   return api.post(`http://10.78.0.165:5000/sendeMail/`, data);
+};
+export const saveDataInterview = (data) => {
+  return api.put(`http://192.168.178.165:5000/candidate/13`, data);
 };

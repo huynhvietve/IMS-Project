@@ -27,6 +27,7 @@ function TableCandidate() {
 
   useEffect(() => {
     const idBatch = localStorage.getItem("idBatch");
+
     candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
       setCandi(res.data.data);
     });
