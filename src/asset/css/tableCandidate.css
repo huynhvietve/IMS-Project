@@ -2,45 +2,48 @@
   background-color: #007bff;
   border-radius: 10px 10px 10px 10px;
 }
+
 .home-candidate {
   background-color: white;
-  margin-top: 20px !important;
+  margin-top: 30px !important;
   margin-bottom: 20px !important;
   border: 2px solid #575555;
   overflow: hidden;
   border-radius: 10px 10px 10px 10px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
 }
-.table-body{
-  max-height: 500px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+
+.text-header{
+  text-transform: uppercase;
 }
-.mess-table-candidate{
+
+.mess-table-candidate {
   color: #007bff;
-  font-weight: bold; 
+  font-weight: bold;
   text-align: center;
 }
+
 .fa-trash-o,
 .fa-pencil-square-o,
 .fa-eye,
 .fa-calendar-plus-o {
   font-size: 13px;
 }
-.fa-trash-o{
-  color:red;
+
+.fa-trash-o {
+  color: red;
 }
-.fa-pencil-square-o{
-  color:gold;
+
+.fa-pencil-square-o {
+  color: gold;
 }
-.fa-calendar-plus-o{
-  color:chartreuse;
+
+.fa-calendar-plus-o {
+  color: chartreuse;
 }
-.fa-eye{
-  color:#007bff;
-}
-.checkbox-inline {
-  padding: 4px;
+
+.fa-eye {
+  color: #007bff;
 }
 
 li {
@@ -56,53 +59,58 @@ li {
 i {
   padding: 7px;
 }
+
 span {
+  padding-top: 5px;
   height: 40px;
   text-align: center;
   font-weight: 500;
   color: white;
 }
+
 .sm-gutter--list {
   text-align: center;
   padding-left: 0;
 }
+
 h3 {
   color: #007bff;
   text-align: center;
 }
+
 /*Upload*/
 .input-toolbar {
   display: flex;
 }
+
 .uploader {
   margin-top: 40px;
-  padding-left: 70px;
-}
-.search-box {
-  margin-top: 40px;
-  padding-left: 28.5rem;
+  padding-left: 7rem;
 }
 
 .btn-upload,
 .btn-search,
 .btn-add {
   font: inherit;
-  background-color: #1aa3ff;
+  background-color: #007bff;
   color: white;
   border: 1px solid #1aa3ff;
   padding: 0.25rem 1rem;
   margin-left: 5px;
   border-radius: 4px;
 }
+
 .btn-add {
   float: right;
-  margin-right: 65px;
+  margin-right: 7.5rem;
+  margin-top: 5px;
 }
 
 .inputUpload {
   border: 1px solid grey;
   border-radius: 4px;
 }
+
 .inputSearch {
   width: 250px;
   height: 32px;
@@ -112,12 +120,11 @@ h3 {
 
 /* GRID */
 
-.wide .l-2-8 {
-  /* flex: 0 0 11.1111111%;
-  max-width: 11.1111111%; */
-  flex: 0 0 12.33333%;
-  max-width: 12.33333%;
+.wide .l-2-7 {
+  flex: 0 0 13.33333%;
+  max-width: 13.33333%;
 }
+
 .grid {
   width: 100%;
   display: block;
@@ -125,7 +132,7 @@ h3 {
 }
 
 .grid.wide {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -221,4 +228,29 @@ h3 {
   .wide .l-0 {
     display: none;
   }
+}
+
+.search {
+  position: relative;
+  margin-top: 40px;
+  padding-left: 26.5rem;
+}
+
+.search__input {
+  padding: 0.25rem 100px 8px 20px;
+  border: 1px solid black;
+  outline: none;
+  border-radius: 4px;
+  transition: .3s;
+}
+
+.search__icon {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+}
+
+.pagination {
+  justify-content: center;
+  margin-left: 55rem;
 }

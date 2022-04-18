@@ -3,23 +3,10 @@ import Swal from "sweetalert2";
 import { candirService } from "../../redux/services";
 import {
   DELETE_CANDI,
-  FETCH_CANDI,
   UPDATE_CANDI,
 
 } from "../type/type";
 
-export const getCandi = () => {
-  return (dispatch) => {
-    candirService
-      .getCandi()
-      .then((res) => {
-        dispatch(createAction(FETCH_CANDI, res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-};
 export const deleteCandi = (idCandidate) => {
   return (dispatch) => {
     Swal.fire({
@@ -37,15 +24,13 @@ export const deleteCandi = (idCandidate) => {
           candirService
             .deleteCandi(idCandidate).then((res) => {
             dispatch(createAction(DELETE_CANDI, res.data));
-            dispatch(getCandi());
           });
-          Swal.fire("Xóa thành công!");
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+      };
 };
 export const updateCandi = (id, item) => {
   return (dispatch) => {
@@ -53,7 +38,6 @@ export const updateCandi = (id, item) => {
       .updateCandi(id, item)
       .then((res) => {
         dispatch(createAction(UPDATE_CANDI, res.data));
-        dispatch(getCandi());
         Swal.fire("Cập nhật thành công");
       })
       .catch((err) => console.log(err));

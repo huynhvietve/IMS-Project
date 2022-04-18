@@ -12,7 +12,7 @@ select{
     margin-top: 400px
 }
 .modal-content-top{
-margin-top: 10px !important;
+    margin-top: 10px !important;
 }
 .modal-header {
     border: none
@@ -39,9 +39,4 @@ margin-top: 10px !important;
 }
 .text-muted{
     text-align: center;
-}
-.modal-body-edit{
-    max-height: 450px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
