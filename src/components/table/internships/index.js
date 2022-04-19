@@ -105,7 +105,6 @@ export default function Internships(props) {
         showCancelButton: true,
         reverseButtons: true,
         confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
         cancelButtonText: "Hủy",
         confirmButtonText: "Đồng ý",
       }).then((result) => {

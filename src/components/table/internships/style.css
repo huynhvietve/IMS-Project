@@ -95,11 +95,22 @@ h4{
   color:white;
   background: #007bff;
   border: 1px solid #007bff;
-  width:100px;
+  width:105px;
 }
-.btn-Batch-huy,
-.btn-Batch-huy:hover{
-  color:white;
-  background:#d33;
-  width:100px;
+.btn-Batch-huy{
+  color: black;
+  background:#f8f9fa;
+  border: 1px solid #007bff;
+  width:105px;
+
+}
+.swal2-styled.swal2-cancel {
+  color: black;
+  background:#f8f9fa;
+  border: 1px solid #007bff;
+  width:105px;
+}
+.swal2-styled.swal2-confirm{
+  width:105px;
+  border: 1px solid #007bff;
 }

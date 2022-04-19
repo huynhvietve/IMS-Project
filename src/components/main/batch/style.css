@@ -43,11 +43,15 @@ h4{
   color:white;
   background: #007bff;
   border: 1px solid #007bff;
-  width:100px;
+  width:105px;
+
 }
 .btn-Batch-huy,
 .btn-Batch-huy:hover{
-  color:white;
-  background:#d33;
-  width:100px;
+  color: black;
+  background:#f8f9fa;
+  border: 1px solid #007bff;
+  width:105px;
+
+
 }
