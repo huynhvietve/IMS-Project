@@ -246,15 +246,13 @@ export default function Batch(props) {
                     <div className="modal-footer">
                     
                       <button
-                        id="md-huy"
                         type="button"
-                        className="btn btn-secondary btn-Batch-huy"
+                        className="btn btn-secondary btn-Batch-Cancel"
                         data-dismiss="modal"
                       >
                         Hủy
                       </button>
                       <button
-                        id="md-them2"
                         type="submit"
                         className="btn btn-primary btn-Batch"
                       >

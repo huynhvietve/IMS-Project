@@ -304,11 +304,9 @@ export default function Internships(props) {
 
                               <div className="modal-footer">
                                 <button
-                                  id="md-huy"
                                   type="button"
-                                  className="btn btn-secondary btn-Batch-huy"
+                                  className="btn btn-secondary btn-Batch-Cancel"
                                   data-dismiss="modal"
-                                  
                                 >
                                   Hủy
                                 </button>
