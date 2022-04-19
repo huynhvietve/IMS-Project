@@ -45,12 +45,15 @@ export default function AddCandidate() {
     covidVaccinationCertificate: "",
     certificationDate: "",
   });
-  const handleReset  = () => {
-    document.querySelectorAll("input").forEach(
+
+  const handleReset = () => {
+    setAddCandi({});
+    Array.from(document.querySelectorAll("input")).forEach(
       input => (input.value = ""))
-    document.querySelectorAll("select").forEach(
+    Array.from(document.querySelectorAll("select")).forEach(
       select => (select.value = "Chọn..."));
   };
+
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -118,7 +121,7 @@ export default function AddCandidate() {
   return (
     <>
       <div
-        class="modal fade"
+        class="modal fade modal-fade"
         id="exampleModalAdd"
         tabindex="-1"
         role="dialog"

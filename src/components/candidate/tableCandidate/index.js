@@ -40,6 +40,12 @@ function TableCandidate() {
     }
     return status
   };
+    const handleReset  = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = ""))
+    Array.from(document.querySelectorAll("select")).forEach(
+      select => (select.value = "Chọn..."));
+  };
 
   return (
     <div>
@@ -119,7 +125,6 @@ function TableCandidate() {
         totalCandis={candi.length}
         paginate={paginate}
       />
-
       {AddCandidate()}
       <button
         id="open-addcandi"
@@ -127,6 +132,7 @@ function TableCandidate() {
         type="submit"
         data-toggle="modal"
         data-target="#exampleModalAdd"
+        onClick={handleReset}
       >
         Thêm
       </button>

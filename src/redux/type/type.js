@@ -1,2 +1,0 @@
-export const DELETE_CANDI = "DELETE_CANDI";
-export const UPDATE_CANDI = "UPDATE_CANDI";
