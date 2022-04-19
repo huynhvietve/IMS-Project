@@ -17,6 +17,7 @@ export const deleteCandi = (idCandidate) => {
       confirmButtonText: "Đồng ý",
       cancelButtonColor: "#3085d6",
       cancelButtonText: "Hủy",
+      reverseButtons: true,
     })
       .then((result) => {
         if (result.isConfirmed) {
