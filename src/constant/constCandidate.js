@@ -32,4 +32,4 @@ export const REMSUB = "Môn học còn lại:";
 export const CVIDINFO = "Thông tin tiêm chủng Covid:"
 export const CERTDATE = "Ngày chứng nhận:"
 export const CVIDCERT = "Giấy chứng nhận:"
-
+export const WARNDEL = "Bạn chắc chắn muốn xóa?"

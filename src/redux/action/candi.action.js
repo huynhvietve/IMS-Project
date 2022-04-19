@@ -1,6 +1,7 @@
 import { createAction } from ".";
 import Swal from "sweetalert2";
 import { candirService } from "../../redux/services";
+import * as constCandidate from "../../constant/constCandidate";
 import {
   DELETE_CANDI,
 
@@ -9,7 +10,7 @@ import {
 export const deleteCandi = (idCandidate) => {
   return (dispatch) => {
     Swal.fire({
-      title: "Bạn chắc chắn muốn xóa?",
+      title: `${constCandidate.WARNDEL}`,
       text: "",
       icon: "warning",
       showCancelButton: true,

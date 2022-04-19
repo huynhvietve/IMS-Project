@@ -114,7 +114,7 @@ function TableCandidate() {
             ))
           ) : (
             <div>
-              <p className="mess-table-candidate">Chưa có dữ liệu</p>
+              <p className="mess-table-candidate">{constTable.NODATA}</p>
             </div>
           )}
         </div>
