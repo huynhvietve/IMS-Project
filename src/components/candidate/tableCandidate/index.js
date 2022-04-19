@@ -128,7 +128,7 @@ function TableCandidate() {
       {AddCandidate()}
       <button
         id="open-addcandi"
-        className="btn-add"
+        className="btn-add-candi"
         type="submit"
         data-toggle="modal"
         data-target="#exampleModalAdd"

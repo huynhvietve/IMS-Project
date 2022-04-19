@@ -91,7 +91,7 @@ h3 {
 }
 
 .btn-upload,
-.btn-add {
+.btn-add-candi {
   font: inherit;
   background-color: #007bff;
   color: white;
@@ -102,7 +102,7 @@ h3 {
   width: 100px;
 }
 
-.btn-add {
+.btn-add-candi {
   float: left;
   margin-top: 5px;
   margin-left: 70rem;
