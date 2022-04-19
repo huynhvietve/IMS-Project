@@ -81,6 +81,8 @@ h3 {
 /*Upload*/
 .input-toolbar {
   display: flex;
+  padding: 6px;
+  
 }
 
 .uploader {
@@ -89,7 +91,6 @@ h3 {
 }
 
 .btn-upload,
-.btn-search,
 .btn-add {
   font: inherit;
   background-color: #007bff;
@@ -98,6 +99,7 @@ h3 {
   padding: 0.25rem 1rem;
   margin-left: 5px;
   border-radius: 4px;
+  width: 100px;
 }
 
 .btn-add {
@@ -233,11 +235,11 @@ h3 {
 .search {
   position: relative;
   margin-top: 40px;
-  padding-left: 26.5rem;
+  padding-left: 24.5rem;
 }
 
 .search__input {
-  padding: 0.25rem 100px 8px 20px;
+  padding: 0.25rem 100px 6px 20px;
   border: 1px solid black;
   outline: none;
   border-radius: 4px;

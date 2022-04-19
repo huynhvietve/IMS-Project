@@ -14,9 +14,9 @@ export const deleteCandi = (idCandidate) => {
       text: "",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#d33",
+      confirmButtonColor: "#3085d6",
       confirmButtonText: "Đồng ý",
-      cancelButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
       cancelButtonText: "Hủy",
       reverseButtons: true,
     })

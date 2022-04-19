@@ -1,6 +1,6 @@
 
 export const NAME = "Họ tên:"
-export const PHONE = "SDT:"
+export const PHONE = "SĐT:"
 export const EMAIL = "Email:"
 export const DGNAME = "Tên DG:"
 export const MTNAME = "Tên Mentor:"
