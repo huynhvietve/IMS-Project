@@ -1,4 +1,4 @@
-import { API_BASE,API_Mentor,API_BASE2} from "./config";
+import { API_BASE} from "./config";
 import api from "./instance";
 import axios from 'axios';
 
