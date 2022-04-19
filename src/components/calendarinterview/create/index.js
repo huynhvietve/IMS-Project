@@ -47,13 +47,17 @@ const CalendarInterview = () => {
       emailInterviewer: enterEmail,
     };
     const emailData = {
-      emailCandidate: enterInternEmail,
-      fullName: enterInternName,
       interviewer: enterName,
       emailInterviewer: enterEmail,
       interviewTime: enterTime,
       interviewDate: enterDate,
       interviewLink: enterLink,
+      listCandidates: [
+        {
+          emailCandidate: enterInternEmail,
+          fullName: enterInternName,
+        },
+      ],
     };
     try {
       const result = await saveDataInterview(id, saveData);
@@ -213,9 +217,6 @@ const CalendarInterview = () => {
                 </tbody>
               </table>
               <div className="taolichpvfooter">
-                <button type="submit" className="btn btn-danger-del">
-                  Gửi
-                </button>
                 <button type="button" class="btn btn-success">
                   Xem trước
                 </button>
@@ -226,6 +227,9 @@ const CalendarInterview = () => {
                   onClick={hidePopUp}
                 >
                   Hủy
+                </button>
+                <button type="submit" className="btn btn-danger-del">
+                  Gửi
                 </button>
               </div>
             </form>

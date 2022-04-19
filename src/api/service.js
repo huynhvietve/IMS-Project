@@ -35,8 +35,8 @@ export function mentorDG(endpoint) {
 }
 
 export const sendEmail = (data) => {
-  return api.post(`http://10.78.0.165:5000/sendeMail/`, data);
+  return api.post(`http://10.78.0.165:5000/sendeMail`, data);
 };
-export const saveDataInterview = (data) => {
-  return api.put(`http://192.168.178.165:5000/candidate/13`, data);
+export const saveDataInterview = (id, data) => {
+  return api.put(`http://10.78.0.29:5000/candidate/interview/${id}`, data);
 };
