@@ -248,7 +248,7 @@ export default function Internships(props) {
                                     <option value="In progress">
                                       In progress
                                     </option>
-                                    <option value="N/a">N/A</option>
+                                    <option value="N/A">N/A</option>
                                   </select>
                                 </td>
                               </tr>
@@ -307,17 +307,16 @@ export default function Internships(props) {
                                 <button
                                   id="md-huy"
                                   type="button"
-                                  className="btn btn-secondary"
+                                  className="btn btn-secondary btn-Batch-huy"
                                   data-dismiss="modal"
-                                  style={{width:"100px"}}
+                                  
                                 >
                                   Hủy
                                 </button>
                                 <button
-                                  className="btn btn-primary"
+                                  className="btn btn-primary btn-Batch"
                                   type="submit"
                                   onClick={editSubmit}   
-                                  style={{marginLeft:"25px"}}   
                                 >
                                   Cập nhật
                                 </button>

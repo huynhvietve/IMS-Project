@@ -114,10 +114,10 @@ export default function Batch(props) {
               <button
                 id="md-them1"
                 type="button"
-                className="btn btn-primary btn-batch"
+                className="btn btn-primary btn-Batch"
                 data-toggle="modal"
                 data-target="#exampleModalCenter"
-                
+                style={{marginLeft:"20px"}}
               >
                 Thêm
               </button>
@@ -126,7 +126,8 @@ export default function Batch(props) {
                 
                 id="md-sumit"
                 type="submit"
-                className="btn btn-primary btn-batch"
+                className="btn btn-primary btn-Batch"
+                style={{marginLeft:"30px"}}
                
               >
                 Xác nhận
@@ -196,7 +197,7 @@ export default function Batch(props) {
                           <option disabled selected hidden>Chọn...</option>
                           <option value="Done">Done</option>
                           <option value="In progress">In progress</option>
-                          <option value="N/a">N/A</option>
+                          <option value="N/A">N/A</option>
                         </select>
                       </td>
                     </tr>
@@ -247,7 +248,7 @@ export default function Batch(props) {
                       <button
                         id="md-huy"
                         type="button"
-                        className="btn btn-secondary btn-batch"
+                        className="btn btn-secondary btn-Batch-huy"
                         data-dismiss="modal"
                       >
                         Hủy
@@ -255,7 +256,7 @@ export default function Batch(props) {
                       <button
                         id="md-them2"
                         type="submit"
-                        className="btn btn-primary btn-batch"
+                        className="btn btn-primary btn-Batch"
                       >
                         Thêm
                       </button>

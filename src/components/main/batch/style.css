@@ -38,10 +38,16 @@ h4{
   text-align: center;
   text-transform: uppercase;
 }
-.btn-batch{
-  width: 120px;
-  margin-left: 20px;
+.btn-Batch,
+.btn-Batch:hover{
+  color:white;
+  background: #007bff;
+  border: 1px solid #007bff;
+  width:100px;
 }
-.batch{
-  padding-top:35px;
+.btn-Batch-huy,
+.btn-Batch-huy:hover{
+  color:white;
+  background:#d33;
+  width:100px;
 }
