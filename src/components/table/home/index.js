@@ -13,7 +13,7 @@ export default function Home() {
       
 }, {});
   return (
-    <>
+  <>
 
   <div>
     <h3 >CHÀO MỪNG BẠN ĐÃ ĐẾN VỚI {idcourse.nameCoure}</h3>

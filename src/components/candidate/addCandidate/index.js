@@ -2,64 +2,58 @@ import React, { useEffect, useState } from "react";
 import { candidateAPI } from "../../../api/service";
 import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
+import * as apiaxios from "../../../api/service";
+import Swal from "sweetalert2";
 
 export default function AddCandidate() {
-
   const [candi, setCandi] = useState([]);
   useEffect(() => {
     const idBatch = localStorage.getItem("idBatch");
     candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
-      setCandi(res.data);
+      setCandi(res.data.data);
     });
-  },[candi]);
-
-  const [dg, setDg] = useState([]);
-  useEffect(() => {
-    candidateAPI("candidate/dg", "Get", null).then((res) => {
-      setDg(res.data);
-    });
-  }, []);
+  }, [candi]);
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
-    candidateAPI("candidate/intershipcouse", "Get", null).then((res) => {
-      setBatch(res.data);
-    });
-  }, []);
-
-  const [mentor, setMentor] = useState([]);
-  useEffect(() => {
-    candidateAPI("candidate/mentor", "Get", null).then((res) => {
-      setMentor(res.data);
+    apiaxios.batchAPI("internshipcourse").then((res) => {
+      setBatch(res.data.data);
     });
   }, []);
 
   const [addCandi, setAddCandi] = useState({
     fullName: "",
     tel: "",
-    email: "",
-    idDG: "",
-    idMentor: "",
+    emailCandidate: "",
     internshipDomain: "",
     preferredSkills: "",
     university: "",
     faculty: "",
     currentYearofStudy: "",
     studentID: "",
-    GraduationYear: "",
+    graduationYear: "",
     GPA: "",
     pcType: "",
     preferredInternshipStartDate: "",
     preferredInternshipDuration: "",
     internshipSchedule: "",
     idInternshipCourse: "",
-    ProjectExperience: "",
-    ExpectedGraduationSchedule: "",
-    CovidVaccinationiInformation: "",
-    RemainingSubjects: "",
-    CovidVaccinationCertificate: "",
-    CertificationDate: "",
+    projectExperience: "",
+    expectedGraduationSchedule: "",
+    covidVaccinationiInformation: "",
+    remainingSubjects: "",
+    covidVaccinationCertificate: "",
+    certificationDate: "",
   });
+
+  const handleReset = () => {
+    setAddCandi({});
+    Array.from(document.querySelectorAll("input")).forEach(
+      input => (input.value = ""))
+    Array.from(document.querySelectorAll("select")).forEach(
+      select => (select.value = "Chọn..."));
+  };
+
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -69,47 +63,66 @@ export default function AddCandidate() {
     newFormData[fieldName] = fieldValue;
     setAddCandi(newFormData);
   };
+
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
     const newCadidate = {
       fullName: addCandi.fullName,
       tel: addCandi.tel,
-      email: addCandi.email,
-      idDG: addCandi.idDG,
-      idMentor: addCandi.idMentor,
+      emailCandidate: addCandi.emailCandidate,
       internshipDomain: addCandi.internshipDomain,
       preferredSkills: addCandi.preferredSkills,
       university: addCandi.university,
       faculty: addCandi.faculty,
       currentYearofStudy: addCandi.currentYearofStudy,
       studentID: addCandi.studentID,
-      GraduationYear: addCandi.GraduationYear,
+      graduationYear: addCandi.graduationYear,
       GPA: addCandi.GPA,
       pcType: addCandi.pcType,
       preferredInternshipStartDate: addCandi.preferredInternshipStartDate,
       preferredInternshipDuration: addCandi.preferredInternshipDuration,
       internshipSchedule: addCandi.internshipSchedule,
       idInternshipCourse: addCandi.idInternshipCourse,
-      ProjectExperience: addCandi.ProjectExperience,
-      ExpectedGraduationSchedule: addCandi.ExpectedGraduationSchedule,
-      CovidVaccinationiInformation: addCandi.CovidVaccinationiInformation,
-      RemainingSubjects: addCandi.RemainingSubjects,
-      CovidVaccinationCertificate: addCandi.CovidVaccinationCertificate,
-      CertificationDate: addCandi.CertificationDate,
+      projectExperience: addCandi.projectExperience,
+      expectedGraduationSchedule: addCandi.expectedGraduationSchedule,
+      covidVaccinationiInformation: addCandi.covidVaccinationiInformation,
+      remainingSubjects: addCandi.remainingSubjects,
+      covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
+      certificationDate: addCandi.certificationDate,
     };
-
     candidateAPI("candidate/create", "POST", newCadidate).then((res) => {
-      setCandi(res.data);
+      setCandi(res.data.data);
+      handleReset();
+    })
+    .catch((error) => {
+      if (error.response) {
+        Swal.fire({
+          icon: "error",
+          text: error.response.data.error,
+          confirmButtonText: "Xác nhận",
+        })
+      } else if (error.request) {
+        Swal.fire({
+          icon: "error",
+          text: error.request,
+          confirmButtonText: "Xác nhận",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          text: error.message,
+          confirmButtonText: "Xác nhận",
+        });
+      }
     });
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
   };
-
   return (
     <>
       <div
-        class="modal fade"
-        id="exampleModal2"
+        class="modal fade modal-fade"
+        id="exampleModalAdd"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -140,7 +153,6 @@ export default function AddCandidate() {
                         type="text"
                         name="fullName"
                         onChange={handleAddFormChange}
-                        required="required"
                       />
                     </td>
                     <td className="right-modal">
@@ -151,7 +163,6 @@ export default function AddCandidate() {
                         type="text"
                         name="tel"
                         onChange={handleAddFormChange}
-                        required="required"
                       />
                     </td>
                   </tr>
@@ -162,46 +173,9 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="email"
-                        name="email"
+                        name="emailCandidate"
                         onChange={handleAddFormChange}
-                        required="required"
                       />
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.DGNAME}</label>
-                    </td>
-                    <td>
-                      <select
-                        className="inputTextCandi"
-                        name="idDG"
-                        id="cars"
-                        onChange={handleAddFormChange}
-                        // required="required"
-                      >
-                        {dg?.map((itemDG) => (
-                          <option value={itemDG.idDG}>{itemDG.nameDG}</option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.MTNAME}</label>
-                    </td>
-                    <td>
-                      <select
-                        className="inputTextCandi"
-                        name="idMentor"
-                        id="cars"
-                        onChange={handleAddFormChange}
-                        // required="required"
-                      >
-                        {mentor?.map((itemMentor) => (
-                          <option value={itemMentor.idMentor}>
-                            {itemMentor.fullNameMentor}
-                          </option>
-                        ))}
-                      </select>
                     </td>
                     <td className="right-modal">
                       <label>{constCandidate.ITDOMAIN}</label>
@@ -256,10 +230,12 @@ export default function AddCandidate() {
                         id="year-study"
                         onChange={handleAddFormChange}
                         >
+                        <option disabled selected hidden>Chọn...</option>
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
                         <option value="Năm 3">Năm 3</option>
                         <option value="Năm 4">Năm 4</option>
+                        <option value="Khác">Khác</option>
                       </select>
                     </td>
                   </tr>
@@ -280,7 +256,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="GraduationYear"
+                        name="graduationYear"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -304,6 +280,7 @@ export default function AddCandidate() {
                         name="pcType"
                         onChange={handleAddFormChange}
                       >
+                      <option disabled selected hidden>Chọn...</option>
                       <option value="PC">PC</option>
                       <option value="Laptop">Laptop</option>
                       </select>
@@ -329,6 +306,7 @@ export default function AddCandidate() {
                         id="inter-duration"
                         onChange={handleAddFormChange}
                       >
+                        <option disabled selected hidden>Chọn...</option>
                         <option value="8 Tuần">
                           8 tuần
                         </option>
@@ -346,6 +324,7 @@ export default function AddCandidate() {
                         id="intern-schehdule"
                         onChange={handleAddFormChange}
                       >
+                        <option disabled selected hidden>Chọn...</option>
                         <option value="Full time">
                           Full time
                         </option>
@@ -363,6 +342,7 @@ export default function AddCandidate() {
                         onChange={handleAddFormChange}
                         // required="required"
                       >
+                        <option disabled selected hidden>Chọn...</option>
                         {batch?.map((itemBatch) => (
                           <option value={itemBatch.idInternshipCourse}>
                             {itemBatch.nameCoure}
@@ -378,7 +358,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="ProjectExperience"
+                        name="projectExperience"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -388,9 +368,9 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="ExpectedGraduationSchedule"
+                        name="expectedGraduationSchedule"
                         onChange={handleAddFormChange}
-                        maxLength={1000}
+                        maxLength="1000"
                       />
                     </td>
                   </tr>
@@ -401,7 +381,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="CovidVaccinationiInformation"
+                        name="covidVaccinationiInformation"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -411,9 +391,9 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="RemainingSubjects"
+                        name="remainingSubjects"
                         onChange={handleAddFormChange}
-                        maxLength={1000}
+                        maxLength="1000"
                       />
                     </td>
                   </tr>
@@ -424,7 +404,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="text"
-                        name="CovidVaccinationCertificate"
+                        name="covidVaccinationCertificate"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -434,7 +414,7 @@ export default function AddCandidate() {
                     <td>
                       <input
                         type="date"
-                        name="CertificationDate"
+                        name="certificationDate"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -443,19 +423,19 @@ export default function AddCandidate() {
                 <div className="modal-footer">
                   {" "}
                   <button
+                    type="button"
+                    className="btn btn-light"
+                    data-dismiss="modal"
+                  >
+                    Hủy
+                  </button>{" "}
+                  <button
                     id="add-candi"
                     type="submit"
                     className="btn btn-danger-del"
                     onSubmit={handleAddFormSubmit}
                   >
                     Thêm
-                  </button>{" "}
-                  <button
-                    type="button"
-                    className="btn btn-light"
-                    data-dismiss="modal"
-                  >
-                    Hủy
                   </button>{" "}
                 </div>
               </form>
