@@ -14,7 +14,7 @@ import indexMentor from "../components/table/mentor/index";
 import indexStudent from "../components/table/student/index";
 import Home from "../components/table/home/index";
 import Batch from "../components/main/batch/index";
-
+import Internships from "../components/table/internships/index"
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -41,6 +41,7 @@ function App() {
                 <Route path="/student" exact component={indexStudent} />
                 <Route path="/home/batch" exact component={Home} />
                 <Route path="/batch" exact component={Batch} />
+                <Route path="/internshipcourse" exact component={Internships} />
                 </Route>
               </Switch>
           </>

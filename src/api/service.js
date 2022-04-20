@@ -18,6 +18,13 @@ export function batchHome( endpoint)  {
 export function batchCreate( endpoint, body)  {
   return api.post(`${API_BASE}/${endpoint}`,body);
 };
+
+export function batchPut( endpoint, body)  {
+  return api.put(`${API_BASE}/${endpoint}`,body);
+};
+export function deleteBatch( endpoint)  {
+  return api.delete(`${API_BASE}/${endpoint}`,null);
+};
 export function candidateAPI(endpoint, method = 'GET',body) {
   return   axios({
       method: method,
