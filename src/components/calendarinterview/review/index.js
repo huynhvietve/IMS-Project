@@ -7,6 +7,7 @@ import { popUpActions } from "../../../redux/store/popup";
 
 const Preview = () => {
   const showPopUp = useSelector((state) => state.popup.showPreview);
+  const showData = useSelector((state) => state.data.dataPreview);
   const dispatch = useDispatch();
   const hidePreview = () => {
     dispatch(popUpActions.hidePreview());
@@ -20,29 +21,54 @@ const Preview = () => {
         </div>
       </ModalHeader>
       <ModalBody>
-        <div className="title__review">
-          <h7>Xin chào ""</h7>
-        </div>
-        <div className="description__review">
-          <span className="description__review-content">
-            Như đã qua trao đổi bằng điện thoại, chúng tôi xin mời bạn đến với
-            cuộc phỏng vấn chi tiết với trưởng dự án bằng link dưới đây.
-          </span>
-        </div>
-        <div className="infor__review">
-          <ul class="infor__review-item">
-            <li class="infor__review-items">Email ứng viên</li>
-            <li class="infor__review-items">Email người phỏng vấn</li>
-            <li class="infor__review-items">Người phỏng vấn</li>
-            <li class="infor__review-items">Thời gian</li>
-            <li class="infor__review-items">Ngày phỏng vấn</li>
-            <li class="infor__review-items">Link phỏng vấn</li>
-          </ul>
-        </div>
-
+        <table style={{ marginLeft: "2%" }}>
+          <tr>
+            <td className="left-modal2">
+              <lable>Tên ứng viên:</lable>
+            </td>
+            <td>{showData?.name}</td>
+          </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Email ứng viên:</lable>
+            </td>
+            <td>{showData?.email}</td>
+          </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Người phỏng vấn:</lable>
+            </td>
+            <td>{showData?.mentor}</td>
+          </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Email người phỏng vấn:</lable>
+            </td>
+            <td>{showData?.emailMentor}</td>
+          </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Ngày phỏng vấn:</lable>
+            </td>
+            <td>{showData?.date}</td>
+          </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Thời gian:</lable>
+            </td>
+            <td>{showData?.time}</td>
+          </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Link phỏng vấn:</lable>
+            </td>
+            <td>{showData?.link}</td>
+          </tr>
+        </table>
         <div>
           <button
             className="btn btn-danger-del"
+            style={{ marginLeft: "40%", marginTop: "10%" }}
             type="button"
             onClick={hidePreview}
           >

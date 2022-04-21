@@ -6,6 +6,7 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { popUpActions } from "../../../redux/store/popup";
+import { dataAction } from "../../../redux/store/datapreview";
 import { useEffect, useState } from "react";
 import { sendEmail, saveDataInterview } from "../../../api/service";
 import Swal from "sweetalert2";
@@ -19,6 +20,17 @@ const CalendarInterview = () => {
   const showPreview = () => {
     dispatch(popUpActions.showPreview());
     dispatch(popUpActions.hide());
+    dispatch(
+      dataAction.setDataPreview({
+        name: enterInternName,
+        email: enterInternEmail,
+        mentor: enterName,
+        emailMentor: enterEmail,
+        link: enterLink,
+        date: enterDate,
+        time: enterTime,
+      })
+    );
   };
 
   const dataIntern = useSelector((state) => state.popup.data);

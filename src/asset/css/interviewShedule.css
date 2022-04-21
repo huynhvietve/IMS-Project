@@ -105,3 +105,17 @@ h4 {
   background: white;
   width: 100px;
 }
+.title__review {
+  color: red;
+  margin-bottom: 2%;
+}
+.description__review-content {
+  color: black;
+}
+.infor__review-link {
+  color: black;
+}
+.infor__review {
+  display: inline-grid;
+  justify-items: start;
+}
