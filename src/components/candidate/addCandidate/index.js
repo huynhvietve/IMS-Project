@@ -49,15 +49,16 @@ export default function AddCandidate() {
   const handleReset = () => {
     setAddCandi({});
     Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = ""))
+      (input) => (input.value = "")
+    );
     Array.from(document.querySelectorAll("select")).forEach(
-      select => (select.value = "Chọn..."));
+      (select) => (select.value = "Chọn...")
+    );
   };
-
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name","value");
+    const fieldName = event.target.getAttribute("name", "value");
     const fieldValue = event.target.value;
     const newFormData = { ...addCandi };
     newFormData[fieldName] = fieldValue;
@@ -90,31 +91,32 @@ export default function AddCandidate() {
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
     };
-    candidateAPI("candidate/create", "POST", newCadidate).then((res) => {
-      setCandi(res.data.data);
-      handleReset();
-    })
-    .catch((error) => {
-      if (error.response) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.error,
-          confirmButtonText: "Xác nhận",
-        })
-      } else if (error.request) {
-        Swal.fire({
-          icon: "error",
-          text: error.request,
-          confirmButtonText: "Xác nhận",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: error.message,
-          confirmButtonText: "Xác nhận",
-        });
-      }
-    });
+    candidateAPI("candidate/create", "POST", newCadidate)
+      .then((res) => {
+        setCandi(res.data.data);
+        handleReset();
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        } else if (error.request) {
+          Swal.fire({
+            icon: "error",
+            text: error.request,
+            confirmButtonText: "Xác nhận",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: error.message,
+            confirmButtonText: "Xác nhận",
+          });
+        }
+      });
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
   };
@@ -178,34 +180,12 @@ export default function AddCandidate() {
                       />
                     </td>
                     <td className="right-modal">
-                      <label>{constCandidate.ITDOMAIN}</label>
+                      <label>{constCandidate.IDSTUDENT}</label>
                     </td>
                     <td>
                       <input
                         type="text"
-                        name="internshipDomain"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.SKILL}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="preferredSkills"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.SCHOOL}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="university"
+                        name="studentID"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -229,8 +209,10 @@ export default function AddCandidate() {
                         name="currentYearofStudy"
                         id="year-study"
                         onChange={handleAddFormChange}
-                        >
-                        <option disabled selected hidden>Chọn...</option>
+                      >
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
                         <option value="Năm 3">Năm 3</option>
@@ -241,28 +223,17 @@ export default function AddCandidate() {
                   </tr>
                   <tr>
                     <td className="left-modal">
-                      <label>{constCandidate.IDSTUDENT}</label>
+                      <label>{constCandidate.SCHOOL}</label>
                     </td>
                     <td>
                       <input
                         type="text"
-                        name="studentID"
+                        name="university"
                         onChange={handleAddFormChange}
                       />
                     </td>
+
                     <td className="right-modal">
-                      <label>{constCandidate.GRAYEAR}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="graduationYear"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
                       <label>{constCandidate.AVGSCORE}</label>
                     </td>
                     <td>
@@ -272,93 +243,15 @@ export default function AddCandidate() {
                         onChange={handleAddFormChange}
                       />
                     </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.TYPEPC}</label>
-                    </td>
-                    <td>
-                      <select
-                        name="pcType"
-                        onChange={handleAddFormChange}
-                      >
-                      <option disabled selected hidden>Chọn...</option>
-                      <option value="PC">PC</option>
-                      <option value="Laptop">Laptop</option>
-                      </select>
-                    </td>
                   </tr>
                   <tr>
                     <td className="left-modal">
-                      <label>{constCandidate.INTERNDATE}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="date"
-                        name="preferredInternshipStartDate"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.INTERTIME}</label>
-                    </td>
-                    <td>
-                      <select
-                        name="preferredInternshipDuration"
-                        id="inter-duration"
-                        onChange={handleAddFormChange}
-                      >
-                        <option disabled selected hidden>Chọn...</option>
-                        <option value="8 Tuần">
-                          8 tuần
-                        </option>
-                        <option value="12 Tuần">12 tuần</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.INTERNTYPE}</label>
-                    </td>
-                    <td>
-                      <select
-                        name="internshipSchedule"
-                        id="intern-schehdule"
-                        onChange={handleAddFormChange}
-                      >
-                        <option disabled selected hidden>Chọn...</option>
-                        <option value="Full time">
-                          Full time
-                        </option>
-                        <option value="Part time">Part time</option>
-                      </select>
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.INTERNBATCH}</label>
-                    </td>
-                    <td>
-                      <select
-                        className="inputTextCandi"
-                        name="idInternshipCourse"
-                        id="cars"
-                        onChange={handleAddFormChange}
-                        // required="required"
-                      >
-                        <option disabled selected hidden>Chọn...</option>
-                        {batch?.map((itemBatch) => (
-                          <option value={itemBatch.idInternshipCourse}>
-                            {itemBatch.nameCoure}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.PRJEXP}</label>
+                      <label>{constCandidate.GRAYEAR}</label>
                     </td>
                     <td>
                       <input
                         type="text"
-                        name="projectExperience"
+                        name="graduationYear"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -376,16 +269,6 @@ export default function AddCandidate() {
                   </tr>
                   <tr>
                     <td className="left-modal">
-                      <label>{constCandidate.CVIDINFO}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="covidVaccinationiInformation"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                    <td className="right-modal">
                       <label>{constCandidate.REMSUB}</label>
                     </td>
                     <td>
@@ -394,6 +277,128 @@ export default function AddCandidate() {
                         name="remainingSubjects"
                         onChange={handleAddFormChange}
                         maxLength="1000"
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.PRJEXP}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="projectExperience"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.ITDOMAIN}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="internshipDomain"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.INTERTIME}</label>
+                    </td>
+                    <td>
+                      <select
+                        name="preferredInternshipDuration"
+                        id="inter-duration"
+                        onChange={handleAddFormChange}
+                      >
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
+                        <option value="8 Tuần">8 tuần</option>
+                        <option value="12 Tuần">12 tuần</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.INTERNDATE}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="date"
+                        name="preferredInternshipStartDate"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.INTERNTYPE}</label>
+                    </td>
+                    <td>
+                      <select
+                        name="internshipSchedule"
+                        id="intern-schehdule"
+                        onChange={handleAddFormChange}
+                      >
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
+                        <option value="Full time">Full time</option>
+                        <option value="Part time">Part time</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.SKILL}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="preferredSkills"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.TYPEPC}</label>
+                    </td>
+                    <td>
+                      <select name="pcType" onChange={handleAddFormChange}>
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
+                        <option value="PC">PC</option>
+                        <option value="Laptop">Laptop</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.INTERNBATCH}</label>
+                    </td>
+                    <td>
+                      <select
+                        className="inputTextCandi"
+                        name="idInternshipCourse"
+                        id="cars"
+                        onChange={handleAddFormChange}
+                      >
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
+                        {batch?.map((itemBatch) => (
+                          <option value={itemBatch.idInternshipCourse}>
+                            {itemBatch.nameCoure}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.CVIDINFO}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="covidVaccinationiInformation"
+                        onChange={handleAddFormChange}
                       />
                     </td>
                   </tr>

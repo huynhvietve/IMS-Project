@@ -4,9 +4,14 @@ select{
 .right-modal{
     padding-left: 20px;
     font-weight: 600;
+    float: left;
 }
 .left-modal{
     font-weight: 600;
+    float: left;
+}
+select, input[type="date"]{
+    width: 189.04px;
 }
 .container.justify-content-center {
     margin-top: 400px
