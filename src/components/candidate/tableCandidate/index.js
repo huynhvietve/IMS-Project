@@ -8,7 +8,7 @@ import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
 import Preview from "../../calendarinterview/review";
-import { useDispatch } from "react-redux";
+
 import { deleteCandi } from "../../../redux/action/candi.action";
 
 import "../../../asset/css/interviewShedule.css";

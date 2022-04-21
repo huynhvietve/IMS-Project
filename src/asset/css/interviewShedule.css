@@ -81,3 +81,27 @@ select {
   background: green;
   width: 105px;
 }
+h3 {
+  color: #007bff;
+  text-align: center;
+  text-transform: uppercase;
+}
+h4 {
+  color: #007bff;
+  text-align: center;
+  text-transform: uppercase;
+}
+.btn-danger-del,
+.btn-danger-del:hover {
+  color: white;
+  background: #007bff;
+  border: 1px solid #007bff;
+  width: 100px;
+}
+
+.btn-light,
+.btn-light:hover {
+  color: black;
+  background: white;
+  width: 100px;
+}
