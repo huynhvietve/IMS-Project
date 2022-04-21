@@ -17,6 +17,26 @@ export function batchHome(endpoint) {
 export function batchCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
 }
+
+export function batchPut(endpoint, body) {
+  return api.put(`${API_BASE}/${endpoint}`, body);
+}
+export function deleteBatch(endpoint) {
+  return api.delete(`${API_BASE}/${endpoint}`, null);
+}
+export function candidateAPI(endpoint, method = "GET", body) {
+  return axios({
+    method: method,
+    url: `${API_BASE}/${endpoint}`,
+    data: body,
+  });
+}
+export function batchHome(endpoint) {
+  return api.get(`${API_BASE}/${endpoint}`, null);
+}
+export function batchCreate(endpoint, body) {
+  return api.post(`${API_BASE}/${endpoint}`, body);
+}
 export function candidateAPI(endpoint, method = "GET", body) {
   return axios({
     method: method,
@@ -40,3 +60,6 @@ export const sendEmail = (data) => {
 export const saveDataInterview = (id, data) => {
   return api.put(`http://10.78.0.29:5000/candidate/interview/${id}`, data);
 };
+export function mentorDG(endpoint) {
+  return api.get(`${API_BASE}/${endpoint}`, null);
+}

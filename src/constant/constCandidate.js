@@ -1,6 +1,6 @@
 
 export const NAME = "Họ tên:"
-export const PHONE = "SDT:"
+export const PHONE = "SĐT:"
 export const EMAIL = "Email:"
 export const DGNAME = "Tên DG:"
 export const MTNAME = "Tên Mentor:"
@@ -10,7 +10,7 @@ export const ITVTIME = "Giờ phỏng vấn:"
 export const SKILL = "Kĩ năng:"
 export const SCHOOL = "Trường:"
 export const FACULTY = "Ngành:"
-export const CRRYEAR = "Năm học hiện tại:"
+export const CRRYEAR = "Sinh viên năm:"
 export const GRAYEAR = "Năm tốt nghiệp:"
 export const IDSTUDENT = "Mã SV:"
 export const AVGSCORE = "Điểm trung bình (Hệ 10):"
@@ -32,4 +32,4 @@ export const REMSUB = "Môn học còn lại:";
 export const CVIDINFO = "Thông tin tiêm chủng Covid:"
 export const CERTDATE = "Ngày chứng nhận:"
 export const CVIDCERT = "Giấy chứng nhận:"
-
+export const WARNDEL = "Bạn chắc chắn muốn xóa?"

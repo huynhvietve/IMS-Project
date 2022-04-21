@@ -11,7 +11,9 @@ select{
 .container.justify-content-center {
     margin-top: 400px
 }
-
+.modal-content-top{
+    margin-top: 10px !important;
+}
 .modal-header {
     border: none
 }
@@ -25,11 +27,15 @@ select{
 .btn-danger-del:hover {
     color:white;
     background: #007bff;
-    border: 1px solid #007bff
+    border: 1px solid #007bff;
+    width:100px;
 }
 
-.btn-light {
-    border: 1px solid #007bff
+.btn-light,
+.btn-light:hover {
+    color:black;
+    border: 1px solid #007bff;
+    width:100px;
 }
 
 .btn:focus {
@@ -38,6 +44,13 @@ select{
 .text-muted{
     text-align: center;
 }
-.modal-content-top{
-    margin-top: 10px !important;
-    }
+.swal2-styled.swal2-cancel {
+    color: black;
+    background:#f8f9fa;
+    border: 1px solid #007bff;
+    width:100px;
+  }
+  .swal2-styled.swal2-confirm{
+    width:105px;
+    border: 1px solid #007bff;
+  }
