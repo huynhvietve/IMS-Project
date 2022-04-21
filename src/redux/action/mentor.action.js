@@ -1,6 +1,7 @@
 import { createAction } from ".";
 import Swal from "sweetalert2";
 import { mentorService } from "../../services";
+import "../../asset/css/mentor.css";
 import {
   DELETE_MENTOR,
   START_LOADING,
@@ -42,9 +43,9 @@ export const deleteMentor = (id) => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       cancelButtonText: "Hủy",
       confirmButtonText: "Đồng ý",
+      reverseButtons: true,
     })
       .then((result) => {
         if (result.isConfirmed) {
@@ -52,11 +53,6 @@ export const deleteMentor = (id) => {
             dispatch(createAction(DELETE_MENTOR, res.data));
             dispatch(getMentor());
           });
-          Swal.fire(
-            {
-              title:"Đã xóa thành công!",
-              confirmButtonText: "Xác nhận",
-            });
         }
       })
       .catch((err) => {
