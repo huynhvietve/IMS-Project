@@ -60,3 +60,24 @@ select {
 .lable-right {
   margin-left: -63px;
 }
+.btn-danger-del,
+.btn-danger-del:hover {
+  color: white;
+  background: #007bff;
+  border: 1px solid #007bff;
+  width: 105px;
+}
+
+.btn-light,
+.btn-light:hover {
+  color: black;
+  background: #f8f9fa;
+  width: 105px;
+}
+
+.btn-suss,
+.btn-suss:hover {
+  color: white;
+  background: green;
+  width: 105px;
+}

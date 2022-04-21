@@ -7,6 +7,7 @@ import { candidateAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
+import Preview from "../../calendarinterview/review";
 
 import "../../../asset/css/interviewShedule.css";
 function TableCandidate() {
@@ -36,6 +37,7 @@ function TableCandidate() {
   return (
     <div>
       <CalendarInterview />
+      <Preview />
       <h3>{constTable.H3}</h3>
       <div className="input-toolbar">
         <div className="uploader">

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initiaPopupState = {
   showModal: false,
   data: null,
+  showPreview: false,
 };
 const popUpSlice = createSlice({
   name: "popup",
@@ -15,6 +16,12 @@ const popUpSlice = createSlice({
     },
     setData(state, action) {
       state.data = action.payload;
+    },
+    showPreview(state) {
+      state.showPreview = true;
+    },
+    hidePreview(state) {
+      state.showPreview = false;
     },
   },
 });

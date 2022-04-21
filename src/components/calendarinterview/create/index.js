@@ -16,6 +16,11 @@ const CalendarInterview = () => {
   const hidePopUp = () => {
     dispatch(popUpActions.hide());
   };
+  const showPreview = () => {
+    dispatch(popUpActions.showPreview());
+    dispatch(popUpActions.hide());
+  };
+
   const dataIntern = useSelector((state) => state.popup.data);
 
   useEffect(() => {
@@ -217,7 +222,11 @@ const CalendarInterview = () => {
                 </tbody>
               </table>
               <div className="taolichpvfooter">
-                <button type="button" class="btn btn-success">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  onClick={showPreview}
+                >
                   Xem trước
                 </button>
                 <button
