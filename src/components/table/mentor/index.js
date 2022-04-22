@@ -390,7 +390,7 @@ function TableMentor(props) {
       />
       <button
         className="btn btn-danger-del"
-        style={{ marginLeft: "1145px" }}
+        style={{ marginLeft: "1135px" }}
         type="submit"
         data-toggle="modal"
         data-target="#exampleModal2"
