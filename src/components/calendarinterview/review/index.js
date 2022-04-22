@@ -4,6 +4,7 @@ import ModalHeader from "react-bootstrap/ModalHeader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { popUpActions } from "../../../redux/store/popup";
+import DayJS from "react-dayjs";
 
 const Preview = () => {
   const showPopUp = useSelector((state) => state.popup.showPreview);
@@ -50,7 +51,9 @@ const Preview = () => {
             <td className="left-modal2">
               <lable>Ngày phỏng vấn:</lable>
             </td>
-            <td>{showData?.date}</td>
+            <td>
+              <DayJS format="DD-MM-YYYY">{showData?.date}</DayJS>
+            </td>
           </tr>
           <tr>
             <td className="left-modal2">
