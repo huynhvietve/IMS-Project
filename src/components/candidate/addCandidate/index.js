@@ -55,6 +55,10 @@ export default function AddCandidate() {
       (select) => (select.value = "Chọn...")
     );
   };
+  const closeModal = () => {
+    const modals = document.getElementById("exampleModalAdd");
+    modals.style.display = "none";
+  }
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -91,10 +95,18 @@ export default function AddCandidate() {
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
     };
+    
     candidateAPI("candidate/create", "POST", newCadidate)
       .then((res) => {
+        Swal.fire({
+          icon: "success",
+          text: "Đã thêm",
+          showConfirmButton: false,
+          timer: 1000,
+        });
         setCandi(res.data.data);
         handleReset();
+        closeModal();
       })
       .catch((error) => {
         if (error.response) {
@@ -120,6 +132,7 @@ export default function AddCandidate() {
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
   };
+
   return (
     <>
       <div
@@ -134,13 +147,13 @@ export default function AddCandidate() {
           <div className="modal-content modal-content-top">
             <div className="modal-header">
               <div className="container d-flex pl-0">
-                <h5
+                <h4
                   className="modal-title ml-2"
                   id="exampleModalLabel"
                   style={{ color: "#007bff" }}
                 >
                   {constTable.H5ADD}
-                </h5>
+                </h4>
               </div>{" "}
             </div>
             <div className="modal-body">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as constTable from "../../../constant/constTable";
+import * as constCandi from "../../../constant/constCandidate";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
 import { candidateAPI, batchAPI } from "../../../api/service";
@@ -22,9 +23,10 @@ function TableCandidate() {
   const currCandi = candi.slice(indexOfFirstCandi, indexOfLastCandi);
   const paginate = (pageNumber) => setCurrPage(pageNumber);
   const idBatch = localStorage.getItem("idBatch");
+  const [search, setSearch] = useState([]);
 
   useEffect(() => {
-    candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
+    candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`, "Get", null).then((res) => {
       setCandi(res.data.data);
     });
   }, [candi]);
@@ -64,7 +66,7 @@ function TableCandidate() {
     );
   };
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const handleOpenModal = () => {
     setOpen(true);
   };
@@ -76,8 +78,8 @@ function TableCandidate() {
     fullName: "",
     tel: "",
     emailCandidate: "",
-    idDG: "",
-    idMentor: "",
+    // idDG: "",
+    // idMentor: "",
     internshipDomain: "",
     preferredSkills: "",
     university: "",
@@ -114,15 +116,15 @@ function TableCandidate() {
     newFormData[fieldName] = fieldValue;
     setValues(newFormData);
   };
-  const handleEditClick = (candidate) => {
+  const handleClick = (candidate) => {
     setValuesId(candidate.idCandidate);
     const formValues = {
       idCandidate: candidate.idCandidate,
       fullName: candidate.fullName,
       tel: candidate.tel,
       emailCandidate: candidate.emailCandidate,
-      idDG: candidate.idDG,
-      idMentor: candidate.idMentor,
+      // idDG: candidate.idDG,
+      // idMentor: candidate.idMentor,
       internshipDomain: candidate.internshipDomain,
       preferredSkills: candidate.preferredSkills,
       university: candidate.university,
@@ -159,8 +161,8 @@ function TableCandidate() {
       fullName: values.fullName,
       tel: values.tel,
       emailCandidate: values.emailCandidate,
-      idDG: values.idDG,
-      idMentor: values.idMentor,
+      // idDG: values.idDG,
+      // idMentor: values.idMentor,
       internshipDomain: values.internshipDomain,
       preferredSkills: values.preferredSkills,
       university: values.university,
@@ -192,7 +194,7 @@ function TableCandidate() {
     .candidatePut(`candidate/${valuesId}`, editCandi).then((res) => {
       Swal.fire({
         icon: "success",
-        text: "Sửa thành công",
+        text: "Cập nhật thành công !!!",
         showConfirmButton: false,
         timer: 1000,
       });
@@ -240,7 +242,12 @@ function TableCandidate() {
           </button>
         </div>
         <div class="search">
-          <input type="text" placeholder="Tìm kiếm..." class="search__input" />
+          <input 
+              type="text" 
+              placeholder="Tìm kiếm..." 
+              class="search__input" 
+              onChange={(e) => setSearch(e.target.value.toLowerCase())} 
+          /> 
           <i class="search__icon fa fa-search"></i>
         </div>
       </div>
@@ -281,15 +288,21 @@ function TableCandidate() {
                     data-toggle="modal"
                     data-target="#exampleModalEdit"
                     onClick={() => {
-                      handleEditClick(candidate);
+                      handleClick(candidate);
                       handleOpenModal();
+                      handleReset();
                     }}
                   ></i>
                   <i
                     className="fa fa-eye fa-eye1"
                     aria-hidden="true"
                     data-toggle="modal"
-                    data-target="#exampleModal4"
+                    data-target="#exampleModalDetail"
+                    onClick={() => {
+                      handleClick(candidate);
+                      handleOpenModal();
+                      handleReset();
+                    }}
                   ></i>
                   <i
                     className="fa fa-calendar-plus-o fa-calendar-plus-o1"
@@ -311,20 +324,20 @@ function TableCandidate() {
                           <div className="modal-content modal-content-top">
                             <div className="modal-header">
                               <div className="container d-flex pl-0">
-                                <h5
+                                <h4
                                   className="modal-title ml-2"
                                   id="exampleModalLabel"
                                   style={{ color: "#007bff" }}
                                 >
                                   {constTable.H5EIDT}
-                                </h5>
+                                </h4>
                               </div>{" "}
                             </div>
                             <div className="modal-body">
                               <table>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Họ tên:</label>
+                                    <label>{constCandi.NAME}</label>
                                   </td>
                                   <td>
                                     <input
@@ -335,7 +348,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Số điện thoại:</label>
+                                    <label>{constCandi.PHONE}</label>
                                   </td>
                                   <td>
                                     <input
@@ -348,7 +361,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Email:</label>
+                                    <label>{constCandi.EMAIL}</label>
                                   </td>
                                   <td>
                                     <input
@@ -359,7 +372,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Mã sinh viên:</label>
+                                    <label>{constCandi.IDSTUDENT}</label>
                                   </td>
                                   <td>
                                     <input
@@ -372,7 +385,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Ngành học:</label>
+                                    <label>{constCandi.FACULTY}</label>
                                   </td>
                                   <td>
                                     <input
@@ -383,7 +396,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Sinh viên năm:</label>
+                                    <label>{constCandi.CRRYEAR}</label>
                                   </td>
                                   <td>
                                     <select
@@ -402,7 +415,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Trường:</label>
+                                    <label>{constCandi.SCHOOL}</label>
                                   </td>
                                   <td>
                                     <input
@@ -413,7 +426,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Điểm trung bình (Hệ 10):</label>
+                                    <label>{constCandi.AVGSCORE}</label>
                                   </td>
                                   <td>
                                     <input
@@ -426,7 +439,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Năm tốt nghiệp:</label>
+                                    <label>{constCandi.GRAYEAR}</label>
                                   </td>
                                   <td>
                                     <input
@@ -437,7 +450,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Dự kiến tốt nghiệp:</label>
+                                    <label>{constCandi.GRADUATION}</label>
                                   </td>
                                   <td>
                                     <input
@@ -450,7 +463,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Môn học còn lại:</label>
+                                    <label>{constCandi.REMSUB}</label>
                                   </td>
                                   <td>
                                     <input
@@ -461,7 +474,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Dự án đã tham gia:</label>
+                                    <label>{constCandi.PRJEXP}</label>
                                   </td>
                                   <td>
                                     <input
@@ -472,9 +485,9 @@ function TableCandidate() {
                                     />
                                   </td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                   <td className="left-modal">
-                                    <label>Tên Mentor:</label>
+                                    <label>{constCandi.MTNAME}</label>
                                   </td>
                                   <td>
                                     <select
@@ -492,7 +505,7 @@ function TableCandidate() {
                                     </select>
                                   </td>
                                   <td className="right-modal">
-                                    <label>Tên DG:</label>
+                                    <label>{constCandi.DGNAME}</label>
                                   </td>
                                   <td>
                                     <select
@@ -509,10 +522,10 @@ function TableCandidate() {
                                       ))}
                                     </select>
                                   </td>
-                                </tr>
+                                </tr> */}
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Vị trí thực tập:</label>
+                                    <label>{constCandi.ITDOMAIN}</label>
                                   </td>
                                   <td>
                                     <input
@@ -523,7 +536,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Thời gian thực tập:</label>
+                                    <label>{constCandi.INTERTIME}</label>
                                   </td>
                                   <td>
                                     <select
@@ -539,7 +552,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Ngày bắt đầu thực tập:</label>
+                                    <label>{constCandi.INTERNDATE}</label>
                                   </td>
                                   <td>
                                     <input
@@ -552,7 +565,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Loại thực tập:</label>
+                                    <label>{constCandi.INTERNTYPE}</label>
                                   </td>
                                   <td>
                                     <select
@@ -572,7 +585,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Kĩ năng:</label>
+                                    <label>{constCandi.SKILL}</label>
                                   </td>
                                   <td>
                                     <input
@@ -583,7 +596,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Loại PC:</label>
+                                    <label>{constCandi.TYPEPC}</label>
                                   </td>
                                   <td>
                                     <select
@@ -599,7 +612,7 @@ function TableCandidate() {
                                 <tr></tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Kết quả:</label>
+                                    <label>{constCandi.RESULT}</label>
                                   </td>
                                   <td>
                                     <select
@@ -607,13 +620,13 @@ function TableCandidate() {
                                       id="status"
                                       value={values.status}
                                       onChange={handleEditChange}
-                                    >
+                                    > <option disabled selected hidden>Chọn....</option>
                                       <option value="Pass">Pass</option>
                                       <option value="Fail">Fail</option>
                                     </select>
                                   </td>
                                   <td className="right-modal">
-                                    <label>Remark:</label>
+                                    <label>{constCandi.REMARK}</label>
                                   </td>
                                   <td>
                                     <input
@@ -626,7 +639,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Nhận xét kỹ thuật:</label>
+                                    <label>{constCandi.TNCOMMENT}</label>
                                   </td>
                                   <td>
                                     <input
@@ -637,7 +650,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Điểm kỹ thuật:</label>
+                                    <label>{constCandi.TNSCORE}</label>
                                   </td>
                                   <td>
                                     <input
@@ -650,7 +663,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Thái độ:</label>
+                                    <label>{constCandi.ATTITUDE}</label>
                                   </td>
                                   <td>
                                     <input
@@ -661,7 +674,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Giao tiếp Tiếng Anh:</label>
+                                    <label>{constCandi.ENGLISH}</label>
                                   </td>
                                   <td>
                                     <input
@@ -674,7 +687,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Comments:</label>
+                                    <label>{constCandi.COMMENTS}</label>
                                   </td>
                                   <td>
                                     <input
@@ -685,7 +698,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Remarks:</label>
+                                    <label>{constCandi.REMARKS}</label>
                                   </td>
                                   <td>
                                     <input
@@ -698,7 +711,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Tiêm chủng Covid:</label>
+                                    <label>{constCandi.CVIDINFO}</label>
                                   </td>
                                   <td>
                                     <input
@@ -711,7 +724,7 @@ function TableCandidate() {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Giấy chứng nhận:</label>
+                                    <label>{constCandi.CVIDCERT}</label>
                                   </td>
                                   <td>
                                     <input
@@ -724,7 +737,7 @@ function TableCandidate() {
                                 </tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>Ngày chứng nhận:</label>
+                                    <label>{constCandi.CERTDATE}</label>
                                   </td>
                                   <td>
                                     <input

@@ -20,7 +20,7 @@ select, input[type="date"]{
     margin-top: 10px !important;
 }
 .modal-header {
-    border: none
+    border: none;
 }
 
 .modal-footer {
