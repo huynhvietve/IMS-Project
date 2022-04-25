@@ -154,13 +154,13 @@ const CalendarInterview = () => {
                 <tbody>
                   <tr>
                     <td className="left-modal2">
-                      <label>Họ tên *:</label>
+                      <label>Họ tên :</label>
                     </td>
                     <td>
                       <input type="text" value={enterInternName} disabled />
                     </td>
                     <td className="right-modal2">
-                      <label className="lable-right">Ngày phỏng vấn *:</label>
+                      <label className="lable-right">Ngày phỏng vấn :</label>
                     </td>
                     <td>
                       <input
@@ -173,7 +173,7 @@ const CalendarInterview = () => {
                   </tr>
                   <tr>
                     <td className="left-modal2">
-                      <label>Email ứng viên *:</label>
+                      <label>Email ứng viên :</label>
                     </td>
                     <td>
                       <input
@@ -184,7 +184,7 @@ const CalendarInterview = () => {
                       />
                     </td>
                     <td className="right-modal2">
-                      <label className="lable-right">Giờ bắt đầu *:</label>
+                      <label className="lable-right">Giờ bắt đầu :</label>
                     </td>
                     <td>
                       <input
@@ -197,7 +197,7 @@ const CalendarInterview = () => {
                   </tr>
                   <tr>
                     <td className="left-modal2">
-                      <label>Email người phỏng vấn *:</label>
+                      <label>Email người phỏng vấn :</label>
                     </td>
                     <td>
                       <input
@@ -208,7 +208,7 @@ const CalendarInterview = () => {
                       />
                     </td>
                     <td className="right-modal2">
-                      <label className="lable-right">Người phỏng vấn *:</label>
+                      <label className="lable-right">Người phỏng vấn :</label>
                     </td>
                     <td>
                       <input
@@ -221,7 +221,7 @@ const CalendarInterview = () => {
                   </tr>
                   <tr>
                     <td className="left-modal2">
-                      <label>Link phỏng vấn *:</label>
+                      <label>Link phỏng vấn :</label>
                     </td>
                     <td>
                       <input
