@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as constTable from "../../../constant/constTable";
 import * as constCandi from "../../../constant/constCandidate";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
 import { candidateAPI, batchAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
-import { useDispatch } from "react-redux";
+import CalendarInterview from "../../calendarinterview/create/index";
+import { popUpActions } from "../../../redux/store/popup";
+import Preview from "../../calendarinterview/review";
+
 import { deleteCandi } from "../../../redux/action/candi.action";
 import * as apiaxios from "../../../api/service";
 import Swal from "sweetalert2";
 import dayjs from "dayjs";
 
+import "../../../asset/css/interviewShedule.css";
 function TableCandidate() {
+  const dispatch = useDispatch();
   const [candi, setCandi] = useState([]);
   const [batchTitle, setBatchTitle] = useState([]);
   const [currPage, setCurrPage] = useState(1);
+  const showModal = (data) => {
+    dispatch(popUpActions.show());
+    dispatch(popUpActions.setData(data));
+  };
   const [candiPerPage, setCandiPerPage] = useState(10);
 
   // Get current candidate
@@ -36,8 +46,6 @@ function TableCandidate() {
       setBatchTitle(res.data.data);
     });
   }, {});
-
-  const dispatch = useDispatch();
 
   const status = (status) => {
     const value = "N/A";
@@ -225,8 +233,11 @@ function TableCandidate() {
 
   return (
     <div>
+      <CalendarInterview />
+      <Preview />
+
       <h3 className="text-header">
-        {constTable.H3} {batchTitle.nameCoure}
+      {constTable.H3} {batchTitle.nameCoure}
       </h3>
       <div className="input-toolbar">
         <div className="uploader">
@@ -301,6 +312,13 @@ function TableCandidate() {
                   <i
                     className="fa fa-calendar-plus-o fa-calendar-plus-o1"
                     aria-hidden="true"
+                    onClick={() =>
+                      showModal({
+                        id: candidate.idCandidate,
+                        fullName: candidate.fullName,
+                        email: candidate.emailCandidate,
+                      })
+                    }
                   ></i>
                 </li>
                 <form>
