@@ -95,8 +95,8 @@ export default function AddCandidate() {
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
     };
-
-    candidateAPI("candidate/create", "POST", newCadidate)
+    apiaxios
+    .candidatePost("candidate/create", "POST", newCadidate)
       .then((res) => {
         Swal.fire({
           icon: "success",

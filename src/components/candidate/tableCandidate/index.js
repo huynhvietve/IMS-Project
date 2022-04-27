@@ -36,7 +36,7 @@ function TableCandidate() {
   const [search, setSearch] = useState([]);
 
   useEffect(() => {
-    candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`, "Get", null).then((res) => {
+    apiaxios.candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`).then((res) => {
       setCandi(res.data.data);
     });
   }, [candi]);
