@@ -36,9 +36,26 @@ export function mentorAPI(endpoint) {
 export function mentorCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
 }
+
 export function mentorDG(endpoint) {
   return api.get(`${API_BASE}/${endpoint}`, null);
 }
 export function mentorEdit(endpoint, body) {
   return api.put(`${API_BASE}/${endpoint}`, body);
 }
+
+export const sendEmail = (data) => {
+  return api.post(`${API_BASE}/sendeMail`, data);
+};
+export const saveDataInterview = (id, data) => {
+  return api.put(`${API_BASE}/candidate/interview/${id}`, data);
+};
+export function mentorDG(endpoint) {
+  return api.get(`${API_BASE}/${endpoint}`, null);
+}
+export function candidatePut( endpoint, body)  {
+  return api.put(`${API_BASE}/${endpoint}`,body);
+};
+export function mentorAPI( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
