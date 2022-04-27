@@ -1,0 +1,25 @@
+.search
+{
+    position: relative; 
+}
+.search__input
+{
+    padding: 8px 20px 8px  20px;
+    border: 1px solid rgb(0, 0, 0);
+    outline: none;
+    border-radius: 30px; 
+    transition: .3s;
+    width: 300px;
+}
+
+
+
+.search__icon
+{
+    position: absolute;
+    top: 6px;
+    right: 10px;
+}
+.search-box{
+    padding-left: 74.5rem;
+}

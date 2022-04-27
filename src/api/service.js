@@ -1,9 +1,10 @@
-import { API_BASE } from "./config";
+import { API_BASE,API_Mentor} from "./config";
 import api from "./instance";
-import axios from "axios";
+import axios from 'axios';
+import * as Config from "./config";
 
 export const loginAPI = (username, password) => {
-  return api.post(`${API_BASE}/auth/login`, {
+  return api.post(`${Config.API_BASE}/auth/login`, {
     username: username,
     password: password,
   });
@@ -53,3 +54,11 @@ export const saveDataInterview = (id, data) => {
 export function candidatePut( endpoint, body)  {
   return api.put(`${API_BASE}/${endpoint}`,body);
 };
+export function mentorDG( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
+export function interviewAPI( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
+
+
