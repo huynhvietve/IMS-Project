@@ -415,7 +415,7 @@ export default function Student(props) {
                                   </tr>
                                   <tr>
                                     <td>
-                                      <label>Kiểm tra bảo mật:</label>
+                                      <label>Điểm bảo mật:</label>
                                     </td>
                                     <td>
                                       <input

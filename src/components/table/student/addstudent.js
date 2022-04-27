@@ -291,7 +291,7 @@ aria-hidden="true"
                     </tr>
                     <tr>
                       <td>
-                        <label>Kiểm tra bảo mật:</label>
+                        <label>Điểm bảo mật:</label>
 
                       </td>
                       <td>
