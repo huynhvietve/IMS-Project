@@ -212,40 +212,39 @@ export default function Student(props) {
           <h3>DANH SÁCH THỰC TẬP SINH {titleBatch.nameCoure}</h3>
           <div className="grid wide home-candidate">
             <div className="row home-candidate--list">
-              <span className="col l-2-8 ">Họ tên</span>
-              <span className="col l-2-8 ">Email</span>
-              <span className="col l-2-8 ">Trường đại học</span>
-              <span className="col l-2-8 ">Loại máy tính</span>
-              <span className="col l-2-8 ">Số điện thoại</span>
-              <span className="col l-2-8 ">Tên DG</span>
-              <span className="col l-2-8 ">Tên mentor</span>
-              <span className="col l-2-8 ">Tác vụ</span>
+              <span className="col l-2-8-student ">Họ tên</span>
+              <span className="col l-2-8-student ">Email</span>
+              <span className="col l-2-8-student ">Trường đại học</span>
+              <span className="col l-2-8-student ">Loại máy tính</span>
+              <span className="col l-2-8-student ">Số điện thoại</span>
+              <span className="col l-2-8-student ">Tên DG</span>
+              <span className="col l-2-8-student ">Tên mentor</span>
+              <span className="col l-2-8-student ">Tác vụ</span>
             </div>
             <div className="table-body-internships">
               {posts.map((students) => (
                 <ul className="row sm-gutter sm-gutter--lisst">
-                  <li className="col l-2-8">{students.fullNameInternship}</li>
-                  <li className="col l-2-8">{students.email}</li>
-                  <li className="col l-2-8" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student">{students.fullNameInternship}</li>
+                  <li className="col l-2-8-student">{students.email}</li>
+                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
                     {students.university}
                   </li>
-                  {/* <li className="col l-2-8">{dayjs(students.dayOfBirth).format("DD/MM/YYYY")}</li>             */}
-                  <li className="col l-2-8" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
                     {students.pcType}
                   </li>
-                  <li className="col l-2-8" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
                     {students.telInternship}
                   </li>
                   <li
-                    className="col l-2-8"
+                    className="col l-2-8-student"
                     style={{ textAlign: "center", marginLeft: "25px" }}
                   >
                     {students.nameDG}
                   </li>
-                  <li className="col l-2-8" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
                     {students.fullNameMentor}
                   </li>
-                  <li className="col l-2-8" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
                     <i
                       className="fa fa-trash-o fa-trash-o1"
                       aria-hidden="true"
