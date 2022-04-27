@@ -13,7 +13,6 @@ select {
     float: left;
 }
 
-select,
 input[type="date"],
 .input-candidate {
     width: 189.04px;

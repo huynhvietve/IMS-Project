@@ -132,8 +132,6 @@ function TableCandidate() {
       studentID: candidate.studentID,
       GPA: candidate.GPA,
       graduationYear: candidate.graduationYear,
-      idDG: candidate.idDG,
-      idMentor: candidate.idMentor,
       preferredInternshipStartDate: candidate.preferredInternshipStartDate,
       preferredInternshipDuration: candidate.preferredInternshipDuration,
       internshipSchedule: candidate.internshipSchedule,
@@ -237,7 +235,7 @@ function TableCandidate() {
       <Preview />
 
       <h3 className="text-header">
-      {constTable.H3} {batchTitle.nameCoure}
+        {constTable.H3} {batchTitle.nameCoure}
       </h3>
       <div className="input-toolbar">
         <div className="uploader">
@@ -412,6 +410,7 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
+                                      style={{ width:"189.04px", height:"29.98px"}}
                                       name="currentYearofStudy"
                                       id="year-study"
                                       value={values.currentYearofStudy}
@@ -514,6 +513,7 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
+                                      style={{ width:"189.04px", height:"29.98px"}}
                                       name="preferredInternshipDuration"
                                       id="inter-duration"
                                       value={values.preferredInternshipDuration}
@@ -543,6 +543,7 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
+                                      style={{ width:"189.04px", height:"29.98px"}}
                                       name="internshipSchedule"
                                       id="intern-schehdule"
                                       value={values.internshipSchedule}
@@ -574,6 +575,7 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
+                                      style={{ width:"189.04px", height:"29.98px"}}
                                       name="pcType"
                                       value={values.pcType}
                                       onChange={handleEditChange}

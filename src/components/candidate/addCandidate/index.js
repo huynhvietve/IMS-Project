@@ -224,6 +224,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
                         clasName="input-candidate"
                         name="currentYearofStudy"
                         id="year-study"
@@ -332,6 +333,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
                         clasName="input-candidate"
                         name="preferredInternshipDuration"
                         id="inter-duration"
@@ -361,6 +363,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
                         name="internshipSchedule"
                         id="intern-schehdule"
                         onChange={handleAddFormChange}
@@ -388,7 +391,9 @@ export default function AddCandidate() {
                       <label>{constCandidate.TYPEPC}</label>
                     </td>
                     <td>
-                      <select name="pcType" onChange={handleAddFormChange}>
+                      <select 
+                        style={{ width:"189.04px", height:"29.98px"}}
+                        name="pcType" onChange={handleAddFormChange}>
                         <option disabled selected hidden>
                           Chọn...
                         </option>
@@ -403,6 +408,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
                         className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
