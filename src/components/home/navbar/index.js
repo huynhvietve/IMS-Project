@@ -34,6 +34,11 @@ export default function Navbar() {
             </ul>
           </li>
           <li>
+            <Link class="nav-color" to="/internshipcourse">Quản lý khóa thực tập</Link>
+            <ul class="sub">
+            </ul>
+          </li>
+          <li>
             <a class="nav-color" href=""
             data-toggle="modal"
             onClick={() => {

@@ -1,14 +1,30 @@
 import React, { useEffect, useState } from "react";
 import * as apiaxios from "../../../api/service";
 import Swal from "sweetalert2";
+import { batch } from "react-redux";
 
 export default function AddMentor() {
   const [mentors, setMentor] = useState([]);
   const [Batch, setBatch] = useState([]);
+  const [batchTitle, setBatchTitle] = useState([]);
   const [dg, setdg] = useState([]);
-
+  const idBatch = localStorage.getItem("idBatch");
   useEffect(() => {
-    apiaxios.batchAPI("internshipcourse", "Get", null).then((res) => {
+    apiaxios
+      .batchAPI("internshipcourse", "Get", null)
+      .then((res) => {
+        setBatch(res.data.data);
+      });
+  }, []);
+  useEffect(() => {
+    apiaxios
+      .batchAPI(`internshipcourse/${idBatch}`, "Get", null)
+      .then((res) => {
+        setBatchTitle(res.data.data);
+      });
+  }, []);
+  useEffect(() => {
+    apiaxios.mentorAPI("internshipcourse", "Get", null).then((res) => {
       setBatch(res.data.data);
     });
   }, []);
@@ -20,7 +36,6 @@ export default function AddMentor() {
   }, []);
 
   useEffect(() => {
-    const idBatch = localStorage.getItem("idBatch");
     apiaxios.mentorAPI(`mentor/batch/${idBatch}`, null).then((res) => {
       setMentor(res.data.data);
     });
@@ -45,6 +60,15 @@ export default function AddMentor() {
     newFormData[fieldName] = fieldValue;
     setAddFormData(newFormData);
   };
+  const handleReset = () => {
+    setAddFormData({});
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    Array.from(document.querySelectorAll("select")).forEach(
+      (select) => (select.value = "Chọn...")
+    );
+  };
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
     const newContact = {
@@ -68,6 +92,7 @@ export default function AddMentor() {
             confirmButtonText: "Xác nhận",
           });
         }
+        handleReset();
         setMentor(res.data);
       })
       .catch((error) => {
@@ -108,29 +133,15 @@ export default function AddMentor() {
       <div className="modal-dialog modal-lg">
         <div className="modal-content" style={{ width: "90%" }}>
           <div className="modal-header">
-            <div className="container d-flex pl-0">
-              <h5
-                className="modal-title ml-2"
-                id="exampleModalLabel"
-                style={{ color: "#007bff" }}
-              >
-                THÊM NGƯỜI HƯỚNG DẪN
-              </h5>
-            </div>{" "}
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">X</span>{" "}
-            </button>
+            <div className="contai  ner d-flex pl-0">
+              <h4 id="exampleModalLabel">THÊM NGƯỜI HƯỚNG DẪN</h4>
+            </div>
           </div>
           <div className="modal-body">
             <form onSubmit={handleAddFormSubmit}>
               <table>
                 <tr>
-                  <td className="left-modal">
+                  <td className="left-mentor">
                     <label>Họ tên:</label>
                   </td>
                   <td>
@@ -138,11 +149,11 @@ export default function AddMentor() {
                       className="inputText"
                       type="text"
                       name="fullNameMentor"
-                      placeholder="Nhập trên 5 kí tự..."
+                      placeholder="Nhập tên..."
                       onChange={handleAddFormChange}
                     />
                   </td>
-                  <td className="right-modal">
+                  <td className="right-mentor">
                     <label>Chức vụ:</label>
                   </td>
                   <td>
@@ -156,7 +167,7 @@ export default function AddMentor() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="left-modal">
+                  <td className="left-mentor">
                     <label>Ngày sinh:</label>
                   </td>
                   <td>
@@ -168,7 +179,7 @@ export default function AddMentor() {
                       onChange={handleAddFormChange}
                     />
                   </td>
-                  <td className="right-modal">
+                  <td className="right-mentor">
                     <label>Email:</label>
                   </td>
                   <td>
@@ -182,7 +193,7 @@ export default function AddMentor() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="left-modal">
+                  <td className="left-mentor">
                     <label>Batch:</label>
                   </td>
                   <td>
@@ -193,14 +204,15 @@ export default function AddMentor() {
                       onChange={handleAddFormChange}
                       style={{ width: "200px" }}
                     >
+                      <option disabled selected hidden>
+                        Chọn...
+                      </option>
                       {Batch?.map((itemBatch) => (
-                        <option value={itemBatch.idInternshipCourse}>
-                          {itemBatch.nameCoure}
-                        </option>
+                        <option value={itemBatch.idInternshipCourse}>{itemBatch.nameCoure}</option>
                       ))}
                     </select>
                   </td>
-                  <td className="right-modal">
+                  <td className="right-mentor">
                     <label>Tên DG:</label>
                   </td>
                   <td>
@@ -211,6 +223,9 @@ export default function AddMentor() {
                       onChange={handleAddFormChange}
                       style={{ width: "200px" }}
                     >
+                      <option disabled selected hidden>
+                        Chọn...
+                      </option>
                       {dg?.map((itemDG) => (
                         <option value={itemDG.idDG}>{itemDG.nameDG}</option>
                       ))}
@@ -218,7 +233,7 @@ export default function AddMentor() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="left-modal">
+                  <td className="left-mentor">
                     <label>Nơi công tác:</label>
                   </td>
                   <td>
@@ -230,7 +245,7 @@ export default function AddMentor() {
                       onChange={handleAddFormChange}
                     />
                   </td>
-                  <td className="right-modal">
+                  <td className="right-mentor">
                     <label>Địa chỉ:</label>
                   </td>
                   <td>
@@ -245,17 +260,16 @@ export default function AddMentor() {
                 </tr>
               </table>
               <div className="modal-footer">
-                {" "}
                 <button
                   type="button"
                   className="btn btn-light"
                   data-dismiss="modal"
                 >
                   Hủy
-                </button>{" "}
-                <button type="submit" className="btn btn-danger-del btn-add">
+                </button>
+                <button type="submit" className="btn btn-danger-del ">
                   Thêm
-                </button>{" "}
+                </button>
               </div>
             </form>
           </div>

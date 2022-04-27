@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
 import BasicForm from "../components/login/Form";
 import { useSelector } from "react-redux";
 import "../asset/css/navbar.css";
@@ -6,6 +7,7 @@ import "../asset/css/header.css";
 import "../asset/css/crudModal.css";
 import "../asset/css/tableCandidate.css";
 import "../asset/css/pagination.css";
+import "../asset/css/interviewShedule.css";
 import "../asset/css/mentor.css";
 import "../asset/css/interview.css"
 import Navbar from "../components/home/navbar/index";
@@ -16,6 +18,7 @@ import indexStudent from "../components/table/student/index";
 import Home from "../components/table/home/index";
 import Batch from "../components/main/batch/index";
 import Interview from "../components/table/interview/search/index";
+
 
 function App() {
   const isAuthen = useSelector((state) => state.auth.isAuthenticated);
@@ -45,7 +48,8 @@ function App() {
                 </Route>
               </Switch>
           </>
-            )}
+        )}
+
         <Route path="*">
           <Redirect to="/login" />
         </Route>

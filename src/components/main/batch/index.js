@@ -37,13 +37,7 @@ export default function Batch(props) {
       kindOfInternship: addFormData.kindOfInternship,
     };
     apiaxios.batchCreate("internshipcourse/create", newContact).then((res) => {
-      if(res.data.error){
-        Swal.fire({
-          icon: 'error',
-          text: res.data.error,
-          confirmButtonText: "Xác nhận",
-        })
-      }else{
+      if(res){
         history.push(`/Home/batch/?id=${res.data.idInternshipCourse}`);
       }
     }).catch((error) => {
@@ -96,8 +90,8 @@ export default function Batch(props) {
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Hệ thống quản lý thực tập</h4>
+            <div className="modal-header batch">
+              <h4>Hệ thống quản lý thực tập</h4>
             </div>
             <div className="modal-body">
               <label className="label-batch">Chọn khóa thực tập : </label>
@@ -105,7 +99,7 @@ export default function Batch(props) {
                 className="select-batch"      
                 onChange={(e) => setIdTemp(e.currentTarget.value)}
               >
-                <option value="">Chọn...</option>
+                <option disabled selected hidden>Chọn...</option>
                 {posts?.map((item) => (
                   <option
                     key={item.idInternshipCourse}
@@ -120,19 +114,21 @@ export default function Batch(props) {
               <button
                 id="md-them1"
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary btn-Batch"
                 data-toggle="modal"
                 data-target="#exampleModalCenter"
-                style={{ width: "156px", float: "right", marginRight: "50px" }}
+                style={{marginLeft:"20px"}}
               >
                 Thêm
               </button>
               <button
                 onClick={handleSubmit}
+                
                 id="md-sumit"
                 type="submit"
-                className="btn btn-primary"
-                style={{ width: "156px", float: "right", marginRight: "50px" }}
+                className="btn btn-primary btn-Batch"
+                style={{marginLeft:"30px"}}
+               
               >
                 Xác nhận
               </button>
@@ -158,13 +154,11 @@ export default function Batch(props) {
             >
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5
-                    className="modal-title"
+                  <h4
                     id="exampleModalLongTitle"
-                    style={{ color: "#1aa3ff" }}
                   >
-                    Thêm khóa thực tập
-                  </h5>
+                    THÊM KHÓA THỰC TẬP
+                  </h4>
                   <button
                     type="button"
                     className="close"
@@ -195,14 +189,15 @@ export default function Batch(props) {
                       </td>
                       <td>
                         <select
-                          className="inputText"
+                          className="inPut-Batch"
                           name="status"
                           id="cars"
                           onChange={handleAddFormChange}
                         >
-                          <option value="">Chọn...</option>
+                          <option disabled selected hidden>Chọn...</option>
                           <option value="Done">Done</option>
                           <option value="In progress">In progress</option>
+                          <option value="N/A">N/A</option>
                         </select>
                       </td>
                     </tr>
@@ -223,12 +218,12 @@ export default function Batch(props) {
                       </td>
                       <td>
                         <select
-                          className="inputText"
+                          className="inPut-Batch"
                           name="kindOfInternship"
                           id="cars"
                           onChange={handleAddFormChange}
                         >
-                          <option value="">Chọn...</option>
+                          <option disabled selected hidden>Chọn...</option>
                           <option value="Full time">Full time</option>
                           <option value="Part time">Part time</option>
                         </select>
@@ -249,20 +244,19 @@ export default function Batch(props) {
                       </td>
                     </tr>
                     <div className="modal-footer">
-                    <button
-                        id="md-them2"
-                        type="submit"
-                        className="btn btn-primary"
-                      >
-                        Thêm
-                      </button>
+                    
                       <button
-                        id="md-huy"
                         type="button"
-                        className="btn btn-secondary"
+                        className="btn btn-secondary btn-Batch-Cancel"
                         data-dismiss="modal"
                       >
                         Hủy
+                      </button>
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-Batch"
+                      >
+                        Thêm
                       </button>
                     </div>
                   </form>

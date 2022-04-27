@@ -13,10 +13,10 @@ export default function Home() {
       
 }, {});
   return (
-    <>
+  <>
 
   <div>
-    <h1 className="h1-batch">Chào mừng bạn đến với {idcourse.nameCoure}</h1>
+    <h3 >CHÀO MỪNG BẠN ĐÃ ĐẾN VỚI {idcourse.nameCoure}</h3>
   </div>
     </>
   )
