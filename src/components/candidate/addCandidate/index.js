@@ -58,7 +58,14 @@ export default function AddCandidate() {
   const closeModal = () => {
     const modals = document.getElementById("exampleModalAdd");
     modals.style.display = "none";
-  }
+  };
+  // const [open, setOpen] = useState(true);
+  // const handleOpenModal = () => {
+  //   setOpen(true);
+  // };
+  // const handleCloseModal = () => {
+  //   setOpen(false);
+  // };
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -95,7 +102,7 @@ export default function AddCandidate() {
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
     };
-    
+
     candidateAPI("candidate/create", "POST", newCadidate)
       .then((res) => {
         Swal.fire({
@@ -165,6 +172,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="fullName"
                         onChange={handleAddFormChange}
@@ -175,6 +183,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="tel"
                         onChange={handleAddFormChange}
@@ -187,7 +196,8 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
-                        type="email"
+                        clasName="input-candidate"
+                        type="text"
                         name="emailCandidate"
                         onChange={handleAddFormChange}
                       />
@@ -197,6 +207,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="studentID"
                         onChange={handleAddFormChange}
@@ -209,6 +220,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="faculty"
                         onChange={handleAddFormChange}
@@ -219,6 +231,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        clasName="input-candidate"
                         name="currentYearofStudy"
                         id="year-study"
                         onChange={handleAddFormChange}
@@ -240,6 +253,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="university"
                         onChange={handleAddFormChange}
@@ -251,6 +265,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="GPA"
                         onChange={handleAddFormChange}
@@ -263,6 +278,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="graduationYear"
                         onChange={handleAddFormChange}
@@ -273,6 +289,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="expectedGraduationSchedule"
                         onChange={handleAddFormChange}
@@ -286,6 +303,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="remainingSubjects"
                         onChange={handleAddFormChange}
@@ -297,6 +315,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="projectExperience"
                         onChange={handleAddFormChange}
@@ -309,6 +328,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="internshipDomain"
                         onChange={handleAddFormChange}
@@ -319,6 +339,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        clasName="input-candidate"
                         name="preferredInternshipDuration"
                         id="inter-duration"
                         onChange={handleAddFormChange}
@@ -444,6 +465,7 @@ export default function AddCandidate() {
                     type="button"
                     className="btn btn-light"
                     data-dismiss="modal"
+                    onClick={handleReset}
                   >
                     Hủy
                   </button>{" "}

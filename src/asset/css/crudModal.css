@@ -1,24 +1,33 @@
-select{
+select {
     width: 100px;
-} 
-.right-modal{
+}
+
+.right-modal {
     padding-left: 20px;
     font-weight: 600;
     float: left;
 }
-.left-modal{
+
+.left-modal {
     font-weight: 600;
     float: left;
 }
-select, input[type="date"]{
+
+select,
+input[type="date"],
+.input-candidate {
     width: 189.04px;
+    height: 29.98px;
 }
+
 .container.justify-content-center {
     margin-top: 400px
 }
-.modal-content-top{
+
+.modal-content-top {
     margin-top: 10px !important;
 }
+
 .modal-header {
     border: none;
 }
@@ -30,32 +39,49 @@ select, input[type="date"]{
 
 .btn-danger-del,
 .btn-danger-del:hover {
-    color:white;
+    color: white;
     background: #007bff;
     border: 1px solid #007bff;
-    width:100px;
+    width: 100px;
 }
 
 .btn-light,
 .btn-light:hover {
-    color:black;
+    color: black;
     border: 1px solid #007bff;
-    width:100px;
+    width: 100px;
 }
 
 .btn:focus {
     box-shadow: none
 }
-.text-muted{
+
+.text-muted {
     text-align: center;
 }
+
 .swal2-styled.swal2-cancel {
     color: black;
-    background:#f8f9fa;
+    background: #f8f9fa;
     border: 1px solid #007bff;
-    width:100px;
-  }
-  .swal2-styled.swal2-confirm{
-    width:105px;
+    width: 100px;
+}
+
+.swal2-styled.swal2-confirm {
+    width: 105px;
     border: 1px solid #007bff;
-  }
+}
+
+.inputDetail {
+    -webkit-appearance: none;
+    border: none;
+    width: 189.04px;
+    pointer-events: none;
+    padding-bottom: 8px;
+}
+
+.inputDetail::-webkit-inner-spin-button,
+.inputDetail::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}

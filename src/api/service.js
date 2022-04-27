@@ -32,6 +32,9 @@ export function candidateAPI(endpoint, method = 'GET',body) {
       data: body
   })
 }
+export function candidatePut( endpoint, body)  {
+  return api.put(`${API_BASE}/${endpoint}`,body);
+};
 export function mentorAPI( endpoint)  {
   return api.get(`${API_BASE}/${endpoint}`,null);
 };
