@@ -42,9 +42,9 @@ export const deleteMentor = (id) => {
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       cancelButtonText: "Hủy",
       confirmButtonText: "Đồng ý",
+      reverseButtons: true,
     })
       .then((result) => {
         if (result.isConfirmed) {
@@ -52,11 +52,6 @@ export const deleteMentor = (id) => {
             dispatch(createAction(DELETE_MENTOR, res.data));
             dispatch(getMentor());
           });
-          Swal.fire(
-            {
-              title:"Đã xóa thành công!",
-              confirmButtonText: "Xác nhận",
-            });
         }
       })
       .catch((err) => {

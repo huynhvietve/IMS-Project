@@ -17,7 +17,6 @@ export function batchHome(endpoint) {
 export function batchCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
 }
-
 export function batchPut(endpoint, body) {
   return api.put(`${API_BASE}/${endpoint}`, body);
 }
@@ -31,12 +30,18 @@ export function candidateAPI(endpoint, method = "GET", body) {
     data: body,
   });
 }
-
 export function mentorAPI(endpoint) {
   return api.get(`${API_BASE}/${endpoint}`, null);
 }
 export function mentorCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);
+}
+
+export function mentorDG(endpoint) {
+  return api.get(`${API_BASE}/${endpoint}`, null);
+}
+export function mentorEdit(endpoint, body) {
+  return api.put(`${API_BASE}/${endpoint}`, body);
 }
 
 export const sendEmail = (data) => {
