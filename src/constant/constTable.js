@@ -1,7 +1,7 @@
 export const H3 = "DANH SÁCH ỨNG VIÊN"
 export const H5ADD = "THÊM ỨNG VIÊN"
 export const H5EIDT = "SỬA ỨNG VIÊN"
-export const H5DETAIL = "CHI TIẾT ỨNG VIÊN"
+export const H4DETAIL = "CHI TIẾT ỨNG VIÊN"
 export const STT = "STT"
 export const NAME = "Họ tên"
 export const EMAIL = "Email"

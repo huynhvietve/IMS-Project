@@ -14,6 +14,8 @@
 }
 
 .text-header{
+  color: #007bff;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -27,7 +29,7 @@
 .fa-pencil-square-o,
 .fa-eye,
 .fa-calendar-plus-o {
-  font-size: 13px;
+  font-size: 20px;
 }
 
 .fa-trash-o {
@@ -61,7 +63,6 @@ i {
 }
 
 span {
-  padding-top: 5px;
   height: 40px;
   text-align: center;
   font-weight: 500;
