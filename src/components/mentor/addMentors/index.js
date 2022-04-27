@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as apiaxios from "../../../api/service";
 import Swal from "sweetalert2";
+import { batch } from "react-redux";
 
 export default function AddMentor() {
   const [mentors, setMentor] = useState([]);
@@ -8,6 +9,13 @@ export default function AddMentor() {
   const [batchTitle, setBatchTitle] = useState([]);
   const [dg, setdg] = useState([]);
   const idBatch = localStorage.getItem("idBatch");
+  useEffect(() => {
+    apiaxios
+      .batchAPI("internshipcourse", "Get", null)
+      .then((res) => {
+        setBatch(res.data.data);
+      });
+  }, []);
   useEffect(() => {
     apiaxios
       .batchAPI(`internshipcourse/${idBatch}`, "Get", null)
@@ -200,9 +208,7 @@ export default function AddMentor() {
                         Chọn...
                       </option>
                       {Batch?.map((itemBatch) => (
-                        <option value={itemBatch.idInternshipCourse}>
-                          {itemBatch.nameCoure}
-                        </option>
+                        <option value={itemBatch.idInternshipCourse}>{itemBatch.nameCoure}</option>
                       ))}
                     </select>
                   </td>

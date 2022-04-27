@@ -52,11 +52,6 @@ export const deleteMentor = (id) => {
             dispatch(createAction(DELETE_MENTOR, res.data));
             dispatch(getMentor());
           });
-          Swal.fire(
-            {
-              title:"Đã xóa thành công!",
-              confirmButtonText: "Xác nhận",
-            });
         }
       })
       .catch((err) => {

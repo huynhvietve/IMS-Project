@@ -20,7 +20,7 @@ function TableMentor(props) {
   }, []);
   const [mentors, setMentor] = useState([]);
   const [currPage, setCurrPage] = useState(1);
-  const [mentorPerPage, setMentorPerPage] = useState(20);
+  const [mentorPerPage, setMentorPerPage] = useState(15);
   const indexOfLastMentor = currPage * mentorPerPage;
   const indexOfFirstMentor = indexOfLastMentor - mentorPerPage;
   const currMentor = mentors.slice(indexOfFirstMentor, indexOfLastMentor);
@@ -51,7 +51,7 @@ function TableMentor(props) {
       setMentor(res.data.data);
     });
   }, [mentors]);
-  
+
   const handleOpenModal = () => {
     setOpen(true);
   };
@@ -163,13 +163,10 @@ function TableMentor(props) {
       <h3>DANH SÁCH NGƯỜI HƯỚNG DẪN {batchTitle.nameCoure}</h3>
       <div className="grid wide1 home-mentor">
         <div className="row home-mentor--list">
-          <span className="col l-2-8-mentor " style={{ marginLeft: "6px" }}>
+          <span className="col l-2-9-mentor " style={{ marginLeft: "6px" }}>
             Họ tên
           </span>
-          <span className= "l-2-6-mentor ">DG</span>
-          <span className="col l-2-8-mentor " >
-            Ngày sinh
-          </span>
+          <span className="l-2-6-mentor ">DG</span>
           <span className="col l-2-8-mentor ">Nơi công tác</span>
           <span className="col l-2-9-mentor ">Email</span>
           <span className="col l-2-9-mentor ">Địa chỉ</span>
@@ -181,17 +178,8 @@ function TableMentor(props) {
         <div>
           {currMentor.map((mentor) => (
             <ul className="row sm-gutter sm-gutter--list" key={mentor.id}>
-              <li className="col l-2-8-mentor">{mentor.fullNameMentor}</li>
+              <li className="col l-2-9-mentor">{mentor.fullNameMentor}</li>
               <li className="l-2-6-mentor">{mentor.nameDG}</li>
-              <DayJS
-                style={{ paddingLeft: "3px" }}
-                element="li"
-                name="dayOfBirth"
-                className="col l-2-8-mentor"
-                format="DD-MM-YYYY"
-              >
-                {mentor.dayOfBirth}
-              </DayJS>
               <li className="col l-2-8-mentor">{mentor.workplace}</li>
               <li className="col l-2-9-mentor">{mentor.email}</li>
               <li className="col l-2-9-mentor">{mentor.address}</li>
@@ -210,8 +198,9 @@ function TableMentor(props) {
                   className="fa fa-pencil-square-o"
                   aria-hidden="true"
                   onClick={() => {
-                    handleEditClick(mentor);
                     handleOpenModal();
+                    handleEditClick(mentor);
+                    handleReset();
                   }}
                 >
                   {" "}
@@ -297,7 +286,7 @@ function TableMentor(props) {
                                 <label>Batch:</label>
                               </td>
                               <td>
-                              <input
+                                <input
                                   className="inputText"
                                   name="email"
                                   type="text"
@@ -384,13 +373,14 @@ function TableMentor(props) {
         </div>
       </div>
       <Pagination
+        style={{ marginLeft: "1070" }}
         mentorPerPage={mentorPerPage}
         totalMentor={mentors.length}
         paginate={paginate}
       />
       <button
         className="btn btn-danger-del"
-        style={{ marginLeft: "1135px" }}
+        style={{ marginLeft: "1070px" }}
         type="submit"
         data-toggle="modal"
         data-target="#exampleModal2"
