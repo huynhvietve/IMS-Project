@@ -55,6 +55,10 @@ export default function AddCandidate() {
       (select) => (select.value = "Chọn...")
     );
   };
+  const closeModal = () => {
+    const modals = document.getElementById("exampleModalAdd");
+    modals.style.display = "none";
+  };
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -91,10 +95,18 @@ export default function AddCandidate() {
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
     };
+
     candidateAPI("candidate/create", "POST", newCadidate)
       .then((res) => {
+        Swal.fire({
+          icon: "success",
+          text: "Đã thêm",
+          showConfirmButton: false,
+          timer: 1000,
+        });
         setCandi(res.data.data);
         handleReset();
+        closeModal();
       })
       .catch((error) => {
         if (error.response) {
@@ -120,6 +132,7 @@ export default function AddCandidate() {
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
   };
+
   return (
     <>
       <div
@@ -134,13 +147,13 @@ export default function AddCandidate() {
           <div className="modal-content modal-content-top">
             <div className="modal-header">
               <div className="container d-flex pl-0">
-                <h5
+                <h4
                   className="modal-title ml-2"
                   id="exampleModalLabel"
                   style={{ color: "#007bff" }}
                 >
                   {constTable.H5ADD}
-                </h5>
+                </h4>
               </div>{" "}
             </div>
             <div className="modal-body">
@@ -152,6 +165,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="fullName"
                         onChange={handleAddFormChange}
@@ -162,6 +176,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="tel"
                         onChange={handleAddFormChange}
@@ -174,40 +189,20 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
-                        type="email"
+                        clasName="input-candidate"
+                        type="text"
                         name="emailCandidate"
                         onChange={handleAddFormChange}
                       />
                     </td>
                     <td className="right-modal">
-                      <label>{constCandidate.ITDOMAIN}</label>
+                      <label>{constCandidate.IDSTUDENT}</label>
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
-                        name="internshipDomain"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.SKILL}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="preferredSkills"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.SCHOOL}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="university"
+                        name="studentID"
                         onChange={handleAddFormChange}
                       />
                     </td>
@@ -218,6 +213,7 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
                         name="faculty"
                         onChange={handleAddFormChange}
@@ -228,6 +224,8 @@ export default function AddCandidate() {
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
+                        clasName="input-candidate"
                         name="currentYearofStudy"
                         id="year-study"
                         onChange={handleAddFormChange}
@@ -245,47 +243,107 @@ export default function AddCandidate() {
                   </tr>
                   <tr>
                     <td className="left-modal">
-                      <label>{constCandidate.IDSTUDENT}</label>
+                      <label>{constCandidate.SCHOOL}</label>
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
-                        name="studentID"
+                        name="university"
                         onChange={handleAddFormChange}
                       />
                     </td>
+
                     <td className="right-modal">
-                      <label>{constCandidate.GRAYEAR}</label>
+                      <label>{constCandidate.AVGSCORE}</label>
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
-                        name="graduationYear"
+                        name="GPA"
                         onChange={handleAddFormChange}
                       />
                     </td>
                   </tr>
                   <tr>
                     <td className="left-modal">
-                      <label>{constCandidate.AVGSCORE}</label>
+                      <label>{constCandidate.GRAYEAR}</label>
                     </td>
                     <td>
                       <input
+                        clasName="input-candidate"
                         type="text"
-                        name="GPA"
+                        name="graduationYear"
                         onChange={handleAddFormChange}
                       />
                     </td>
                     <td className="right-modal">
-                      <label>{constCandidate.TYPEPC}</label>
+                      <label>{constCandidate.GRADUATION}</label>
                     </td>
                     <td>
-                      <select name="pcType" onChange={handleAddFormChange}>
+                      <input
+                        clasName="input-candidate"
+                        type="text"
+                        name="expectedGraduationSchedule"
+                        onChange={handleAddFormChange}
+                        maxLength="1000"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.REMSUB}</label>
+                    </td>
+                    <td>
+                      <input
+                        clasName="input-candidate"
+                        type="text"
+                        name="remainingSubjects"
+                        onChange={handleAddFormChange}
+                        maxLength="1000"
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.PRJEXP}</label>
+                    </td>
+                    <td>
+                      <input
+                        clasName="input-candidate"
+                        type="text"
+                        name="projectExperience"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.ITDOMAIN}</label>
+                    </td>
+                    <td>
+                      <input
+                        clasName="input-candidate"
+                        type="text"
+                        name="internshipDomain"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                    <td className="right-modal">
+                      <label>{constCandidate.INTERTIME}</label>
+                    </td>
+                    <td>
+                      <select
+                        style={{ width:"189.04px", height:"29.98px"}}
+                        clasName="input-candidate"
+                        name="preferredInternshipDuration"
+                        id="inter-duration"
+                        onChange={handleAddFormChange}
+                      >
                         <option disabled selected hidden>
                           Chọn...
                         </option>
-                        <option value="PC">PC</option>
-                        <option value="Laptop">Laptop</option>
+                        <option value="8 Tuần">8 tuần</option>
+                        <option value="12 Tuần">12 tuần</option>
                       </select>
                     </td>
                   </tr>
@@ -301,28 +359,11 @@ export default function AddCandidate() {
                       />
                     </td>
                     <td className="right-modal">
-                      <label>{constCandidate.INTERTIME}</label>
-                    </td>
-                    <td>
-                      <select
-                        name="preferredInternshipDuration"
-                        id="inter-duration"
-                        onChange={handleAddFormChange}
-                      >
-                        <option disabled selected hidden>
-                          Chọn...
-                        </option>
-                        <option value="8 Tuần">8 tuần</option>
-                        <option value="12 Tuần">12 tuần</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
                       <label>{constCandidate.INTERNTYPE}</label>
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
                         name="internshipSchedule"
                         id="intern-schehdule"
                         onChange={handleAddFormChange}
@@ -334,16 +375,44 @@ export default function AddCandidate() {
                         <option value="Part time">Part time</option>
                       </select>
                     </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
+                      <label>{constCandidate.SKILL}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="preferredSkills"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
                     <td className="right-modal">
+                      <label>{constCandidate.TYPEPC}</label>
+                    </td>
+                    <td>
+                      <select 
+                        style={{ width:"189.04px", height:"29.98px"}}
+                        name="pcType" onChange={handleAddFormChange}>
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
+                        <option value="PC">PC</option>
+                        <option value="Laptop">Laptop</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="left-modal">
                       <label>{constCandidate.INTERNBATCH}</label>
                     </td>
                     <td>
                       <select
+                        style={{ width:"189.04px", height:"29.98px"}}
                         className="inputTextCandi"
                         name="idInternshipCourse"
                         id="cars"
                         onChange={handleAddFormChange}
-                        // required="required"
                       >
                         <option disabled selected hidden>
                           Chọn...
@@ -355,32 +424,7 @@ export default function AddCandidate() {
                         ))}
                       </select>
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
-                      <label>{constCandidate.PRJEXP}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="projectExperience"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
                     <td className="right-modal">
-                      <label>{constCandidate.GRADUATION}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="expectedGraduationSchedule"
-                        onChange={handleAddFormChange}
-                        maxLength="1000"
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
                       <label>{constCandidate.CVIDINFO}</label>
                     </td>
                     <td>
@@ -388,17 +432,6 @@ export default function AddCandidate() {
                         type="text"
                         name="covidVaccinationiInformation"
                         onChange={handleAddFormChange}
-                      />
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.REMSUB}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="remainingSubjects"
-                        onChange={handleAddFormChange}
-                        maxLength="1000"
                       />
                     </td>
                   </tr>
@@ -431,6 +464,7 @@ export default function AddCandidate() {
                     type="button"
                     className="btn btn-light"
                     data-dismiss="modal"
+                    onClick={handleReset}
                   >
                     Hủy
                   </button>{" "}
