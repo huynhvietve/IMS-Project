@@ -30,23 +30,12 @@ function TableCandidate() {
       setCandi(res.data.data);
     });
   }, [candi]);
+
   useEffect(() => {
     batchAPI(`internshipcourse/${idBatch}`, "Get", null).then((res) => {
       setBatchTitle(res.data.data);
     });
   }, {});
-  const [mentor, setMentor] = useState([]);
-  useEffect(() => {
-    apiaxios.mentorAPI("mentor", "Get", null).then((res) => {
-      setMentor(res.data.data);
-    });
-  }, []);
-  const [dg, setDg] = useState([]);
-  useEffect(() => {
-    apiaxios.mentorDG("dg", "Get", null).then((res) => {
-      setDg(res.data.data);
-    });
-  }, []);
 
   const dispatch = useDispatch();
 
@@ -78,8 +67,6 @@ function TableCandidate() {
     fullName: "",
     tel: "",
     emailCandidate: "",
-    // idDG: "",
-    // idMentor: "",
     internshipDomain: "",
     preferredSkills: "",
     university: "",
@@ -88,12 +75,13 @@ function TableCandidate() {
     studentID: "",
     GPA: "",
     graduationYear: "",
+    idDG: "",
+    idMentor: "",
     preferredInternshipStartDate: "",
     preferredInternshipDuration: "",
     internshipSchedule: "",
     pcType: "",
     status: "",
-    remark: "",
     technicalComments: "",
     technicalScore: "",
     attitude: "",
@@ -106,6 +94,11 @@ function TableCandidate() {
     covidVaccinationiInformation: "",
     covidVaccinationCertificate: "",
     certificationDate: "",
+    interviewLink: "",
+    interviewDate: "",
+    interviewTime: "",
+    interviewer: "",
+    emailInterviewer: "",
   });
   const [valuesId, setValuesId] = useState(null);
   const handleEditChange = (event) => {
@@ -123,8 +116,6 @@ function TableCandidate() {
       fullName: candidate.fullName,
       tel: candidate.tel,
       emailCandidate: candidate.emailCandidate,
-      // idDG: candidate.idDG,
-      // idMentor: candidate.idMentor,
       internshipDomain: candidate.internshipDomain,
       preferredSkills: candidate.preferredSkills,
       university: candidate.university,
@@ -133,12 +124,13 @@ function TableCandidate() {
       studentID: candidate.studentID,
       GPA: candidate.GPA,
       graduationYear: candidate.graduationYear,
+      idDG: candidate.idDG,
+      idMentor: candidate.idMentor,
       preferredInternshipStartDate: candidate.preferredInternshipStartDate,
       preferredInternshipDuration: candidate.preferredInternshipDuration,
       internshipSchedule: candidate.internshipSchedule,
       pcType: candidate.pcType,
       status: candidate.status,
-      remark: candidate.remark,
       technicalComments: candidate.technicalComments,
       technicalScore: candidate.technicalScore,
       attitude: candidate.attitude,
@@ -151,6 +143,11 @@ function TableCandidate() {
       covidVaccinationiInformation: candidate.covidVaccinationiInformation,
       covidVaccinationCertificate: candidate.covidVaccinationCertificate,
       certificationDate: candidate.certificationDate,
+      interviewLink: candidate.interviewLink,
+      interviewDate: candidate.interviewDate,
+      interviewTime: candidate.interviewTime,
+      interviewer: candidate.interviewer,
+      emailInterviewer: candidate.emailInterviewer,
     };
     setValues(formValues);
   };
@@ -161,8 +158,6 @@ function TableCandidate() {
       fullName: values.fullName,
       tel: values.tel,
       emailCandidate: values.emailCandidate,
-      // idDG: values.idDG,
-      // idMentor: values.idMentor,
       internshipDomain: values.internshipDomain,
       preferredSkills: values.preferredSkills,
       university: values.university,
@@ -175,8 +170,6 @@ function TableCandidate() {
       preferredInternshipDuration: values.preferredInternshipDuration,
       internshipSchedule: values.internshipSchedule,
       pcType: values.pcType,
-      status: values.status,
-      remark: values.remark,
       technicalComments: values.technicalComments,
       technicalScore: values.technicalScore,
       attitude: values.attitude,
@@ -191,42 +184,43 @@ function TableCandidate() {
       certificationDate: values.certificationDate,
     };
     apiaxios
-    .candidatePut(`candidate/${valuesId}`, editCandi).then((res) => {
-      Swal.fire({
-        icon: "success",
-        text: "Cập nhật thành công !!!",
-        showConfirmButton: false,
-        timer: 1000,
+      .candidatePut(`candidate/${valuesId}`, editCandi)
+      .then((res) => {
+        Swal.fire({
+          icon: "success",
+          text: "Cập nhật thành công !!!",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        const newCandi = [...candi];
+        const index = candi.findIndex(
+          (candidate) => candidate.idCandidate === valuesId
+        );
+        newCandi[index] = editCandi;
+        setCandi(newCandi);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        } else if (error.request) {
+          Swal.fire({
+            icon: "error",
+            text: error.request,
+            confirmButtonText: "Xác nhận",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: error.message,
+            confirmButtonText: "Xác nhận",
+          });
+        }
       });
-      const newCandi = [...candi];
-      const index = candi.findIndex(
-        (candidate) => candidate.idCandidate === valuesId
-      );
-      newCandi[index] = editCandi;
-      setCandi(newCandi);
-      handleCloseModal();
-    })
-    .catch((error) => {
-      if (error.response) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.error,
-          confirmButtonText: "Xác nhận",
-        });
-      } else if (error.request) {
-        Swal.fire({
-          icon: "error",
-          text: error.request,
-          confirmButtonText: "Xác nhận",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: error.message,
-          confirmButtonText: "Xác nhận",
-        });
-      }
-    });
   };
 
   return (
@@ -242,12 +236,12 @@ function TableCandidate() {
           </button>
         </div>
         <div class="search">
-          <input 
-              type="text" 
-              placeholder="Tìm kiếm..." 
-              class="search__input" 
-              onChange={(e) => setSearch(e.target.value.toLowerCase())} 
-          /> 
+          <input
+            type="text"
+            placeholder="Tìm kiếm..."
+            class="search__input"
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+          />
           <i class="search__icon fa fa-search"></i>
         </div>
       </div>
@@ -365,7 +359,7 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <input
-                                      type="email"
+                                      type="text"
                                       name="emailCandidate"
                                       onChange={handleEditChange}
                                       value={values.emailCandidate}
@@ -485,44 +479,6 @@ function TableCandidate() {
                                     />
                                   </td>
                                 </tr>
-                                {/* <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.MTNAME}</label>
-                                  </td>
-                                  <td>
-                                    <select
-                                      className="inputTextCandi"
-                                      name="idMentor"
-                                      id="cars"
-                                      value={values.idMentor}
-                                      onChange={handleEditChange}
-                                    >
-                                      {mentor?.map((itemMentor) => (
-                                        <option value={itemMentor.idMentor}>
-                                          {itemMentor.fullNameMentor}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.DGNAME}</label>
-                                  </td>
-                                  <td>
-                                    <select
-                                      className="inputTextCandi"
-                                      name="idDG"
-                                      id="cars"
-                                      value={values.idDG}
-                                      onChange={handleEditChange}
-                                    >
-                                      {dg?.map((itemDG) => (
-                                        <option value={itemDG.idDG}>
-                                          {itemDG.nameDG}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </td>
-                                </tr> */}
                                 <tr>
                                   <td className="left-modal">
                                     <label>{constCandi.ITDOMAIN}</label>
@@ -612,27 +568,24 @@ function TableCandidate() {
                                 <tr></tr>
                                 <tr>
                                   <td className="left-modal">
-                                    <label>{constCandi.RESULT}</label>
-                                  </td>
-                                  <td>
-                                    <select
-                                      name="status"
-                                      id="status"
-                                      value={values.status}
-                                      onChange={handleEditChange}
-                                    > <option disabled selected hidden>Chọn....</option>
-                                      <option value="Pass">Pass</option>
-                                      <option value="Fail">Fail</option>
-                                    </select>
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.REMARK}</label>
+                                    <label>{constCandi.ATTITUDE}</label>
                                   </td>
                                   <td>
                                     <input
                                       type="text"
-                                      name="remark"
-                                      value={values.remark}
+                                      name="attitude"
+                                      value={values.attitude}
+                                      onChange={handleEditChange}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.COMMENTS}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      type="text"
+                                      name="comments"
+                                      value={values.comments}
                                       onChange={handleEditChange}
                                     />
                                   </td>
@@ -662,18 +615,8 @@ function TableCandidate() {
                                   </td>
                                 </tr>
                                 <tr>
+                                  
                                   <td className="left-modal">
-                                    <label>{constCandi.ATTITUDE}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="attitude"
-                                      value={values.attitude}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
                                     <label>{constCandi.ENGLISH}</label>
                                   </td>
                                   <td>
@@ -681,19 +624,6 @@ function TableCandidate() {
                                       type="text"
                                       name="englishCommunication"
                                       value={values.englishCommunication}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.COMMENTS}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="comments"
-                                      value={values.comments}
                                       onChange={handleEditChange}
                                     />
                                   </td>
@@ -776,6 +706,425 @@ function TableCandidate() {
                     )}
                   </div>
                 </form>
+                <form>
+                  <div>
+                    {open && (
+                      <div
+                        className="modal fade"
+                        id="exampleModalDetail"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-lg">
+                          <div className="modal-content modal-content-top">
+                            <div className="modal-header">
+                              <div className="container d-flex pl-0">
+                                <h4
+                                  className="modal-title ml-2"
+                                  id="exampleModalLabel"
+                                  style={{ color: "#007bff" }}
+                                >
+                                  {constTable.H4DETAIL}
+                                </h4>
+                              </div>{" "}
+                            </div>
+                            <div className="modal-body">
+                              <table>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.NAME}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.fullName}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.PHONE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.tel}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.EMAIL}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.emailCandidate}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.IDSTUDENT}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.studentID}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.FACULTY}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.faculty}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.CRRYEAR}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.currentYearofStudy}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.SCHOOL}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.university}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.AVGSCORE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.GPA}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.GRAYEAR}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.graduationYear}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.GRADUATION}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.expectedGraduationSchedule}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.REMSUB}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.remainingSubjects}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.PRJEXP}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.projectExperience}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.ITDOMAIN}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.internshipDomain}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.INTERTIME}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.preferredInternshipDuration}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.INTERNDATE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      type="date"
+                                      value={dayjs(
+                                        values.preferredInternshipStartDate
+                                      ).format("YYYY-MM-DD")}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.INTERNTYPE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.internshipSchedule}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.SKILL}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.preferredSkills}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.TYPEPC}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.pcType}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.ITVDATE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      type="date"
+                                      value={dayjs(values.interviewDate).format(
+                                        "YYYY-MM-DD"
+                                      )}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.ITVTIME}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.interviewTime}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.ITVER}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.interviewer}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.EMAILITVER}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.emailInterviewer}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.ITVLINK}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.interviewLink}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.RESULT}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.status}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                <td className="left-modal">
+                                    <label>{constCandi.ATTITUDE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.attitude}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.COMMENTS}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.comments}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.TNCOMMENT}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.technicalComments}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.TNSCORE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.technicalScore}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.ENGLISH}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.englishCommunication}
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.REMARKS}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.remarks}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.CVIDINFO}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={
+                                        values.covidVaccinationiInformation
+                                      }
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>{constCandi.CVIDCERT}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.covidVaccinationCertificate}
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>{constCandi.CERTDATE}</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      type="date"
+                                      value={dayjs(
+                                        values.certificationDate
+                                      ).format("YYYY-MM-DD")}
+                                    />
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                            <div className="modal-footer">
+                              {" "}
+                              <button
+                                type="button"
+                                className="btn btn-light"
+                                data-dismiss="modal"
+                              >
+                                Hủy
+                              </button>{" "}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </form>
               </ul>
             ))
           ) : (
@@ -798,7 +1147,6 @@ function TableCandidate() {
         type="submit"
         data-toggle="modal"
         data-target="#exampleModalAdd"
-        onClick={handleReset}
       >
         Thêm
       </button>
