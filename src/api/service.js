@@ -50,9 +50,6 @@ export const sendEmail = (data) => {
 export const saveDataInterview = (id, data) => {
   return api.put(`${API_BASE}/candidate/interview/${id}`, data);
 };
-export function mentorDG(endpoint) {
-  return api.get(`${API_BASE}/${endpoint}`, null);
-}
 export function candidatePut( endpoint, body)  {
   return api.put(`${API_BASE}/${endpoint}`,body);
 };
