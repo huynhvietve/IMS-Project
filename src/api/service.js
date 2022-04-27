@@ -41,3 +41,18 @@ export function mentorCreate( endpoint,body)  {
 export function mentorDG( endpoint)  {
   return api.get(`${API_BASE}/${endpoint}`,null);
 };
+export function student( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
+export function studentCreate( endpoint, body)  {
+  return api.post(`${API_BASE}/${endpoint}`,body);
+};
+export function dg( endpoint)  {
+  return api.get(`${API_BASE}/${endpoint}`,null);
+};
+export function deleteStudent( endpoint)  {
+  return api.delete(`${API_BASE}/${endpoint}`,null);
+};
+export function editStudent( endpoint, body)  {
+  return api.put(`${API_BASE}/${endpoint}`,body);
+};

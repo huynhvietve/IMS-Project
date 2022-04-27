@@ -1,0 +1,12 @@
+.btnStudent {
+    font: inherit;
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #1aa3ff;
+    padding: 0.25rem 1rem;
+    /* margin-right: 20px; */
+    float: right;
+    margin-right:100px;
+    border-radius: 4px;
+    width: 100px;
+  }
