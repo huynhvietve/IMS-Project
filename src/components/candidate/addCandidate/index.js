@@ -49,15 +49,16 @@ export default function AddCandidate() {
   const handleReset = () => {
     setAddCandi({});
     Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = ""))
+      (input) => (input.value = "")
+    );
     Array.from(document.querySelectorAll("select")).forEach(
-      select => (select.value = "Chọn..."));
+      (select) => (select.value = "Chọn...")
+    );
   };
-
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name","value");
+    const fieldName = event.target.getAttribute("name", "value");
     const fieldValue = event.target.value;
     const newFormData = { ...addCandi };
     newFormData[fieldName] = fieldValue;
@@ -90,31 +91,32 @@ export default function AddCandidate() {
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
     };
-    candidateAPI("candidate/create", "POST", newCadidate).then((res) => {
-      setCandi(res.data.data);
-      handleReset();
-    })
-    .catch((error) => {
-      if (error.response) {
-        Swal.fire({
-          icon: "error",
-          text: error.response.data.error,
-          confirmButtonText: "Xác nhận",
-        })
-      } else if (error.request) {
-        Swal.fire({
-          icon: "error",
-          text: error.request,
-          confirmButtonText: "Xác nhận",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          text: error.message,
-          confirmButtonText: "Xác nhận",
-        });
-      }
-    });
+    candidateAPI("candidate/create", "POST", newCadidate)
+      .then((res) => {
+        setCandi(res.data.data);
+        handleReset();
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        } else if (error.request) {
+          Swal.fire({
+            icon: "error",
+            text: error.request,
+            confirmButtonText: "Xác nhận",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: error.message,
+            confirmButtonText: "Xác nhận",
+          });
+        }
+      });
     const newCadidates = [...candi, newCadidate];
     setCandi(newCadidates);
   };
@@ -229,8 +231,10 @@ export default function AddCandidate() {
                         name="currentYearofStudy"
                         id="year-study"
                         onChange={handleAddFormChange}
-                        >
-                        <option disabled selected hidden>Chọn...</option>
+                      >
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
                         <option value="Năm 1">Năm 1</option>
                         <option value="Năm 2">Năm 2</option>
                         <option value="Năm 3">Năm 3</option>
@@ -276,13 +280,12 @@ export default function AddCandidate() {
                       <label>{constCandidate.TYPEPC}</label>
                     </td>
                     <td>
-                      <select
-                        name="pcType"
-                        onChange={handleAddFormChange}
-                      >
-                      <option disabled selected hidden>Chọn...</option>
-                      <option value="PC">PC</option>
-                      <option value="Laptop">Laptop</option>
+                      <select name="pcType" onChange={handleAddFormChange}>
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
+                        <option value="PC">PC</option>
+                        <option value="Laptop">Laptop</option>
                       </select>
                     </td>
                   </tr>
@@ -306,10 +309,10 @@ export default function AddCandidate() {
                         id="inter-duration"
                         onChange={handleAddFormChange}
                       >
-                        <option disabled selected hidden>Chọn...</option>
-                        <option value="8 Tuần">
-                          8 tuần
+                        <option disabled selected hidden>
+                          Chọn...
                         </option>
+                        <option value="8 Tuần">8 tuần</option>
                         <option value="12 Tuần">12 tuần</option>
                       </select>
                     </td>
@@ -324,10 +327,10 @@ export default function AddCandidate() {
                         id="intern-schehdule"
                         onChange={handleAddFormChange}
                       >
-                        <option disabled selected hidden>Chọn...</option>
-                        <option value="Full time">
-                          Full time
+                        <option disabled selected hidden>
+                          Chọn...
                         </option>
+                        <option value="Full time">Full time</option>
                         <option value="Part time">Part time</option>
                       </select>
                     </td>
@@ -342,7 +345,9 @@ export default function AddCandidate() {
                         onChange={handleAddFormChange}
                         // required="required"
                       >
-                        <option disabled selected hidden>Chọn...</option>
+                        <option disabled selected hidden>
+                          Chọn...
+                        </option>
                         {batch?.map((itemBatch) => (
                           <option value={itemBatch.idInternshipCourse}>
                             {itemBatch.nameCoure}

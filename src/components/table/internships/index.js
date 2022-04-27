@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 import * as apiaxios from "../../../api/service";
-import DayJS from "react-dayjs";
 import dayjs from "dayjs";
 import "./style.css";
 import Swal from "sweetalert2";
@@ -29,7 +28,7 @@ export default function Internships(props) {
     newFormData[fieldName] = fieldValue;
     setValues(newFormData);
   };
-  const handleEditClick = ( products) => {
+  const handleEditClick = (products) => {
     setValuesId(products.idInternshipCourse);
     const formValues = {
       idInternshipCourse: products.idInternshipCourse,
@@ -61,7 +60,9 @@ export default function Internships(props) {
           confirmButtonText: "Xác nhận",
         });
         const newBatch = [...posts];
-        const index = posts.findIndex((products) => products.idInternshipCourse === valuesId);
+        const index = posts.findIndex(
+          (products) => products.idInternshipCourse === valuesId
+        );
         newBatch[index] = editBatch;
         setPosts(newBatch);
         handleCloseModal();
@@ -88,47 +89,43 @@ export default function Internships(props) {
           });
         }
       });
-    
   };
   const handleOpenModal = () => {
-      setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleCloseModal = () => {
-    setOpen(false)
-}
+    setOpen(false);
+  };
 
   const handleDeleteClick = (postsId) => {
-      Swal.fire({
-        title: "Bạn có muốn xóa khóa thực tập này ?",
-        text: "",
-        icon: "warning",
-        showCancelButton: true,
-        reverseButtons: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonText: "Hủy",
-        confirmButtonText: "Đồng ý",
-      }).then((result) => {
-        if (result.isConfirmed) {
+    Swal.fire({
+      title: "Bạn có muốn xóa khóa thực tập này ?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonText: "Hủy",
+      confirmButtonText: "Đồng ý",
+    }).then((result) => {
+      if (result.isConfirmed) {
         const newContacts = [...posts];
         const index = posts.findIndex(
           (products) => products.idInternshipCourse === postsId
         );
         apiaxios
           .deleteBatch(`internshipcourse/${postsId}`, "DELETE", newContacts)
-          .then((res) => {
-          });
-          newContacts.splice(index, 1);
-          setPosts(newContacts);
-        }
-   })
+          .then((res) => {});
+        newContacts.splice(index, 1);
+        setPosts(newContacts);
+      }
+    });
   };
   return (
     <div>
       <form>
         <div>
-          <h3>
-            KHÓA THỰC TẬP
-          </h3>
+          <h3>KHÓA THỰC TẬP</h3>
           <div className="grid wide home-candidate">
             <div className="row home-candidate--list">
               <span className="col l-2-8-batch">Khóa thực tập</span>
@@ -158,7 +155,10 @@ export default function Internships(props) {
                   >
                     {dayjs(products.dateEnd).format("DD/MM/YYYY")}
                   </li>
-                  <li name="kindOfInternship" className="col l-2-8-kindOfInternship ">
+                  <li
+                    name="kindOfInternship"
+                    className="col l-2-8-kindOfInternship "
+                  >
                     {products.kindOfInternship}
                   </li>
                   <li name="status" className="col l-2-8-status ">
@@ -179,150 +179,155 @@ export default function Internships(props) {
                       style={{ marginLeft: "10px" }}
                       className="fa fa-pencil-square-o"
                       aria-hidden="true"
-                      onClick={() => {handleEditClick(products);
-                        handleOpenModal()}}
+                      onClick={() => {
+                        handleEditClick(products);
+                        handleOpenModal();
+                      }}
                     ></i>
                   </li>
                   <form>
                     <div className="container">
-                    {open &&  <div
-                        className="modal fade"
-                        id="myModalBatch"
-                        tabIndex={-1}
-                        role="dialog"
-                        aria-labelledby="exampleModalCenterTitle"
-                        aria-hidden="true"
-                      >
+                      {open && (
                         <div
-                          className="modal-dialog modal-lg"
-                          role="document"
-                          style={{ width: "700px", marginTop: "100px" }}
+                          className="modal fade"
+                          id="myModalBatch"
+                          tabIndex={-1}
+                          role="dialog"
+                          aria-labelledby="exampleModalCenterTitle"
+                          aria-hidden="true"
                         >
-                          <div className="modal-content">
-                            <div className="modal-header">
-                              <h4
-                                id="exampleModalLongTitle"
-                              >
-                                SỬA KHÓA THỰC TẬP
-                              </h4>
-                              <button
-                                type="button"
-                                className="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                              >
-                                <span aria-hidden="true">×</span>
-                              </button>
-                            </div>
-                            <div className="modal-body">
-                              <tr>
-                                <td>
-                                  <label>Khóa thực tập :</label>
-                                </td>
-                                <td>
-                                  <input
-                                    disabled
-                                    className="input-Batch"
-                                    type="text"
-                                    name="nameCoure"
-                                    value={values.nameCoure}
-                                    onChange={handleEditFormChange}
-                                  />
-                                </td>
-                                <td style={{ paddingLeft: "20px" }}>
-                                  <label>Loại thực tập :  </label>
-                                </td>
-                                <td>
-                                  <select
-                                    className="input-Batch"
-                                    name="status"
-                                    id="cars"
-                                    value={values.status}
-                                    onChange={handleEditFormChange}
-                                  >
-                                    <option disabled selected hidden>
-                                      Chọn...
-                                    </option>
-                                    <option value="Done">Done</option>
-                                    <option value="In progress">
-                                      In progress
-                                    </option>
-                                    <option value="N/A">N/A</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <label>Ngày bắt đầu : </label>
-                                </td>
-                                <td>
-                                  <input
-                                    className="input-Batch"
-                                    type="date"
-                                    name="dateStart"
-                                    value={dayjs(values.dateStart).format(
-                                      "YYYY-MM-DD"
-                                    )}
-                                    onChange={handleEditFormChange}
-                                  ></input>
-                                </td>
-                                <td>
-                                  <label>Trạng thái : </label>
-                                </td>
-                                <td>
-                                  <select
-                                    className="input-Batch"
-                                    name="kindOfInternship"
-                                    id="cars"
-                                    value={values.kindOfInternship}
-                                    onChange={handleEditFormChange}
-                                  >
-                                    <option disabled selected hidden>
-                                      Chọn...
-                                    </option>
-                                    <option value="Full time">Full time</option>
-                                    <option value="Part time">Part time</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <label>Ngày kết thúc: </label>
-                                </td>
-                                <td>
-                                  <input
-                                    className="input-Batch"
-                                    type="date"
-                                    name="dateEnd"
-                                    value={dayjs(values.dateEnd).format(
-                                      "YYYY-MM-DD"
-                                    )}
-                                    onChange={handleEditFormChange}
-                                  ></input>
-                                </td>
-                              </tr>
-
-                              <div className="modal-footer">
+                          <div
+                            className="modal-dialog modal-lg"
+                            role="document"
+                            style={{ width: "700px", marginTop: "100px" }}
+                          >
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h4 id="exampleModalLongTitle">
+                                  SỬA KHÓA THỰC TẬP
+                                </h4>
                                 <button
                                   type="button"
-                                  className="btn btn-secondary btn-Batch-Cancel"
+                                  className="close"
                                   data-dismiss="modal"
+                                  aria-label="Close"
                                 >
-                                  Hủy
+                                  <span aria-hidden="true">×</span>
                                 </button>
-                                <button
-                                  className="btn btn-primary btn-Batch"
-                                  type="submit"
-                                  onClick={editSubmit}   
-                                >
-                                  Cập nhật
-                                </button>
-                                
+                              </div>
+                              <div className="modal-body">
+                                <tr>
+                                  <td>
+                                    <label>Khóa thực tập :</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      disabled
+                                      className="input-Batch"
+                                      type="text"
+                                      name="nameCoure"
+                                      value={values.nameCoure}
+                                      onChange={handleEditFormChange}
+                                    />
+                                  </td>
+                                  <td style={{ paddingLeft: "20px" }}>
+                                    <label>Loại thực tập : </label>
+                                  </td>
+                                  <td>
+                                    <select
+                                      className="input-Batch"
+                                      name="status"
+                                      id="cars"
+                                      value={values.status}
+                                      onChange={handleEditFormChange}
+                                    >
+                                      <option disabled selected hidden>
+                                        Chọn...
+                                      </option>
+                                      <option value="Done">Done</option>
+                                      <option value="In progress">
+                                        In progress
+                                      </option>
+                                      <option value="N/A">N/A</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label>Ngày bắt đầu : </label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      className="input-Batch"
+                                      type="date"
+                                      name="dateStart"
+                                      value={dayjs(values.dateStart).format(
+                                        "YYYY-MM-DD"
+                                      )}
+                                      onChange={handleEditFormChange}
+                                    ></input>
+                                  </td>
+                                  <td>
+                                    <label>Trạng thái : </label>
+                                  </td>
+                                  <td>
+                                    <select
+                                      className="input-Batch"
+                                      name="kindOfInternship"
+                                      id="cars"
+                                      value={values.kindOfInternship}
+                                      onChange={handleEditFormChange}
+                                    >
+                                      <option disabled selected hidden>
+                                        Chọn...
+                                      </option>
+                                      <option value="Full time">
+                                        Full time
+                                      </option>
+                                      <option value="Part time">
+                                        Part time
+                                      </option>
+                                    </select>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                    <label>Ngày kết thúc: </label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      className="input-Batch"
+                                      type="date"
+                                      name="dateEnd"
+                                      value={dayjs(values.dateEnd).format(
+                                        "YYYY-MM-DD"
+                                      )}
+                                      onChange={handleEditFormChange}
+                                    ></input>
+                                  </td>
+                                </tr>
+
+                                <div className="modal-footer">
+                                  <button
+                                    type="button"
+                                    className="btn btn-secondary btn-Batch-Cancel"
+                                    data-dismiss="modal"
+                                  >
+                                    Hủy
+                                  </button>
+                                  <button
+                                    className="btn btn-primary btn-Batch"
+                                    type="submit"
+                                    onClick={editSubmit}
+                                  >
+                                    Cập nhật
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>}
+                      )}
                     </div>
                   </form>
                 </ul>

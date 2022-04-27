@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import * as constTable from "../../../constant/constTable";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
-import { candidateAPI,batchAPI } from "../../../api/service";
+import { candidateAPI, batchAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
-import { useDispatch } from "react-redux";
+import CalendarInterview from "../../calendarinterview/create/index";
+import { popUpActions } from "../../../redux/store/popup";
+import Preview from "../../calendarinterview/review";
+
 import { deleteCandi } from "../../../redux/action/candi.action";
 
+import "../../../asset/css/interviewShedule.css";
 function TableCandidate() {
+  const dispatch = useDispatch();
   const [candi, setCandi] = useState([]);
   const [batch, setBatch] = useState([]);
   const [currPage, setCurrPage] = useState(1);
+  const showModal = (data) => {
+    dispatch(popUpActions.show());
+    dispatch(popUpActions.setData(data));
+  };
   const [candiPerPage, setCandiPerPage] = useState(10);
 
   // Get current candidate
@@ -31,25 +41,30 @@ function TableCandidate() {
     });
   }, {});
 
-  const dispatch = useDispatch();
-
   const status = (status) => {
-    const value = 'N/A'
-    if(status == null) {
+    const value = "N/A";
+    if (status == null) {
       return value;
     }
-    return status
+    return status;
   };
-    const handleReset  = () => {
+  const handleReset = () => {
     Array.from(document.querySelectorAll("input")).forEach(
-      input => (input.value = ""))
+      (input) => (input.value = "")
+    );
     Array.from(document.querySelectorAll("select")).forEach(
-      select => (select.value = "Chọn..."));
+      (select) => (select.value = "Chọn...")
+    );
   };
 
   return (
     <div>
-      <h3 className="text-header">{constTable.H3} {batch.nameCoure}</h3>
+      <CalendarInterview />
+      <Preview />
+
+      <h3 className="text-header">
+        {constTable.H3} {batch.nameCoure}
+      </h3>
       <div className="input-toolbar">
         <div className="uploader">
           <input className="inputUpload" type="file" id="fileupload" />
@@ -108,6 +123,13 @@ function TableCandidate() {
                   <i
                     className="fa fa-calendar-plus-o fa-calendar-plus-o1"
                     aria-hidden="true"
+                    onClick={() =>
+                      showModal({
+                        id: candidate.idCandidate,
+                        fullName: candidate.fullName,
+                        email: candidate.emailCandidate,
+                      })
+                    }
                   ></i>
                 </li>
               </ul>
