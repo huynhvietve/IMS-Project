@@ -59,13 +59,6 @@ export default function AddCandidate() {
     const modals = document.getElementById("exampleModalAdd");
     modals.style.display = "none";
   };
-  // const [open, setOpen] = useState(true);
-  // const handleOpenModal = () => {
-  //   setOpen(true);
-  // };
-  // const handleCloseModal = () => {
-  //   setOpen(false);
-  // };
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
