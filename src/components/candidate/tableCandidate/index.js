@@ -192,12 +192,6 @@ function TableCandidate() {
     apiaxios
       .candidatePut(`candidate/${valuesId}`, editCandi)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: "Cập nhật thành công !!!",
-          showConfirmButton: false,
-          timer: 1000,
-        });
         const newCandi = [...candi];
         const index = candi.findIndex(
           (candidate) => candidate.idCandidate === valuesId
