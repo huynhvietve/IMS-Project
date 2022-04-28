@@ -192,11 +192,11 @@ h4 {
 .inputText {
   width: 200px;
 }
-.fa-trash-o {
-  color: red;
+.iconred {
+  color: red !important; 
 }
 .fa-pencil-square-o {
-  color: gold;
+  color: gold !important;
 }
 .fa-calendar-plus-o {
   color: chartreuse;
