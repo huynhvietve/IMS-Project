@@ -4,7 +4,7 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandi from "../../../constant/constCandidate";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
-import { candidateAPI, batchAPI,UploadAPI } from "../../../api/service";
+import { candidateAPI, batchAPI, UploadAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
@@ -36,9 +36,11 @@ function TableCandidate() {
   const [search, setSearch] = useState([]);
 
   useEffect(() => {
-    apiaxios.candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`).then((res) => {
-      setCandi(res.data.data);
-    });
+    apiaxios
+      .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
+      .then((res) => {
+        setCandi(res.data.data);
+      });
   }, [candi]);
 
   useEffect(() => {
@@ -228,27 +230,27 @@ function TableCandidate() {
         }
       });
   };
-  
-  const [file, setFile] = useState()
 
-  const handleChange =(event)=> {
-    setFile(event.target.files[0])
-  }
-  
-  const handleSubmit= (event) => {
-    event.preventDefault()
+  const [file, setFile] = useState();
+
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileName', file.name);
+    formData.append("file", file);
+    formData.append("fileName", file.name);
     const config = {
       headers: {
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data",
       },
     };
-    UploadAPI('upload', formData, config).then((response) => {
+    UploadAPI("upload", formData, config).then((response) => {
       console.log(response.data);
     });
-  }
+  };
 
   return (
     <div>
@@ -259,8 +261,11 @@ function TableCandidate() {
         {constTable.H3} {batchTitle.nameCoure}
       </h3>
       <div className="input-toolbar">
-      <form onSubmit={handleSubmit} style={{marginLeft: "9%",marginTop: "4%",}}>
-          <input type="file" onChange={handleChange}/>
+        <form
+          onSubmit={handleSubmit}
+          style={{ marginLeft: "9%", marginTop: "4%" }}
+        >
+          <input type="file" onChange={handleChange} />
           <button type="submit">Upload</button>
         </form>
         <div class="search">
@@ -429,7 +434,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="currentYearofStudy"
                                       id="year-study"
                                       value={values.currentYearofStudy}
@@ -532,7 +540,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="preferredInternshipDuration"
                                       id="inter-duration"
                                       value={values.preferredInternshipDuration}
@@ -562,7 +573,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="internshipSchedule"
                                       id="intern-schehdule"
                                       value={values.internshipSchedule}
@@ -594,7 +608,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="pcType"
                                       value={values.pcType}
                                       onChange={handleEditChange}
@@ -654,7 +671,6 @@ function TableCandidate() {
                                   </td>
                                 </tr>
                                 <tr>
-                                  
                                   <td className="left-modal">
                                     <label>{constCandi.ENGLISH}</label>
                                   </td>
@@ -1042,7 +1058,7 @@ function TableCandidate() {
                                   </td>
                                 </tr>
                                 <tr>
-                                <td className="left-modal">
+                                  <td className="left-modal">
                                     <label>{constCandi.ATTITUDE}</label>
                                   </td>
                                   <td>
