@@ -161,7 +161,7 @@ function TableMentor(props) {
   return (
     <div>
       <h3>DANH SÁCH NGƯỜI HƯỚNG DẪN {batchTitle.nameCoure}</h3>
-      <div className="grid wide1 home-mentor">
+      <div className="grid wide home-mentor">
         <div className="row home-mentor--list">
           <span className="col l-2-9-mentor " style={{ marginLeft: "6px" }}>
             Họ tên
@@ -189,7 +189,7 @@ function TableMentor(props) {
                   onClick={() => {
                     dispatch(deleteMentor(mentor.idMentor));
                   }}
-                  className="fa fa-trash-o"
+                  className="fa fa-trash-o iconred"
                   aria-hidden="true"
                 ></i>
                 <i
