@@ -127,3 +127,7 @@ h4{
   width:105px;
   border: 1px solid #007bff;
 }
+.modal-open,
+::-webkit-scrollbar {
+    overflow: scroll;
+}

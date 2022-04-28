@@ -6,9 +6,11 @@ import Swal from "sweetalert2";
 import AddStudent from "./addstudent";
 export default function Student(props) {
   const [posts, setPosts] = useState([]);
+  const [idDG, setIdDG] = useState([]);
   const [open, setOpen] = useState(false);
   const [titleBatch, settitleBatch] = useState([]);
   const idBatch = localStorage.getItem("idBatch");
+  console.log(idDG)
   useEffect(() => {
     apiaxios.student(`internship/batch/${idBatch}`).then((res) => {
       setPosts(res.data.data);
@@ -21,6 +23,21 @@ export default function Student(props) {
         settitleBatch(res.data.data);
       });
   }, {});
+  const [mentor, setMentor] = useState([]);
+  useEffect(() => {
+    const fetchDatas = async () => {
+      apiaxios.mentorAPI(`mentor/batch/${idBatch}?idDG=${idDG}`, null).then((res) => {
+        setMentor(res.data.data);
+    });
+  }
+    fetchDatas();
+  },[idDG]);
+  const [dg, setDg] = useState([]);
+  useEffect(() => {
+    apiaxios.mentorDG("dg", "Get", null).then((res) => {
+      setDg(res.data.data);
+    });
+  }, []);
   const [values, setValues] = useState({
     idInternship: "",
     fullNameInternship: "",
@@ -112,7 +129,7 @@ export default function Student(props) {
       internshipProject: values.internshipProject,
       internshipAgreementPolicy: values.internshipAgreementPolicy,
       securityTest: values.securityTest,
-      idDG: values.idDG,
+      idDG: idDG,
       toeicScore: values.toeicScore,
       testDate: values.testDate,
       securityAwareness: values.securityAwareness,
@@ -568,10 +585,13 @@ export default function Student(props) {
                               </td>
                               <td>
                                 <input
-                                  className="inputText"
-                                  type="text"
+                                  className="inputeditStudent"
+                                  style={{ width: "200px" }}
+                                  type="date"
                                   name="internshipSchedule"
-                                  value={values.internshipSchedule}
+                                  value={dayjs(values.internshipSchedule).format(
+                                    "YYYY-MM-DD"
+                                  )}
                                   onChange={handleEditFormChange}
                                 ></input>
                                 <br></br>
@@ -627,14 +647,22 @@ export default function Student(props) {
                                 <label>Tên DG:</label>
                               </td>
                               <td>
-                                <input
-                                  disabled
-                                  className="inputText"
-                                  type="text"
-                                  name="nameDG"
-                                  value={values.nameDG}
-                                  onChange={handleEditFormChange}
-                                ></input>
+                                <select
+                                      className="input_Student"
+                                      style={{width: "200px",height:"30px"}}
+                                      name="idDG"
+                                      id="cars"
+                                       onChange={(e) => {setIdDG(e.currentTarget.value)}}
+                                    >
+                                      <option disabled selected hidden>
+                                    Chọn...
+                                  </option>
+                                      {dg?.map((itemDG) => (
+                                        <option value={itemDG.idDG}>
+                                          {itemDG.nameDG}
+                                        </option>
+                                      ))}
+                                    </select>
 
                                 <br></br>
                               </td>
@@ -642,14 +670,22 @@ export default function Student(props) {
                                 <label>Tên Mentor:</label>
                               </td>
                               <td>
-                                <input
-                                  disabled
-                                  className="inputText"
-                                  type="text"
-                                  name="fullNameMentor"
-                                  value={values.fullNameMentor}
-                                  onChange={handleEditFormChange}
-                                ></input>
+                                    <select
+                                      className="input_Student"
+                                      style={{width: "200px",height:"30px"}}
+                                      name="idMentor"
+                                      id="cars"
+                                      onChange={handleEditFormChange}
+                                    >
+                                      <option disabled selected hidden>
+                                    Chọn...
+                                  </option>
+                                      {mentor?.map((itemMentor) => (
+                                        <option value={itemMentor.idMentor}>
+                                          {itemMentor.fullNameMentor}
+                                        </option>
+                                      ))}
+                                    </select>
                                 <br></br>
                               </td>
                             </tr>
