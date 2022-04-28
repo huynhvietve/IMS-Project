@@ -51,11 +51,7 @@ const CalendarInterview = () => {
   const [enterDate, setEnterDate] = useState();
   const addUserHandler = async (event) => {
     event.preventDefault();
-    setEnterEmail("");
-    setEnterName("");
-    setEnterLink("");
-    setEnterTime("");
-    setEnterDate("");
+
     const saveData = {
       interviewTime: enterTime,
       interviewDate: enterDate,
@@ -92,6 +88,11 @@ const CalendarInterview = () => {
           timer: 1500,
           style: "display:block",
         });
+        setEnterEmail("");
+        setEnterName("");
+        setEnterLink("");
+        setEnterTime("");
+        setEnterDate("");
       }
     } catch (error) {
       if (error.response) {

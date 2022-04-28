@@ -110,11 +110,6 @@ function TableMentor(props) {
     apiaxios
       .mentorEdit(`mentor/${valuesId}`, editMentor)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: res.data.message,
-          confirmButtonText: "Xác nhận",
-        });
         const newMentor = [...posts];
         const index = posts.findIndex((mentor) => mentor.idMentor === valuesId);
         newMentor[index] = editMentor;
