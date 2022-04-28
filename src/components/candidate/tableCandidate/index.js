@@ -261,18 +261,19 @@ function TableCandidate() {
         {constTable.H3} {batchTitle.nameCoure}
       </h3>
       <div className="input-toolbar">
-        <form
-          onSubmit={handleSubmit}
-          style={{ marginLeft: "9%", marginTop: "4%" }}
-        >
-          <input type="file" onChange={handleChange} />
-          <button type="submit">Upload</button>
-        </form>
+        <div className="uploader-candi">
+          <form
+            onSubmit={handleSubmit}
+          >
+            <input type="file" onChange={handleChange} />
+            <button className="btn-upload" type="submit">Upload</button>
+          </form>
+        </div>
         <div class="search">
           <input
             type="text"
             placeholder="Tìm kiếm..."
-            class="search__input"
+            class="search__input-candi"
             onChange={(e) => setSearch(e.target.value.toLowerCase())}
           />
           <i class="search__icon fa fa-search"></i>
@@ -280,13 +281,13 @@ function TableCandidate() {
       </div>
       <div className="grid wide home-candidate">
         <div className="row home-candidate--list">
-          <span className="col l-2-8 ">{constTable.NAME}</span>
-          <span className="col l-2-8 ">{constTable.EMAIL}</span>
-          <span className="col l-2-8 ">{constTable.STID}</span>
-          <span className="col l-2-8 ">{constTable.UNI}</span>
-          <span className="col l-2-8 ">{constTable.ITDOMAIN}</span>
-          <span className="col l-2-8 ">{constTable.ITRESULT}</span>
-          <span className="col l-2-8 ">{constTable.ACTION}</span>
+          <span className="col l-2-8-candi ">{constTable.NAME}</span>
+          <span className="col l-2-8-candi ">{constTable.EMAIL}</span>
+          <span className="col l-2-8-candi ">{constTable.STID}</span>
+          <span className="col l-2-8-candi ">{constTable.UNI}</span>
+          <span className="col l-2-8-candi ">{constTable.ITDOMAIN}</span>
+          <span className="col l-2-8-candi ">{constTable.ITRESULT}</span>
+          <span className="col l-2-8-candi ">{constTable.ACTION}</span>
         </div>
         <div className="table-body">
           {currCandi.length > 0 ? (
@@ -295,13 +296,15 @@ function TableCandidate() {
                 className="row sm-gutter sm-gutter--list"
                 key={candidate.idCandidate}
               >
-                <li className="col l-2-8">{candidate.fullName}</li>
-                <li className="col l-2-8">{candidate.emailCandidate}</li>
-                <li className="col l-2-8">{candidate.studentID}</li>
-                <li className="col l-2-8">{candidate.university}</li>
-                <li className="col l-2-8">{candidate.internshipDomain}</li>
-                <li className="col l-2-8">{status(candidate.status)}</li>
-                <li className="col l-2-8">
+                <li className="col l-2-8-candi">{candidate.fullName}</li>
+                <li className="col l-2-8-candi">{candidate.emailCandidate}</li>
+                <li className="col l-2-8-candi">{candidate.studentID}</li>
+                <li className="col l-2-8-candi">{candidate.university}</li>
+                <li className="col l-2-8-candi">
+                  {candidate.internshipDomain}
+                </li>
+                <li className="col l-2-8-candi">{status(candidate.status)}</li>
+                <li className="col l-2-8-candi">
                   <i
                     className="fa fa-trash-o fa-trash-o1"
                     aria-hidden="true"

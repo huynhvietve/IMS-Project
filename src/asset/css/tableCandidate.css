@@ -86,7 +86,7 @@ h3 {
   
 }
 
-.uploader {
+.uploader-candi {
   margin-top: 40px;
   padding-left: 7rem;
 }
@@ -123,7 +123,7 @@ h3 {
 
 /* GRID */
 
-.wide .l-2-7 {
+.wide .l-2-7-candi {
   flex: 0 0 13.33333%;
   max-width: 13.33333%;
 }
@@ -239,7 +239,7 @@ h3 {
   padding-left: 24.5rem;
 }
 
-.search__input {
+.search__input-candi {
   padding: 0.25rem 100px 6px 20px;
   border: 1px solid black;
   outline: none;

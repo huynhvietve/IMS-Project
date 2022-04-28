@@ -30,8 +30,8 @@ export function candidateAPI(endpoint) {
 export function mentorAPI(endpoint) {
   return api.get(`${API_BASE}/${endpoint}`, null);
 }
-export function candidatePost(endpoint) {
-  return api.posh(`${API_BASE}/${endpoint}`, null);
+export function candidatePost(endpoint, body) {
+  return api.post(`${API_BASE}/${endpoint}`, body);
 }
 export function mentorCreate(endpoint, body) {
   return api.post(`${API_BASE}/${endpoint}`, body);

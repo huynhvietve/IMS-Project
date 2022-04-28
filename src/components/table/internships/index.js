@@ -223,7 +223,8 @@ export default function Internships(props) {
                                   <td>
                                     <input
                                       disabled
-                                      className="input-Batch"
+                                      className="input-editBatch"
+                                      style={{width:"200px",height:"30px"}}
                                       type="text"
                                       name="nameCoure"
                                       value={values.nameCoure}
@@ -235,7 +236,8 @@ export default function Internships(props) {
                                   </td>
                                   <td>
                                     <select
-                                      className="input-Batch"
+                                      className="input-editBatch"
+                                      style={{width:"200px",height:"30px"}}
                                       name="status"
                                       id="cars"
                                       value={values.status}
@@ -258,7 +260,8 @@ export default function Internships(props) {
                                   </td>
                                   <td>
                                     <input
-                                      className="input-Batch"
+                                      className="input-editBatch"
+                                      style={{width:"200px",height:"30px"}}
                                       type="date"
                                       name="dateStart"
                                       value={dayjs(values.dateStart).format(
@@ -272,7 +275,8 @@ export default function Internships(props) {
                                   </td>
                                   <td>
                                     <select
-                                      className="input-Batch"
+                                      className="input-editBatch"
+                                      style={{width:"200px",height:"30px"}}
                                       name="kindOfInternship"
                                       id="cars"
                                       value={values.kindOfInternship}
@@ -296,7 +300,8 @@ export default function Internships(props) {
                                   </td>
                                   <td>
                                     <input
-                                      className="input-Batch"
+                                      className="input-editBatch"
+                                      style={{width:"200px",height:"30px"}}
                                       type="date"
                                       name="dateEnd"
                                       value={dayjs(values.dateEnd).format(

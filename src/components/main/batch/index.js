@@ -207,7 +207,8 @@ export default function Batch(props) {
                       </td>
                       <td>
                         <input
-                          className="inputText"
+                          className="inputDay"
+                          style={{width:"200px"}}
                           type="date"
                           name="dateStart"
                           onChange={handleAddFormChange}
@@ -235,7 +236,8 @@ export default function Batch(props) {
                       </td>
                       <td>
                         <input
-                          className="inputText"
+                          className="inputDay"
+                          style={{width:"200px"}}
                           type="date"
                           name="dateEnd"
                           onChange={handleAddFormChange}
