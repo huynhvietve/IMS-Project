@@ -4,7 +4,7 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandi from "../../../constant/constCandidate";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
-import { candidateAPI, batchAPI } from "../../../api/service";
+import { candidateAPI, batchAPI,UploadAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
@@ -228,6 +228,27 @@ function TableCandidate() {
         }
       });
   };
+  
+  const [file, setFile] = useState()
+
+  const handleChange =(event)=> {
+    setFile(event.target.files[0])
+  }
+  
+  const handleSubmit= (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    UploadAPI('upload', formData, config).then((response) => {
+      console.log(response.data);
+    });
+  }
 
   return (
     <div>
@@ -238,12 +259,10 @@ function TableCandidate() {
         {constTable.H3} {batchTitle.nameCoure}
       </h3>
       <div className="input-toolbar">
-        <div className="uploader">
-          <input className="inputUpload" type="file" id="fileupload" />
-          <button className="btn-upload" type="submit" id="import">
-            Nhập
-          </button>
-        </div>
+      <form onSubmit={handleSubmit} style={{marginLeft: "9%",marginTop: "4%",}}>
+          <input type="file" onChange={handleChange}/>
+          <button type="submit">Upload</button>
+        </form>
         <div class="search">
           <input
             type="text"

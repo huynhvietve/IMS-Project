@@ -71,3 +71,6 @@ export function editStudent( endpoint, body)  {
 export function mentorDG( endpoint)  {
   return api.get(`${API_BASE}/${endpoint}`,null);
 };
+export function UploadAPI(endpoint, file , config) {
+  return api.post(`${API_BASE}/${endpoint}`, file );
+}
