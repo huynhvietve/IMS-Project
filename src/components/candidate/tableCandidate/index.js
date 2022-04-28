@@ -247,9 +247,31 @@ function TableCandidate() {
         "content-type": "multipart/form-data",
       },
     };
-    UploadAPI("upload", formData, config).then((response) => {
-      console.log(response.data);
-    });
+    UploadAPI("upload", formData, config)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        } else if (error.request) {
+          Swal.fire({
+            icon: "error",
+            text: error.request,
+            confirmButtonText: "Xác nhận",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: error.message,
+            confirmButtonText: "Xác nhận",
+          });
+        }
+      });
   };
 
   return (
@@ -262,11 +284,11 @@ function TableCandidate() {
       </h3>
       <div className="input-toolbar">
         <div className="uploader-candi">
-          <form
-            onSubmit={handleSubmit}
-          >
+          <form style={{ marginLeft: "7px" }} onSubmit={handleSubmit}>
             <input type="file" onChange={handleChange} />
-            <button className="btn-upload" type="submit">Upload</button>
+            <button className="btn-upload" type="submit">
+              Upload
+            </button>
           </form>
         </div>
         <div class="search">
