@@ -96,7 +96,7 @@ export default function AddCandidate() {
       certificationDate: addCandi.certificationDate,
     };
     apiaxios
-    .candidatePost("candidate/create", "POST", newCadidate)
+    .candidatePost("candidate/create", newCadidate)
       .then((res) => {
         Swal.fire({
           icon: "success",
