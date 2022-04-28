@@ -62,7 +62,7 @@ function InsertInterview(posts, setPosts) {
               </h5>
             </div>{" "}
           </div>
-          <div className="grid wide1 home-interview">
+          <div className="grid wide home-interview">
             <div className="row home-interview--list1">
               <span className="col1 l-2-10 ">{constTable.NAME}</span>
               <span className="col1 l-2-10 ">{constTable.EMAIL}</span>
@@ -76,7 +76,7 @@ function InsertInterview(posts, setPosts) {
               <span className="col1 l-2-10 ">{constTable.RESULT}</span>
             </div>
             <div className="table-body tablenone">
-              {posts.map((interview) => (
+              {posts?.map((interview) => (
                 <ul
                   className="row sm-gutter sm-gutter--list"
                   key={interview.idCandidate}
