@@ -279,7 +279,7 @@ function TableCandidate() {
       <div className="input-toolbar">
         <div className="uploader-candi">
           <form style={{ marginLeft: "7px" }} onSubmit={handleSubmit}>
-            <input type="file" onChange={handleChange} />
+            <input className="inputUpload" type="file" onChange={handleChange} />
             <button className="btn-upload" type="submit">
               Upload
             </button>
