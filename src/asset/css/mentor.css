@@ -270,3 +270,7 @@ select {
   justify-content: center;
   margin-left: 60rem;
 }
+body.modal-open,
+::-webkit-scrollbar {
+    overflow: scroll;
+}

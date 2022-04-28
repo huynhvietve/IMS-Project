@@ -9,6 +9,10 @@ export default function AddMentor() {
   const [batchTitle, setBatchTitle] = useState([]);
   const [dg, setdg] = useState([]);
   const idBatch = localStorage.getItem("idBatch");
+    const closeModal = () => {
+    const modals = document.getElementById("exampleModal2");
+    modals.style.display = "none";
+  };
   useEffect(() => {
     apiaxios
       .batchAPI("internshipcourse", "Get", null)
@@ -85,15 +89,9 @@ export default function AddMentor() {
     apiaxios
       .mentorCreate("mentor", newContact)
       .then((res) => {
-        if (res.data.erro) {
-          Swal.fire({
-            icon: "error",
-            text: res.data.error,
-            confirmButtonText: "Xác nhận",
-          });
-        }
-        handleReset();
         setMentor(res.data);
+        handleReset();
+        closeModal();
       })
       .catch((error) => {
         if (error.response) {
@@ -109,7 +107,6 @@ export default function AddMentor() {
             confirmButtonText: "Xác nhận",
           });
         } else {
-          console.log("Error", error.message);
           Swal.fire({
             icon: "error",
             text: error.message,

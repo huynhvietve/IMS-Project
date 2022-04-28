@@ -4,7 +4,7 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandi from "../../../constant/constCandidate";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
-import { candidateAPI, batchAPI } from "../../../api/service";
+import { candidateAPI, batchAPI, UploadAPI } from "../../../api/service";
 import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
@@ -36,9 +36,11 @@ function TableCandidate() {
   const [search, setSearch] = useState([]);
 
   useEffect(() => {
-    apiaxios.candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`).then((res) => {
-      setCandi(res.data.data);
-    });
+    apiaxios
+      .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
+      .then((res) => {
+        setCandi(res.data.data);
+      });
   }, [candi]);
 
   useEffect(() => {
@@ -229,6 +231,49 @@ function TableCandidate() {
       });
   };
 
+  const [file, setFile] = useState();
+
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("fileName", file.name);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    UploadAPI("upload", formData, config)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+          Swal.fire({
+            icon: "error",
+            text: error.response.data.error,
+            confirmButtonText: "Xác nhận",
+          });
+        } else if (error.request) {
+          Swal.fire({
+            icon: "error",
+            text: error.request,
+            confirmButtonText: "Xác nhận",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            text: error.message,
+            confirmButtonText: "Xác nhận",
+          });
+        }
+      });
+  };
+
   return (
     <div>
       <CalendarInterview />
@@ -239,10 +284,12 @@ function TableCandidate() {
       </h3>
       <div className="input-toolbar">
         <div className="uploader-candi">
-          <input className="inputUpload" type="file" id="fileupload" />
-          <button className="btn-upload" type="submit" id="import">
-            Nhập
-          </button>
+          <form style={{ marginLeft: "7px" }} onSubmit={handleSubmit}>
+            <input type="file" onChange={handleChange} />
+            <button className="btn-upload" type="submit">
+              Upload
+            </button>
+          </form>
         </div>
         <div class="search">
           <input
@@ -275,7 +322,9 @@ function TableCandidate() {
                 <li className="col l-2-8-candi">{candidate.emailCandidate}</li>
                 <li className="col l-2-8-candi">{candidate.studentID}</li>
                 <li className="col l-2-8-candi">{candidate.university}</li>
-                <li className="col l-2-8-candi">{candidate.internshipDomain}</li>
+                <li className="col l-2-8-candi">
+                  {candidate.internshipDomain}
+                </li>
                 <li className="col l-2-8-candi">{status(candidate.status)}</li>
                 <li className="col l-2-8-candi">
                   <i
@@ -410,7 +459,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="currentYearofStudy"
                                       id="year-study"
                                       value={values.currentYearofStudy}
@@ -513,7 +565,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="preferredInternshipDuration"
                                       id="inter-duration"
                                       value={values.preferredInternshipDuration}
@@ -543,7 +598,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="internshipSchedule"
                                       id="intern-schehdule"
                                       value={values.internshipSchedule}
@@ -575,7 +633,10 @@ function TableCandidate() {
                                   </td>
                                   <td>
                                     <select
-                                      style={{ width:"189.04px", height:"29.98px"}}
+                                      style={{
+                                        width: "189.04px",
+                                        height: "29.98px",
+                                      }}
                                       name="pcType"
                                       value={values.pcType}
                                       onChange={handleEditChange}
@@ -635,7 +696,6 @@ function TableCandidate() {
                                   </td>
                                 </tr>
                                 <tr>
-                                  
                                   <td className="left-modal">
                                     <label>{constCandi.ENGLISH}</label>
                                   </td>
@@ -1023,7 +1083,7 @@ function TableCandidate() {
                                   </td>
                                 </tr>
                                 <tr>
-                                <td className="left-modal">
+                                  <td className="left-modal">
                                     <label>{constCandi.ATTITUDE}</label>
                                   </td>
                                   <td>

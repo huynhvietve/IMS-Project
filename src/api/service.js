@@ -84,3 +84,6 @@ export function insertinterviewAPI(endpoint) {
 export function updateinsertinterviewAPI(endpoint, body) {
   return api.put(`${API_BASE}/${endpoint}`, body);
 }
+export function UploadAPI(endpoint, file , config) {
+  return api.post(`${API_BASE}/${endpoint}`, file );
+}
