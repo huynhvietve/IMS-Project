@@ -98,12 +98,6 @@ export default function AddCandidate() {
     apiaxios
     .candidatePost("candidate/create", newCadidate)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: "Đã thêm",
-          showConfirmButton: false,
-          timer: 1000,
-        });
         setCandi(res.data.data);
         handleReset();
         closeModal();

@@ -84,3 +84,6 @@ input[type="date"],
     display: none;
     -webkit-appearance: none;
 }
+.modal-open::-webkit-scrollbar {
+    overflow-y: scroll;
+}

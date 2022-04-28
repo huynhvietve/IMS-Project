@@ -194,12 +194,6 @@ function TableCandidate() {
     apiaxios
       .candidatePut(`candidate/${valuesId}`, editCandi)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: "Cập nhật thành công !!!",
-          showConfirmButton: false,
-          timer: 1000,
-        });
         const newCandi = [...candi];
         const index = candi.findIndex(
           (candidate) => candidate.idCandidate === valuesId
@@ -285,7 +279,7 @@ function TableCandidate() {
       <div className="input-toolbar">
         <div className="uploader-candi">
           <form style={{ marginLeft: "7px" }} onSubmit={handleSubmit}>
-            <input type="file" onChange={handleChange} />
+            <input className="inputUpload" type="file" onChange={handleChange} />
             <button className="btn-upload" type="submit">
               Upload
             </button>
