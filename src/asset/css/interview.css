@@ -12,14 +12,6 @@
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
   }
 
-  .fa-trash-o,
-  .fa-pencil-square-o,
-  .fa-eye,
-  .fa-calendar-plus-o {
-    color: black;
-    font-size: 15px;
-  }
-
   .checkbox-inline {
     padding: 4px;
   }
@@ -56,40 +48,8 @@
     margin-top: 40px;
     padding-left: 70px;
   }
-  .search-box{
-    margin-top: 13px;
-    padding-left: 53.5rem;
-  }
-  .btn-add {
-    font: inherit;
-    background-color: #1aa3ff;
-    color: white;
-    border: 1px solid #1aa3ff;
-    padding: 0.25rem 1rem;
-    margin-left: 5px;
-    border-radius: 4px;
-  }
-  .btn-add {
-    float: right;
-    margin-right: 65px;
-  }
-  
-  .inputUpload {
-    border: 1px solid grey;
-    border-radius: 4px;
-  }
-  .inputSearch {
-    width: 250px;
-    height: 32px;
-    border: 1px solid grey;
-    border-radius: 4px;
-  }
-  
+
   /* GRID */
-  .l-2-8 {
-    flex: 1 0 7.692307692307692%;
-    max-width: 7.692307692307692%;
-  }
   .l-2-9 {
     flex: 1 0 7.692307692307692%;
     max-width: 7.692307692307692%;
@@ -198,11 +158,7 @@
       display: none;
     }
   }
-  
-  .inputText{
-    width: 200px;
-  }
-  
+
   select{
     width: 100px;
   } 
@@ -248,40 +204,5 @@
     text-align: center;
   }
   
-  .fa-trash-o,
-  .fa-pencil-square-o,
-  .fa-eye,
-  .fa-calendar-plus-o {
-    color: black;
-    font-size: 15px;
-  }
-  
-  .input-toolbar {
-    display: flex;
-  }
-  
-  .search-box {
-    margin-top: 40px;
-    padding-left: 28.5rem;
-  }
-  
-  .btn-search {
-    font: inherit;
-    background-color: #1aa3ff;
-    color: white;
-    border: 1px solid #1aa3ff;
-    padding: 0.25rem 1rem;
-    margin-left: 5px;
-    border-radius: 4px;
-  }
-  
-  .inputSearch {
-    width: 250px;
-    height: 32px;
-    border: 1px solid grey;
-    border-radius: 4px;
-    margin-left: 750px;
-  
-  }
 
- 
+  
