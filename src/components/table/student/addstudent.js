@@ -210,7 +210,8 @@ export default function AddStudent() {
                 </td>
                 <td>
                   <input
-                    className="inputText"
+                    className="inputStudent"
+                    style={{width:"200px"}}
                     type="date"
                     name="dayOfBirth"
                     onChange={handleAddFormChange}
@@ -312,7 +313,8 @@ export default function AddStudent() {
                 </td>
                 <td>
                   <input
-                    className="inputText"
+                    className="inputStudent"
+                    style={{width:"200px"}}
                     type="date"
                     name="testDate"
                     onChange={handleAddFormChange}
@@ -443,7 +445,8 @@ export default function AddStudent() {
                 </td>
                 <td>
                   <input
-                    className="inputText"
+                    className="inputStudent"
+                    style={{width:"200px"}}
                     type="date"
                     name="certificationDate"
                     onChange={handleAddFormChange}

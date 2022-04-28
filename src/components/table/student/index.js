@@ -224,27 +224,36 @@ export default function Student(props) {
             <div className="table-body-internships">
               {posts.map((students) => (
                 <ul className="row sm-gutter sm-gutter--lisst">
-                  <li className="col l-2-8-student">{students.fullNameInternship}</li>
-                  <li className="col l-2-8-student">{students.email}</li>
-                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
-                    {students.university}
+                  <li className="col l-2-8-student">
+                    {students.fullNameInternship}
                   </li>
-                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student">{students.email}</li>
+                  <li className="col l-2-8-student">{students.university}</li>
+                  <li
+                    className="col l-2-8-student"
+                    style={{ marginLeft: "10px" }}
+                  >
                     {students.pcType}
                   </li>
-                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
+                  <li className="col l-2-8-student">
                     {students.telInternship}
                   </li>
                   <li
                     className="col l-2-8-student"
-                    style={{ textAlign: "center", marginLeft: "25px" }}
+                    style={{ textAlign: "center", marginRight: "10px" }}
                   >
                     {students.nameDG}
                   </li>
-                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
+                  <li
+                    className="col l-2-8-student"
+                    style={{ textAlign: "center" }}
+                  >
                     {students.fullNameMentor}
                   </li>
-                  <li className="col l-2-8-student" style={{ textAlign: "center" }}>
+                  <li
+                    className="col l-2-8-student"
+                    style={{ textAlign: "center" }}
+                  >
                     <i
                       className="fa fa-trash-o fa-trash-o1"
                       aria-hidden="true"
@@ -267,452 +276,445 @@ export default function Student(props) {
                       data-target="#exampleModal4"
                     ></i>
                   </li>
-                  <form>
-                    <div className="container">
-                      {open && (
-                        <div
-                          className="modal fade"
-                          id="editStudent"
-                          tabIndex={-1}
-                          role="dialog"
-                          aria-labelledby="exampleModalCenterTitle"
-                          aria-hidden="true"
-                        >
-                          <div
-                            className="modal-dialog modal-lg"
-                            role="document"
-                            style={{ width: "700px", marginTop: "5px" }}
-                          >
-                            <div
-                              className="modal-content"
-                              style={{ marginTop: "10px", width: "770px" }}
-                            >
-                              <div className="modal-header">
-                                <h4 id="exampleModalLongTitle">
-                                  SỬA THỰC TẬP SINH
-                                </h4>
-                                <button
-                                  type="button"
-                                  className="close"
-                                  data-dismiss="modal"
-                                  aria-label="Close"
-                                >
-                                  <span aria-hidden="true">×</span>
-                                </button>
-                              </div>
-                              <div className="modal-body">
-                                <form>
-                                  <tr>
-                                    <td>
-                                      <label>Họ tên:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="fullNameInternship"
-                                        value={values.fullNameInternship}
-                                        onChange={handleEditFormChange}
-                                      />
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Địa chỉ: </label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="address"
-                                        value={values.address}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Ngày sinh: </label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="date"
-                                        name="dayOfBirth"
-                                        value={dayjs(values.dayOfBirth).format(
-                                          "YYYY-MM-DD"
-                                        )}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Trường đại học: </label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="university"
-                                        value={values.university}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Email:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="email"
-                                        value={values.email}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Số điện thoại:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="telInternship"
-                                        value={values.telInternship}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Dự án thực tập:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="internshipProject"
-                                        value={values.internshipProject}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Thỏa thuận thực tập:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="internshipAgreementPolicy"
-                                        value={values.internshipAgreementPolicy}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Điểm bảo mật:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="securityTest"
-                                        value={values.securityTest}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Điểm Toeic:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="toeicScore"
-                                        value={values.toeicScore}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Ngày test toeic:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="date"
-                                        name="testDate"
-                                        value={dayjs(values.testDate).format(
-                                          "YYYY-MM-DD"
-                                        )}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Nhận thức bảo mật:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="securityAwareness"
-                                        value={values.securityAwareness}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Phương pháp Agile:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="pmtoolsAgileMethodology"
-                                        value={values.pmtoolsAgileMethodology}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Nghi thức truyền thông:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="workEtiquetteProfessionalCommunication"
-                                        value={
-                                          values.workEtiquetteProfessionalCommunication
-                                        }
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Kỉ năng thuyết trình:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="presentationSkills"
-                                        value={values.presentationSkills}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Tham dự khóa đào tạo:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="trainingAttendance"
-                                        value={values.trainingAttendance}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>
-                                      <label>Bình luận:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="remark"
-                                        value={values.remark}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Loại máy tính:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="pcType"
-                                        value={values.pcType}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Lịch thực tập:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="internshipSchedule"
-                                        value={values.internshipSchedule}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Thông tin covid:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="covidVaccinationiInformation"
-                                        value={
-                                          values.covidVaccinationiInformation
-                                        }
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>
-                                      <label>Ngày chứng nhận:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="date"
-                                        name="certificationDate"
-                                        onChange={handleEditFormChange}
-                                        value={dayjs(
-                                          values.certificationDate
-                                        ).format("YYYY-MM-DD")}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Miền thực tập:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        className="inputText"
-                                        type="text"
-                                        name="internshipDomain"
-                                        value={values.internshipDomain}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <label>Tên DG:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        disabled
-                                        className="inputText"
-                                        type="text"
-                                        name="nameDG"
-                                        value={values.nameDG}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Tên Mentor:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        disabled
-                                        className="inputText"
-                                        type="text"
-                                        name="fullNameMentor"
-                                        value={values.fullNameMentor}
-                                        onChange={handleEditFormChange}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>
-                                      <label>Trạng thái:</label>
-                                    </td>
-                                    <td>
-                                    <select
-                          className="inputText"
-                          name="status"
-                          id="cars"
-                          onChange={handleEditFormChange}
-                          value={values.status}
-
-                        >
-                          <option disabled selected hidden>Chọn...</option>
-                          <option value="Pass">Pass</option>
-                          <option value="False">False</option>
-                          <option value="N/A">N/A</option>
-                        </select>
-                                      <br></br>
-                                    </td>
-                                    <td style={{ paddingLeft: "20px" }}>
-                                      <label>Khóa thực tập:</label>
-                                    </td>
-                                    <td>
-                                      <input
-                                        disabled
-                                        className="inputText"
-                                        type="text"
-                                        name="nameCoure"
-                                        onChange={handleEditFormChange}
-                                        value={values.nameCoure}
-                                      ></input>
-                                      <br></br>
-                                    </td>
-                                  </tr>
-
-                                  <div className="modal-footer">
-                                    <button
-                                      type="button"
-                                      className="btn btn-secondary btn-Batch-Cancel"
-                                      data-dismiss="modal"
-                                    >
-                                      Hủy
-                                    </button>
-                                    <button
-                                      className="btn btn-primary btn-Batch"
-                                      type="submit"
-                                      onClick={editSubmit}
-                                    >
-                                      Cập nhật
-                                    </button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </form>
                 </ul>
               ))}
             </div>
+            <form>
+              <div className="container">
+                {open && (
+                  <div
+                    className="modal fade"
+                    id="editStudent"
+                    tabIndex={-1}
+                    role="dialog"
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog modal-lg" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h4 id="exampleModalLongTitle">SỬA THỰC TẬP SINH</h4>
+                          <button
+                            type="button"
+                            className="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <form>
+                            <tr>
+                              <td>
+                                <label>Họ tên:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="fullNameInternship"
+                                  value={values.fullNameInternship}
+                                  onChange={handleEditFormChange}
+                                />
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Địa chỉ: </label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="address"
+                                  value={values.address}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Ngày sinh: </label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputEditStudent"
+                                  style={{ width: "200px" }}
+                                  type="date"
+                                  name="dayOfBirth"
+                                  value={dayjs(values.dayOfBirth).format(
+                                    "YYYY-MM-DD"
+                                  )}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Trường đại học: </label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="university"
+                                  value={values.university}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Email:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="email"
+                                  value={values.email}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Số điện thoại:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="telInternship"
+                                  value={values.telInternship}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Dự án thực tập:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="internshipProject"
+                                  value={values.internshipProject}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Thỏa thuận thực tập:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="internshipAgreementPolicy"
+                                  value={values.internshipAgreementPolicy}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Điểm bảo mật:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="securityTest"
+                                  value={values.securityTest}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Điểm Toeic:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="toeicScore"
+                                  value={values.toeicScore}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Ngày test toeic:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputeditStudent"
+                                  style={{ width: "200px" }}
+                                  type="date"
+                                  name="testDate"
+                                  value={dayjs(values.testDate).format(
+                                    "YYYY-MM-DD"
+                                  )}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Nhận thức bảo mật:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="securityAwareness"
+                                  value={values.securityAwareness}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Phương pháp Agile:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="pmtoolsAgileMethodology"
+                                  value={values.pmtoolsAgileMethodology}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Nghi thức truyền thông:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="workEtiquetteProfessionalCommunication"
+                                  value={
+                                    values.workEtiquetteProfessionalCommunication
+                                  }
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Kỉ năng thuyết trình:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="presentationSkills"
+                                  value={values.presentationSkills}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Tham dự khóa đào tạo:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="trainingAttendance"
+                                  value={values.trainingAttendance}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <label>Bình luận:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="remark"
+                                  value={values.remark}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Loại máy tính:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="pcType"
+                                  value={values.pcType}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Lịch thực tập:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="internshipSchedule"
+                                  value={values.internshipSchedule}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Thông tin covid:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="covidVaccinationiInformation"
+                                  value={values.covidVaccinationiInformation}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <label>Ngày chứng nhận:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputeditStudent"
+                                  style={{ width: "200px" }}
+                                  type="date"
+                                  name="certificationDate"
+                                  onChange={handleEditFormChange}
+                                  value={dayjs(values.certificationDate).format(
+                                    "YYYY-MM-DD"
+                                  )}
+                                ></input>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Miền thực tập:</label>
+                              </td>
+                              <td>
+                                <input
+                                  className="inputText"
+                                  type="text"
+                                  name="internshipDomain"
+                                  value={values.internshipDomain}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <label>Tên DG:</label>
+                              </td>
+                              <td>
+                                <input
+                                  disabled
+                                  className="inputText"
+                                  type="text"
+                                  name="nameDG"
+                                  value={values.nameDG}
+                                  onChange={handleEditFormChange}
+                                ></input>
+
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Tên Mentor:</label>
+                              </td>
+                              <td>
+                                <input
+                                  disabled
+                                  className="inputText"
+                                  type="text"
+                                  name="fullNameMentor"
+                                  value={values.fullNameMentor}
+                                  onChange={handleEditFormChange}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <label>Trạng thái:</label>
+                              </td>
+                              <td>
+                                <select
+                                  className="inputText"
+                                  name="status"
+                                  id="cars"
+                                  onChange={handleEditFormChange}
+                                  value={values.status}
+                                >
+                                  <option disabled selected hidden>
+                                    Chọn...
+                                  </option>
+                                  <option value="Pass">Pass</option>
+                                  <option value="False">False</option>
+                                  <option value="N/A">N/A</option>
+                                </select>
+                                <br></br>
+                              </td>
+                              <td style={{ paddingLeft: "20px" }}>
+                                <label>Khóa thực tập:</label>
+                              </td>
+                              <td>
+                                <input
+                                  disabled
+                                  className="inputText"
+                                  type="text"
+                                  name="nameCoure"
+                                  onChange={handleEditFormChange}
+                                  value={values.nameCoure}
+                                ></input>
+                                <br></br>
+                              </td>
+                            </tr>
+
+                            <div className="modal-footer">
+                              <button
+                                type="button"
+                                className="btn btn-secondary btn-Batch-Cancel"
+                                data-dismiss="modal"
+                              >
+                                Hủy
+                              </button>
+                              <button
+                                className="btn btn-primary btn-Batch"
+                                type="submit"
+                                onClick={editSubmit}
+                              >
+                                Cập nhật
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </form>
           </div>
           {AddStudent()}
           <button
@@ -721,7 +723,6 @@ export default function Student(props) {
             className="btnStudent"
             data-toggle="modal"
             data-target="#exampleModalStudent"
-            style={{ marginLeft: "20px" }}
           >
             Thêm
           </button>
