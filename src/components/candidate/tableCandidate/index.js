@@ -25,21 +25,22 @@ function TableCandidate() {
     dispatch(popUpActions.show());
     dispatch(popUpActions.setData(data));
   };
-  const [candiPerPage, setCandiPerPage] = useState(10);
+  const [candiPerPage, setCandiPerPage] = useState();
 
   // Get current candidate
-  const indexOfLastCandi = currPage * candiPerPage;
-  const indexOfFirstCandi = indexOfLastCandi - candiPerPage;
-  const currCandi = candi.slice(indexOfFirstCandi, indexOfLastCandi);
+  const indexOfLastCandi = currPage * candi.length;
+  const indexOfFirstCandi = indexOfLastCandi - candi.length;
+  const currCandi = candi;
   const paginate = (pageNumber) => setCurrPage(pageNumber);
   const idBatch = localStorage.getItem("idBatch");
   const [search, setSearch] = useState([]);
 
   useEffect(() => {
     apiaxios
-      .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
+      .candidateAPI(`candidate/batch/${idBatch}?page=${currPage}&fullName=${search}`)
       .then((res) => {
         setCandi(res.data.data);
+        setCandiPerPage(res.data.total)
       });
   }, [candi]);
 
@@ -1210,8 +1211,8 @@ function TableCandidate() {
       </div>
       <Pagination
         className="pagination"
-        candiPerPage={candiPerPage}
-        totalCandis={candi.length}
+        candiPerPage={candi.length}
+        totalCandis={candiPerPage}
         paginate={paginate}
       />
       {AddCandidate()}
