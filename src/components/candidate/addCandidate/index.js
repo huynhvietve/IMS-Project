@@ -12,7 +12,7 @@ export default function AddCandidate() {
     candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
       setCandi(res.data.data);
     });
-  }, [candi]);
+  }, []);
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
