@@ -29,6 +29,7 @@ const CalendarInterview = () => {
         link: enterLink,
         date: enterDate,
         time: enterTime,
+        tite: title,
       })
     );
   };
@@ -40,7 +41,7 @@ const CalendarInterview = () => {
     setEnterInternEmail(dataIntern?.email);
     setId(dataIntern?.id);
   }, [dataIntern]);
-
+  const [title, setTitle] = useState("");
   const [enterEmail, setEnterEmail] = useState("");
   const [enterName, setEnterName] = useState("");
   const [enterLink, setEnterLink] = useState("");
@@ -60,6 +61,7 @@ const CalendarInterview = () => {
       emailInterviewer: enterEmail,
     };
     const emailData = {
+      subject: title,
       interviewer: enterName,
       emailInterviewer: enterEmail,
       interviewTime: enterTime,
@@ -93,6 +95,7 @@ const CalendarInterview = () => {
         setEnterLink("");
         setEnterTime("");
         setEnterDate("");
+        setTitle("");
       }
     } catch (error) {
       if (error.response) {
@@ -132,6 +135,9 @@ const CalendarInterview = () => {
   };
   const enterDateHandler = (event) => {
     setEnterDate(event.target.value);
+  };
+  const enterTitleHandler = (event) => {
+    setTitle(event.target.value);
   };
   return (
     <Modal
@@ -229,6 +235,18 @@ const CalendarInterview = () => {
                         type="link"
                         onChange={enterLinkChangHanler}
                         value={enterLink}
+                        placeholder="Nhập link"
+                      />
+                    </td>
+                    <td className="right-modal2">
+                      <label className="lable-right">Tiêu đề :</label>
+                    </td>
+                    <td>
+                      <input
+                        placeholder="Nhập tiêu đề"
+                        type="text"
+                        onChange={enterTitleHandler}
+                        value={title}
                       />
                     </td>
                   </tr>
