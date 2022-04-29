@@ -235,6 +235,7 @@ const CalendarInterview = () => {
                         type="link"
                         onChange={enterLinkChangHanler}
                         value={enterLink}
+                        placeholder="Nhập link"
                       />
                     </td>
                     <td className="right-modal2">
