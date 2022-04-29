@@ -183,7 +183,7 @@ export default function Student(props) {
   };
   const handleDeleteClick = (postsId) => {
     Swal.fire({
-      title: "Bạn có muốn xóa khóa thực tập này ?",
+      title: "Bạn có muốn xóa thực tập sinh này ?",
       text: "",
       icon: "warning",
       showCancelButton: true,
