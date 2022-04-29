@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import * as apiaxios from "../../../../api/service";
 import * as constTable from "../../../../constant/internview/table/index";
+import dayjs from "dayjs";
 import {
   delinterviewAPI,
   mentorAPI,
   mentorDG,
   updateinterviewAPI,
+  batchAPI,
 } from "../../../../api/service";
 import Swal from "sweetalert2";
 import "../search/style.css";
@@ -15,15 +17,29 @@ import insertInterview from "../insert/index";
 function Index() {
   const [interviews, setinterviews] = useState([]);
   const [DG, setDG] = useState([]);
+  const [idDG, setIdDG] = useState([]);
   const [posts, setPosts] = useState([]);
   const [mentor, setMentor] = useState([]);
   const [status, setStatus] = useState([]);
+  const [batchTitle, setBatchTitle] = useState([]);
   const idBatch = localStorage.getItem("idBatch");
+  const [open, setOpen] = useState(true);
+  console.log(idDG);
+  console.log(mentor);
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
   useEffect(() => {
-    mentorAPI(`mentor`, null).then((res) => {
-      setMentor(res.data.data);
-    });
-  }, []);
+    const fetchDatas = async () => {
+      mentorAPI(`mentor/idDG?idDG=${idDG}`, null).then((res) => {
+        setMentor(res.data.data);
+      });
+    };
+    fetchDatas();
+  }, [idDG]);
   useEffect(() => {
     mentorDG(`dg`, null).then((res) => {
       setDG(res.data.data);
@@ -39,6 +55,13 @@ function Index() {
     };
     if (interviews.length === 0 || interviews.length > 0) fetchData();
   }, [interviews]);
+
+  useEffect(() => {
+    batchAPI(`internshipcourse/${idBatch}`, "Get", null).then((res) => {
+      setBatchTitle(res.data.data);
+    });
+  }, {});
+
   useEffect(() => {
     const status = "Pass";
     const updateInsert = "success";
@@ -79,7 +102,7 @@ function Index() {
   const [values, setValues] = useState({
     idCandidate: "",
     status: "",
-    idDG: "",
+    idDG: idDG,
     idMentor: "",
     comments: "",
     fullName: "",
@@ -152,6 +175,7 @@ function Index() {
           text: "Cập nhật thành công !!!",
           confirmButtonText: "Xác nhận",
         });
+        handleCloseModal();
         const newBatch = [...posts];
         const index = posts.findIndex(
           (products) => products.idCandidate === valuesId
@@ -167,9 +191,12 @@ function Index() {
         });
       });
   };
+
   return (
     <div>
-      <h3>{constTable.H3}</h3>
+      <h3>
+        {constTable.H3} {batchTitle.nameCoure}
+      </h3>
       <div className="input-toolbar">
         <div className="search-box">
           <div className="search">
@@ -211,7 +238,9 @@ function Index() {
               >
                 <li className="col1 l-2-9">{interview.fullName}</li>
                 <li className="col1 l-2-9">{interview.emailCandidate}</li>
-                <li className="col1 l-2-9">{interview.interviewDate}</li>
+                <li element="li" name="interviewDate" className="col1 l-2-9">
+                  {dayjs(interview.interviewDate).format("DD/MM/YYYY")}
+                </li>
                 <li className="col1 l-2-9">{interview.interviewTime}</li>
                 <li className="col1 l-2-9">{interview.interviewer}</li>
                 <li className="col1 l-2-9">{interview.interviewLink}</li>
@@ -234,6 +263,7 @@ function Index() {
                     aria-hidden="true"
                     onClick={() => {
                       handleEditClick(interview);
+                      handleOpenModal();
                     }}
                   ></i>
                 </li>
@@ -246,175 +276,184 @@ function Index() {
           )}
         </div>
       </div>
-      <div
-        class="modal fade"
-        id="exampleModaEdit"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <div className="container d-flex pl-0">
-                <h5
-                  className="modal-title ml-2"
-                  id="exampleModalLabel"
-                  style={{ color: "#007bff" }}
-                >
-                  CẬP NHẬT KẾT QUẢ PHỎNG VẤN
-                </h5>
-              </div>{" "}
-            </div>
-            <div className="modal-body-iv">
-              <table>
-                <tr>
-                  <td className="left-modal">
-                    <label>Họ Tên:</label>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={values.fullName}
-                      disabled
-                      onChange={handleEditFormChange}
-                    />
-                  </td>
-                  <td className="right-modal">
-                    <label>Tên DG :</label>
-                  </td>
-                  <td>
-                    <select name="idDG" onChange={handleEditFormChange}>
-                      {DG?.map((itemDG) => (
-                        <option value={itemDG.idDG}>{itemDG.nameDG}</option>
-                      ))}
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="left-modal">
-                    <label>Nhận xét :</label>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="comments"
-                      value={values.comments}
-                      onChange={handleEditFormChange}
-                    />
-                  </td>
-                  <td className="right-modal">
-                    <label>Kết quả :</label>
-                  </td>
-                  <td>
-                    <select name="status" onChange={handleEditFormChange}>
-                      <option disabled selected hidden value="">
-                        Chọn...
-                      </option>
-                      <option value="Pass">Pass</option>
-                      <option value="Fail">Fail</option>
-                    </select>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="left-modal">
-                    <label>ID Mentor :</label>
-                  </td>
-                  <td>
-                    <select name="idMentor" onChange={handleEditFormChange}>
-                      <option disabled selected hidden value="">
-                        {" "}
-                        Chọn...
-                      </option>
-                      {mentor?.map((itemmentor) => (
-                        <option value={itemmentor.idMentor}>
-                          {itemmentor.fullNameMentor}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                </tr>
+      <form>
+        {open && (
+          <div
+            class="modal fade"
+            id="exampleModaEdit"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <div className="container d-flex pl-0">
+                    <h5
+                      className="modal-title ml-2"
+                      id="exampleModalLabel"
+                      style={{ color: "#007bff" }}
+                    >
+                      CẬP NHẬT KẾT QUẢ PHỎNG VẤN
+                    </h5>
+                  </div>{" "}
+                </div>
+                <div className="modal-body-iv">
+                  <table>
+                    <tr>
+                      <td className="left-modal">
+                        <label>Họ Tên:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="fullName"
+                          value={values.fullName}
+                          disabled
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                      <td className="right-modal">
+                        <label>Tên DG:</label>
+                      </td>
+                      <td>
+                        <select
+                          name="idDG"
+                          onChange={(e) => {
+                            setIdDG(e.currentTarget.value);
+                          }}
+                        >
+                          {DG?.map((itemDG) => (
+                            <option value={itemDG.idDG}>{itemDG.nameDG}</option>
+                          ))}
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="left-modal">
+                        <label>Nhận xét:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="comments"
+                          value={values.comments}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                      <td className="right-modal">
+                        <label>Kết quả:</label>
+                      </td>
+                      <td>
+                        <select name="status" onChange={handleEditFormChange}>
+                          <option disabled selected hidden value="">
+                            Chọn...
+                          </option>
+                          <option value="Pass">Pass</option>
+                          <option value="Fail">Fail</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="left-modal">
+                        <label>Mentor:</label>
+                      </td>
+                      <td>
+                        <select name="idMentor" onChange={handleEditFormChange}>
+                          <option disabled selected hidden value="">
+                            {" "}
+                            Chọn...
+                          </option>
+                          {mentor?.map((itemmentor) => (
+                            <option value={itemmentor.idMentor}>
+                              {itemmentor.fullNameMentor}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
+                    </tr>
 
-                <td>
-                  <input
-                    type="hidden"
-                    name="emailCandidate"
-                    value={values.emailCandidate}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="interviewDate"
-                    value={values.interviewDate}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="interviewTime"
-                    value={values.interviewTime}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="interviewer"
-                    value={values.interviewer}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="interviewLink"
-                    value={values.interviewLink}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="technicalComments"
-                    value={values.technicalComments}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="technicalScore"
-                    value={values.technicalScore}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="englishCommunication"
-                    value={values.englishCommunication}
-                    onChange={handleEditFormChange}
-                  />
-                  <input
-                    type="hidden"
-                    name="attitude"
-                    value={values.attitude}
-                    onChange={handleEditFormChange}
-                  />
-                </td>
-              </table>
-            </div>
-            <div className="modal-footer">
-              {" "}
-              <button
-                type="button"
-                className="btn btn-light"
-                data-dismiss="modal"
-              >
-                Hủy
-              </button>{" "}
-              <button
-                type="submit"
-                onClick={editSubmit}
-                className="btn btn-danger-del"
-              >
-                Thêm
-              </button>{" "}
+                    <td>
+                      <input
+                        type="hidden"
+                        name="emailCandidate"
+                        value={values.emailCandidate}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="interviewDate"
+                        value={values.interviewDate}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="interviewTime"
+                        value={values.interviewTime}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="interviewer"
+                        value={values.interviewer}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="interviewLink"
+                        value={values.interviewLink}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="technicalComments"
+                        value={values.technicalComments}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="technicalScore"
+                        value={values.technicalScore}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="englishCommunication"
+                        value={values.englishCommunication}
+                        onChange={handleEditFormChange}
+                      />
+                      <input
+                        type="hidden"
+                        name="attitude"
+                        value={values.attitude}
+                        onChange={handleEditFormChange}
+                      />
+                    </td>
+                  </table>
+                </div>
+                <div className="modal-footer">
+                  {" "}
+                  <button
+                    type="button"
+                    className="btn btn-light"
+                    data-dismiss="modal"
+                  >
+                    Hủy
+                  </button>{" "}
+                  <button
+                    type="submit"
+                    onClick={editSubmit}
+                    className="btn btn-danger-del"
+                  >
+                    Cập Nhật
+                  </button>{" "}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </form>
       <button
         className="btn-add-iv"
         type="submit"

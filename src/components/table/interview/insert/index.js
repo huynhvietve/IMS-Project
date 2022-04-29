@@ -106,10 +106,12 @@ function InsertInterview(posts, setPosts) {
             </button>{" "}
             <button
               type="submit"
-              onClick={() => handleSubmit(idBatch)}
+              onClick={() => {
+                handleSubmit(idBatch);
+              }}
               className="btn btn-danger-del btn-add"
             >
-              Insert
+              Thêm
             </button>{" "}
           </div>
         </div>
