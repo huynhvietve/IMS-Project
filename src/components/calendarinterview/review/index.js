@@ -67,6 +67,12 @@ const Preview = () => {
             </td>
             <td>{showData?.link}</td>
           </tr>
+          <tr>
+            <td className="left-modal2">
+              <lable>Tiêu đề:</lable>
+            </td>
+            <td>{showData?.tite}</td>
+          </tr>
         </table>
         <div>
           <button
