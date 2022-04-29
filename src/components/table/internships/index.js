@@ -54,11 +54,6 @@ export default function Internships(props) {
     apiaxios
       .batchPut(`internshipcourse/${valuesId}`, editBatch)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: res.data.message,
-          confirmButtonText: "Xác nhận",
-        });
         const newBatch = [...posts];
         const index = posts.findIndex(
           (products) => products.idInternshipCourse === valuesId

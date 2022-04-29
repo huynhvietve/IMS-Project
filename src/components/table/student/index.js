@@ -10,7 +10,7 @@ export default function Student(props) {
   const [open, setOpen] = useState(false);
   const [titleBatch, settitleBatch] = useState([]);
   const idBatch = localStorage.getItem("idBatch");
-  console.log(idDG)
+  console.log(idDG);
   useEffect(() => {
     apiaxios.student(`internship/batch/${idBatch}`).then((res) => {
       setPosts(res.data.data);
@@ -26,12 +26,14 @@ export default function Student(props) {
   const [mentor, setMentor] = useState([]);
   useEffect(() => {
     const fetchDatas = async () => {
-      apiaxios.mentorAPI(`mentor/batch/${idBatch}?idDG=${idDG}`, null).then((res) => {
-        setMentor(res.data.data);
-    });
-  }
+      apiaxios
+        .mentorAPI(`mentor/batch/${idBatch}?idDG=${idDG}`, null)
+        .then((res) => {
+          setMentor(res.data.data);
+        });
+    };
     fetchDatas();
-  },[idDG]);
+  }, [idDG]);
   const [dg, setDg] = useState([]);
   useEffect(() => {
     apiaxios.mentorDG("dg", "Get", null).then((res) => {
@@ -154,11 +156,6 @@ export default function Student(props) {
     apiaxios
       .editStudent(`internship/${valuesId}`, editBatch)
       .then((res) => {
-        Swal.fire({
-          icon: "success",
-          text: res.data.message,
-          confirmButtonText: "Xác nhận",
-        });
         const newBatch = [...posts];
         const index = posts.findIndex(
           (students) => students.idInternship === valuesId
@@ -589,9 +586,9 @@ export default function Student(props) {
                                   style={{ width: "200px" }}
                                   type="date"
                                   name="internshipSchedule"
-                                  value={dayjs(values.internshipSchedule).format(
-                                    "YYYY-MM-DD"
-                                  )}
+                                  value={dayjs(
+                                    values.internshipSchedule
+                                  ).format("YYYY-MM-DD")}
                                   onChange={handleEditFormChange}
                                 ></input>
                                 <br></br>
@@ -648,21 +645,23 @@ export default function Student(props) {
                               </td>
                               <td>
                                 <select
-                                      className="input_Student"
-                                      style={{width: "200px",height:"30px"}}
-                                      name="idDG"
-                                      id="cars"
-                                       onChange={(e) => {setIdDG(e.currentTarget.value)}}
-                                    >
-                                      <option disabled selected hidden>
+                                  className="input_Student"
+                                  style={{ width: "200px", height: "30px" }}
+                                  name="idDG"
+                                  id="cars"
+                                  onChange={(e) => {
+                                    setIdDG(e.currentTarget.value);
+                                  }}
+                                >
+                                  <option disabled selected hidden>
                                     Chọn...
                                   </option>
-                                      {dg?.map((itemDG) => (
-                                        <option value={itemDG.idDG}>
-                                          {itemDG.nameDG}
-                                        </option>
-                                      ))}
-                                    </select>
+                                  {dg?.map((itemDG) => (
+                                    <option value={itemDG.idDG}>
+                                      {itemDG.nameDG}
+                                    </option>
+                                  ))}
+                                </select>
 
                                 <br></br>
                               </td>
@@ -670,22 +669,22 @@ export default function Student(props) {
                                 <label>Tên Mentor:</label>
                               </td>
                               <td>
-                                    <select
-                                      className="input_Student"
-                                      style={{width: "200px",height:"30px"}}
-                                      name="idMentor"
-                                      id="cars"
-                                      onChange={handleEditFormChange}
-                                    >
-                                      <option disabled selected hidden>
+                                <select
+                                  className="input_Student"
+                                  style={{ width: "200px", height: "30px" }}
+                                  name="idMentor"
+                                  id="cars"
+                                  onChange={handleEditFormChange}
+                                >
+                                  <option disabled selected hidden>
                                     Chọn...
                                   </option>
-                                      {mentor?.map((itemMentor) => (
-                                        <option value={itemMentor.idMentor}>
-                                          {itemMentor.fullNameMentor}
-                                        </option>
-                                      ))}
-                                    </select>
+                                  {mentor?.map((itemMentor) => (
+                                    <option value={itemMentor.idMentor}>
+                                      {itemMentor.fullNameMentor}
+                                    </option>
+                                  ))}
+                                </select>
                                 <br></br>
                               </td>
                             </tr>
@@ -705,8 +704,8 @@ export default function Student(props) {
                                   <option disabled selected hidden>
                                     Chọn...
                                   </option>
-                                  <option value="Pass">Pass</option>
-                                  <option value="False">False</option>
+                                  <option value="Full time">Full time</option>
+                                  <option value="Part time">Part time</option>
                                   <option value="N/A">N/A</option>
                                 </select>
                                 <br></br>

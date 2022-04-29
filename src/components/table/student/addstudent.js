@@ -520,8 +520,9 @@ export default function AddStudent() {
                   <label>Trạng thái:</label>
                 </td>
                 <td>
-                  <select
-                    className="inputText"
+                <select
+                    style={{height:"30px",width:"200px"}}
+                    className="input-TT"
                     name="status"
                     id="cars"
                     onChange={handleAddFormChange}
@@ -529,8 +530,8 @@ export default function AddStudent() {
                     <option disabled selected hidden>
                       Chọn...
                     </option>
-                    <option value="Pass">Pass</option>
-                    <option value="False">False</option>
+                    <option value="Full time">Full time</option>
+                    <option value="Part time">Part time</option>
                     <option value="N/A">N/A</option>
                   </select>
                   <br></br>
@@ -540,7 +541,8 @@ export default function AddStudent() {
                 </td>
                 <td>
                   <select
-                    className="inputText"
+                    style={{height:"30px",width:"200px"}}
+                    className="input-Batchh"
                     name="idInternshipCourse"
                     id="cars"
                     onChange={handleAddFormChange}
