@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { candidateAPI } from "../../../api/service";
 import * as constTable from "../../../constant/constTable";
 import * as constCandidate from "../../../constant/constCandidate";
 import * as apiaxios from "../../../api/service";
@@ -7,9 +6,10 @@ import Swal from "sweetalert2";
 
 export default function AddCandidate() {
   const [candi, setCandi] = useState([]);
+  const idBatch = localStorage.getItem("idBatch");
   useEffect(() => {
-    const idBatch = localStorage.getItem("idBatch");
-    candidateAPI(`candidate/batch/${idBatch}`, "Get", null).then((res) => {
+    apiaxios
+    .candidateAPI(`candidate/batch/${idBatch}`).then((res) => {
       setCandi(res.data.data);
     });
   }, []);
@@ -123,8 +123,8 @@ export default function AddCandidate() {
           });
         }
       });
-    const newCadidates = [...candi, newCadidate];
-    setCandi(newCadidates);
+      const newCadidates = [...candi, newCadidate];
+      setCandi(newCadidates);
   };
 
   return (
@@ -217,22 +217,12 @@ export default function AddCandidate() {
                       <label>{constCandidate.CRRYEAR}</label>
                     </td>
                     <td>
-                      <select
-                        style={{ width:"189.04px", height:"29.98px"}}
+                      <input
                         clasName="input-candidate"
+                        type="text"
                         name="currentYearofStudy"
-                        id="year-study"
                         onChange={handleAddFormChange}
-                      >
-                        <option disabled selected hidden>
-                          Chọn...
-                        </option>
-                        <option value="Năm 1">Năm 1</option>
-                        <option value="Năm 2">Năm 2</option>
-                        <option value="Năm 3">Năm 3</option>
-                        <option value="Năm 4">Năm 4</option>
-                        <option value="Khác">Khác</option>
-                      </select>
+                      />
                     </td>
                   </tr>
                   <tr>

@@ -9,8 +9,6 @@ import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
 import Preview from "../../calendarinterview/review";
-
-import { deleteCandi } from "../../../redux/action/candi.action";
 import * as apiaxios from "../../../api/service";
 import Swal from "sweetalert2";
 import dayjs from "dayjs";
@@ -26,23 +24,28 @@ function TableCandidate() {
     dispatch(popUpActions.setData(data));
   };
   const [candiPerPage, setCandiPerPage] = useState();
-
-  // Get current candidate
-  const indexOfLastCandi = currPage * candi.length;
-  const indexOfFirstCandi = indexOfLastCandi - candi.length;
-  const currCandi = candi;
   const paginate = (pageNumber) => setCurrPage(pageNumber);
   const idBatch = localStorage.getItem("idBatch");
   const [search, setSearch] = useState([]);
 
   useEffect(() => {
     apiaxios
-      .candidateAPI(`candidate/batch/${idBatch}?page=${currPage}&fullName=${search}`)
+      .candidateAPI(`candidate/batch/${idBatch}?page=${currPage}`)
       .then((res) => {
         setCandi(res.data.data);
-        setCandiPerPage(res.data.total)
+        setCandiPerPage(res.data.total);
       });
-  }, [candi]);
+  }, [currPage]);
+  useEffect(() => {
+  const  fetchData = () => {
+    apiaxios
+      .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
+      .then((res) => {
+        setCandi(res.data.data);
+      });
+    } 
+    fetchData()
+  }, [search]);
 
   useEffect(() => {
     batchAPI(`internshipcourse/${idBatch}`, "Get", null).then((res) => {
@@ -226,6 +229,30 @@ function TableCandidate() {
       });
   };
 
+  const handleDeleteClick = (idCandidate) => {
+    Swal.fire({
+      title: "Bạn có muốn xóa?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonText: "Hủy",
+      confirmButtonText: "Đồng ý",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newContacts = [...candi];
+        const index = candi.findIndex(
+          (candidate) => candidate.idCandidate === idCandidate
+        );
+        apiaxios
+          .deleteCandi(`candidate/${idCandidate}`, "DELETE", newContacts)
+          .then((res) => {setCandi(newContacts);});
+        newContacts.splice(index, 1);
+      }
+    });
+  };
+
   const [file, setFile] = useState();
 
   const handleChange = (event) => {
@@ -307,8 +334,8 @@ function TableCandidate() {
           <span className="col l-2-8-candi ">{constTable.ACTION}</span>
         </div>
         <div className="table-body">
-          {currCandi.length > 0 ? (
-            currCandi?.map((candidate) => (
+          {candi.length > 0 ? (
+            candi?.map((candidate) => (
               <ul
                 className="row sm-gutter sm-gutter--list"
                 key={candidate.idCandidate}
@@ -325,9 +352,9 @@ function TableCandidate() {
                   <i
                     className="fa fa-trash-o fa-trash-o1"
                     aria-hidden="true"
-                    onClick={() => {
-                      dispatch(deleteCandi(candidate.idCandidate));
-                    }}
+                    onClick={() =>
+                      handleDeleteClick(candidate.idCandidate)
+                    }
                   ></i>
                   <i
                     className="fa fa-pencil-square-o fa-pencil-square-o1"
@@ -453,22 +480,12 @@ function TableCandidate() {
                                     <label>{constCandi.CRRYEAR}</label>
                                   </td>
                                   <td>
-                                    <select
-                                      style={{
-                                        width: "189.04px",
-                                        height: "29.98px",
-                                      }}
+                                    <input
+                                      type="text"
                                       name="currentYearofStudy"
-                                      id="year-study"
                                       value={values.currentYearofStudy}
                                       onChange={handleEditChange}
-                                    >
-                                      <option value="Năm 1">Năm 1</option>
-                                      <option value="Năm 2">Năm 2</option>
-                                      <option value="Năm 3">Năm 3</option>
-                                      <option value="Năm 4">Năm 4</option>
-                                      <option value="Khác">Khác</option>
-                                    </select>
+                                    />
                                   </td>
                                 </tr>
                                 <tr>
