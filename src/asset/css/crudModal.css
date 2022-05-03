@@ -71,12 +71,13 @@ input[type="date"],
     border: 1px solid #007bff;
 }
 
-.inputDetail {
+.inputDetail{
     -webkit-appearance: none;
     border: none;
     width: 189.04px;
-    pointer-events: none;
     padding-bottom: 8px;
+    color: black;
+    background: white;
 }
 
 .inputDetail::-webkit-inner-spin-button,
