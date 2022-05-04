@@ -107,6 +107,7 @@ h3 {
   float: left;
   margin-top: 5px;
   margin-left: 70rem;
+  margin-bottom: 30px;
 }
 
 .inputUpload {
@@ -251,9 +252,4 @@ h3 {
   position: absolute;
   top: 6px;
   right: 10px;
-}
-
-.pagination {
-  justify-content: center;
-  margin-left: 55rem;
 }

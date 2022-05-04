@@ -9,8 +9,6 @@ import AddCandidate from "../addCandidate/index";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
 import Preview from "../../calendarinterview/review";
-
-import { deleteCandi } from "../../../redux/action/candi.action";
 import * as apiaxios from "../../../api/service";
 import Swal from "sweetalert2";
 import dayjs from "dayjs";
@@ -26,23 +24,28 @@ function TableCandidate() {
     dispatch(popUpActions.setData(data));
   };
   const [candiPerPage, setCandiPerPage] = useState();
-
-  // Get current candidate
-  const indexOfLastCandi = currPage * candi.length;
-  const indexOfFirstCandi = indexOfLastCandi - candi.length;
-  const currCandi = candi;
   const paginate = (pageNumber) => setCurrPage(pageNumber);
   const idBatch = localStorage.getItem("idBatch");
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     apiaxios
-      .candidateAPI(`candidate/batch/${idBatch}?page=${currPage}&fullName=${search}`)
+      .candidateAPI(`candidate/batch/${idBatch}?page=${currPage}`)
       .then((res) => {
         setCandi(res.data.data);
-        setCandiPerPage(res.data.total)
+        setCandiPerPage(res.data.total);
       });
-  }, [candi]);
+  }, [currPage]);
+  useEffect(() => {
+  const  fetchData = () => {
+    apiaxios
+      .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
+      .then((res) => {
+        setCandi(res.data.data);
+      });
+    } 
+    fetchData()
+  }, [search]);
 
   useEffect(() => {
     batchAPI(`internshipcourse/${idBatch}`, "Get", null).then((res) => {
@@ -86,19 +89,10 @@ function TableCandidate() {
     studentID: "",
     GPA: "",
     graduationYear: "",
-    idDG: "",
-    idMentor: "",
     preferredInternshipStartDate: "",
     preferredInternshipDuration: "",
     internshipSchedule: "",
     pcType: "",
-    status: "",
-    technicalComments: "",
-    technicalScore: "",
-    attitude: "",
-    englishCommunication: "",
-    comments: "",
-    remarks: "",
     projectExperience: "",
     expectedGraduationSchedule: "",
     remainingSubjects: "",
@@ -179,12 +173,6 @@ function TableCandidate() {
       preferredInternshipDuration: values.preferredInternshipDuration,
       internshipSchedule: values.internshipSchedule,
       pcType: values.pcType,
-      technicalComments: values.technicalComments,
-      technicalScore: values.technicalScore,
-      attitude: values.attitude,
-      englishCommunication: values.englishCommunication,
-      comments: values.comments,
-      remarks: values.remarks,
       projectExperience: values.projectExperience,
       expectedGraduationSchedule: values.expectedGraduationSchedule,
       remainingSubjects: values.remainingSubjects,
@@ -224,6 +212,30 @@ function TableCandidate() {
           });
         }
       });
+  };
+
+  const handleDeleteClick = (idCandidate) => {
+    Swal.fire({
+      title: "Bạn có muốn xóa?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonText: "Hủy",
+      confirmButtonText: "Đồng ý",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const newContacts = [...candi];
+        const index = candi.findIndex(
+          (candidate) => candidate.idCandidate === idCandidate
+        );
+        apiaxios
+          .deleteCandi(`candidate/${idCandidate}`, "DELETE", newContacts)
+          .then((res) => {setCandi(newContacts);});
+        newContacts.splice(index, 1);
+      }
+    });
   };
 
   const [file, setFile] = useState();
@@ -307,8 +319,8 @@ function TableCandidate() {
           <span className="col l-2-8-candi ">{constTable.ACTION}</span>
         </div>
         <div className="table-body">
-          {currCandi.length > 0 ? (
-            currCandi?.map((candidate) => (
+          {candi.length > 0 ? (
+            candi?.map((candidate) => (
               <ul
                 className="row sm-gutter sm-gutter--list"
                 key={candidate.idCandidate}
@@ -325,9 +337,9 @@ function TableCandidate() {
                   <i
                     className="fa fa-trash-o fa-trash-o1"
                     aria-hidden="true"
-                    onClick={() => {
-                      dispatch(deleteCandi(candidate.idCandidate));
-                    }}
+                    onClick={() =>
+                      handleDeleteClick(candidate.idCandidate)
+                    }
                   ></i>
                   <i
                     className="fa fa-pencil-square-o fa-pencil-square-o1"
@@ -453,22 +465,12 @@ function TableCandidate() {
                                     <label>{constCandi.CRRYEAR}</label>
                                   </td>
                                   <td>
-                                    <select
-                                      style={{
-                                        width: "189.04px",
-                                        height: "29.98px",
-                                      }}
+                                    <input
+                                      type="text"
                                       name="currentYearofStudy"
-                                      id="year-study"
                                       value={values.currentYearofStudy}
                                       onChange={handleEditChange}
-                                    >
-                                      <option value="Năm 1">Năm 1</option>
-                                      <option value="Năm 2">Năm 2</option>
-                                      <option value="Năm 3">Năm 3</option>
-                                      <option value="Năm 4">Năm 4</option>
-                                      <option value="Khác">Khác</option>
-                                    </select>
+                                    />
                                   </td>
                                 </tr>
                                 <tr>
@@ -641,79 +643,6 @@ function TableCandidate() {
                                     </select>
                                   </td>
                                 </tr>
-                                <tr></tr>
-                                <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.ATTITUDE}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="attitude"
-                                      value={values.attitude}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.COMMENTS}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="comments"
-                                      value={values.comments}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.TNCOMMENT}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="technicalComments"
-                                      value={values.technicalComments}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.TNSCORE}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="technicalScore"
-                                      value={values.technicalScore}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.ENGLISH}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="englishCommunication"
-                                      value={values.englishCommunication}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.REMARKS}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="remarks"
-                                      value={values.remarks}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr>
                                 <tr>
                                   <td className="left-modal">
                                     <label>{constCandi.CVIDINFO}</label>
@@ -816,6 +745,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.fullName}
+                                      title={values.fullName}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -826,6 +757,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.tel}
+                                      title={values.tel}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -838,6 +771,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.emailCandidate}
+                                      title={values.emailCandidate}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -848,6 +783,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.studentID}
+                                      title={values.studentID}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -860,6 +797,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.faculty}
+                                      title={values.faculty}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -870,6 +809,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.currentYearofStudy}
+                                      title={values.currentYearofStudy}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -882,6 +823,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.university}
+                                      title={values.university}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -892,6 +835,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.GPA}
+                                      title={values.GPA}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -904,6 +849,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.graduationYear}
+                                      title={values.graduationYear}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -914,6 +861,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.expectedGraduationSchedule}
+                                      title={values.expectedGraduationSchedule}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -926,6 +875,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.remainingSubjects}
+                                      title={values.remainingSubjects}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -936,6 +887,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.projectExperience}
+                                      title={values.projectExperience}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -948,6 +901,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.internshipDomain}
+                                      title={values.internshipDomain}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -958,6 +913,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.preferredInternshipDuration}
+                                      title={values.preferredInternshipDuration}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -973,6 +930,7 @@ function TableCandidate() {
                                       value={dayjs(
                                         values.preferredInternshipStartDate
                                       ).format("YYYY-MM-DD")}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -983,6 +941,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.internshipSchedule}
+                                      title={values.internshipSchedule}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -995,6 +955,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.preferredSkills}
+                                      title={values.preferredSkills}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1005,6 +967,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.pcType}
+                                      title={values.pcType}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1020,6 +984,7 @@ function TableCandidate() {
                                       value={dayjs(values.interviewDate).format(
                                         "YYYY-MM-DD"
                                       )}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1030,6 +995,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.interviewTime}
+                                      title={values.interviewTime}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1042,6 +1009,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.interviewer}
+                                      title={values.interviewer}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1052,6 +1021,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.emailInterviewer}
+                                      title={values.emailInterviewer}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1064,6 +1035,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.interviewLink}
+                                      title={values.interviewLink}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1074,6 +1047,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.status}
+                                      title={values.status}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1086,6 +1061,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.attitude}
+                                      title={values.attitude}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1096,6 +1073,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.comments}
+                                      title={values.comments}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1108,6 +1087,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.technicalComments}
+                                      title={values.technicalComments}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1118,6 +1099,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.technicalScore}
+                                      title={values.technicalScore}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1130,6 +1113,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.englishCommunication}
+                                      title={values.englishCommunication}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1140,6 +1125,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.remarks}
+                                      title={values.remarks}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1154,6 +1141,8 @@ function TableCandidate() {
                                       value={
                                         values.covidVaccinationiInformation
                                       }
+                                      title={values.covidVaccinationiInformation}
+                                      disabled
                                     />
                                   </td>
                                   <td className="right-modal">
@@ -1164,6 +1153,8 @@ function TableCandidate() {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.covidVaccinationCertificate}
+                                      title={values.covidVaccinationCertificate}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
@@ -1179,6 +1170,7 @@ function TableCandidate() {
                                       value={dayjs(
                                         values.certificationDate
                                       ).format("YYYY-MM-DD")}
+                                      disabled
                                     />
                                   </td>
                                 </tr>
