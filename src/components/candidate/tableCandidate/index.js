@@ -93,13 +93,6 @@ function TableCandidate() {
     preferredInternshipDuration: "",
     internshipSchedule: "",
     pcType: "",
-    // status: "",
-    // technicalComments: "",
-    // technicalScore: "",
-    // attitude: "",
-    // englishCommunication: "",
-    // comments: "",
-    // remarks: "",
     projectExperience: "",
     expectedGraduationSchedule: "",
     remainingSubjects: "",
@@ -180,12 +173,6 @@ function TableCandidate() {
       preferredInternshipDuration: values.preferredInternshipDuration,
       internshipSchedule: values.internshipSchedule,
       pcType: values.pcType,
-      // technicalComments: values.technicalComments,
-      // technicalScore: values.technicalScore,
-      // attitude: values.attitude,
-      // englishCommunication: values.englishCommunication,
-      // comments: values.comments,
-      // remarks: values.remarks,
       projectExperience: values.projectExperience,
       expectedGraduationSchedule: values.expectedGraduationSchedule,
       remainingSubjects: values.remainingSubjects,
@@ -656,78 +643,6 @@ function TableCandidate() {
                                     </select>
                                   </td>
                                 </tr>
-                                {/* <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.ATTITUDE}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="attitude"
-                                      value={values.attitude}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.COMMENTS}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="comments"
-                                      value={values.comments}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.TNCOMMENT}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="technicalComments"
-                                      value={values.technicalComments}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.TNSCORE}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="technicalScore"
-                                      value={values.technicalScore}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className="left-modal">
-                                    <label>{constCandi.ENGLISH}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="englishCommunication"
-                                      value={values.englishCommunication}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                  <td className="right-modal">
-                                    <label>{constCandi.REMARKS}</label>
-                                  </td>
-                                  <td>
-                                    <input
-                                      type="text"
-                                      name="remarks"
-                                      value={values.remarks}
-                                      onChange={handleEditChange}
-                                    />
-                                  </td>
-                                </tr> */}
                                 <tr>
                                   <td className="left-modal">
                                     <label>{constCandi.CVIDINFO}</label>

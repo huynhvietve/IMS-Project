@@ -6,13 +6,17 @@ import Swal from "sweetalert2";
 
 export default function AddCandidate() {
   const [candi, setCandi] = useState([]);
+  const [currPage, setCurrPage] = useState(1);
+  const [candiPerPage, setCandiPerPage] = useState();
   const idBatch = localStorage.getItem("idBatch");
   useEffect(() => {
     apiaxios
-    .candidateAPI(`candidate/batch/${idBatch}`).then((res) => {
-      setCandi(res.data.data);
-    });
-  }, []);
+      .candidateAPI(`candidate/batch/${idBatch}?page=${currPage}`)
+      .then((res) => {
+        setCandi(res.data.data);
+        setCandiPerPage(res.data.total);
+      });
+  }, [currPage]);
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
@@ -98,7 +102,8 @@ export default function AddCandidate() {
     apiaxios
     .candidatePost("candidate/create", newCadidate)
       .then((res) => {
-        setCandi(res.data.data);
+        const newCadidates = [...candi, newCadidate];
+        setCandi(newCadidates);
         handleReset();
         closeModal();
       })
@@ -123,8 +128,6 @@ export default function AddCandidate() {
           });
         }
       });
-      const newCadidates = [...candi, newCadidate];
-      setCandi(newCadidates);
   };
 
   return (
