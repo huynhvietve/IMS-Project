@@ -90,3 +90,9 @@ export function UploadAPI(endpoint, file , config) {
 export function deleteCandi(endpoint) {
   return api.delete(`${API_BASE}/${endpoint}`, null);
 }
+export function dgCreate(endpoint, body) {
+  return api.post(`${API_BASE}/${endpoint}`, body);
+}
+export function dgEdit(endpoint, body) {
+  return api.put(`${API_BASE}/${endpoint}`, body);
+}
