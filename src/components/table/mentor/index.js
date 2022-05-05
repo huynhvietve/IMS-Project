@@ -368,7 +368,7 @@ function TableMentor(props) {
         </div>
       </div>
       <Pagination
-        style={{ marginLeft: "1070" }}
+      className="pagination"
         mentorPerPage={mentorPerPage}
         totalMentor={mentors.length}
         paginate={paginate}

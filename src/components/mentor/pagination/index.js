@@ -10,7 +10,7 @@ const Pagination = ({ mentorPerPage, totalMentor, paginate }) => {
 
   return (
     <nav className="nav-pagination">
-      <ul className="pagination1 pagination-sm">
+      <ul className="pagination pagination-sm">
         {pageNumbers.map((number) => (
           <li key={number} className="page-item">
             <NavLink onClick={() => paginate(number)} to="/mentor" className="page-link">
