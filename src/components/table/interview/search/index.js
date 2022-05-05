@@ -357,6 +357,78 @@ function Index() {
                     </tr>
                     <tr>
                       <td className="left-modal">
+                        <label>Thái độ:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="attitude"
+                          value={values.attitude}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                      <td className="right-modal">
+                        <label>Comments:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="comments"
+                          value={values.comments}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="left-modal">
+                        <label>Nhận xét kỹ thuật:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="technicalComments"
+                          value={values.technicalComments}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                      <td className="right-modal">
+                        <label>Điểm kỹ thuật:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="technicalScore"
+                          value={values.technicalScore}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="left-modal">
+                        <label>Giao tiếp Tiếng Anh:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="englishCommunication"
+                          value={values.englishCommunication}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                      <td className="right-modal">
+                        <label>Remarks:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="remarks"
+                          value={values.remarks}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="left-modal">
                         <label>Mentor:</label>
                       </td>
                       <td>

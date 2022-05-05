@@ -7,11 +7,33 @@ import Swal from "sweetalert2";
 export default function Navbar() {
   const id = useSelector((state) => state.auth.id);
 
+
   const isLogin = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(authActions.logout());
   };
+    const id = useSelector((state) => state.auth.id);
+
+    const isLogin = useSelector((state) => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
+    const logoutHandler = () => {
+      Swal.fire({
+        title: "Bạn có muốn đăng xuất ?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonText: "Hủy",
+        confirmButtonText: "Đồng ý",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(authActions.logout());
+        }
+      })
+    };
+
   return (
     <div class="wrap">
       <nav>
