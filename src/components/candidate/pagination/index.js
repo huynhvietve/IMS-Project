@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Pagination = ({ candiPerPage, totalCandis, paginate }) => {
+const Pagination = ({ totalCandis, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalCandis / candiPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalCandis / 20); i++) {
     pageNumbers.push(i);
   }
 
