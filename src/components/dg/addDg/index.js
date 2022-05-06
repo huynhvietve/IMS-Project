@@ -5,6 +5,7 @@ import { batch } from "react-redux";
 
 export default function AddDg() {
   const [dg, setDg] = useState([]);
+  const idBatch = localStorage.getItem("idBatch");
   const closeModal = () => {
     const modals = document.getElementById("exampleModaldg");
     modals.style.display = "none";
@@ -41,7 +42,7 @@ export default function AddDg() {
       nameDG: addFormData.nameDG,
     };
     apiaxios
-      .dgCreate("dg/create", newContact)
+      .dgCreate(`dg/create?idInternshipCourse=${idBatch}`, newContact)
       .then((res) => {
         setDg(res.data.data);
         handleReset();

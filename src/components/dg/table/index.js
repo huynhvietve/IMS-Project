@@ -10,6 +10,7 @@ function TableDg(props) {
   const [dg, setDg] = useState([]);
   const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
+  const idBatch = localStorage.getItem("idBatch");
   useEffect(() => {
     dispatch(getDg());
   }, []);
@@ -17,7 +18,7 @@ function TableDg(props) {
   const [open, setOpen] = useState(false);
   const [valuesId, setValuesId] = useState(null);
   useEffect(() => {
-    apiaxios.dg("dg", "Get", null).then((res) => {
+    apiaxios.dg(`dg?idInternshipCourse=${idBatch}`, "Get", null).then((res) => {
       setDg(res.data.data);
     });
   }, [dg]);
