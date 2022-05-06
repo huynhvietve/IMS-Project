@@ -34,14 +34,14 @@ function Index() {
   };
   useEffect(() => {
     const fetchDatas = async () => {
-      mentorAPI(`mentor/idDG?idDG=${idDG}`, null).then((res) => {
+      mentorAPI(`mentor/idDG?idDG=${idDG}&idInternshipCourse=${idBatch}`, null).then((res) => {
         setMentor(res.data.data);
       });
     };
     fetchDatas();
   }, [idDG]);
   useEffect(() => {
-    mentorDG(`dg`, null).then((res) => {
+    mentorDG(`dg?idInternshipCourse=${idBatch}`, null).then((res) => {
       setDG(res.data.data);
     });
   }, []);
