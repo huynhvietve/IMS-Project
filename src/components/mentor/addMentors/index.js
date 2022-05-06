@@ -34,7 +34,7 @@ export default function AddMentor() {
   }, []);
 
   useEffect(() => {
-    apiaxios.mentorDG("dg", "Get", null).then((res) => {
+    apiaxios.mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null).then((res) => {
       setdg(res.data.data);
     });
   }, []);
@@ -87,7 +87,7 @@ export default function AddMentor() {
       idInternshipCourse: addFormData.idInternshipCourse,
     };
     apiaxios
-      .mentorCreate("mentor", newContact)
+      .mentorCreate(`mentor?idInternshipCourse=${idBatch}`, newContact)
       .then((res) => {
         setMentor(res.data);
         handleReset();
@@ -191,25 +191,6 @@ export default function AddMentor() {
                 </tr>
                 <tr>
                   <td className="left-mentor">
-                    <label>Batch:</label>
-                  </td>
-                  <td>
-                    <select
-                      className="inputText"
-                      name="idInternshipCourse"
-                      id="cars"
-                      onChange={handleAddFormChange}
-                      style={{ width: "200px" }}
-                    >
-                      <option disabled selected hidden>
-                        Chọn...
-                      </option>
-                      {Batch?.map((itemBatch) => (
-                        <option value={itemBatch.idInternshipCourse}>{itemBatch.nameCoure}</option>
-                      ))}
-                    </select>
-                  </td>
-                  <td className="right-mentor">
                     <label>Tên DG:</label>
                   </td>
                   <td>
@@ -228,6 +209,18 @@ export default function AddMentor() {
                       ))}
                     </select>
                   </td>
+                  <td className="right-mentor">
+                    <label>Địa chỉ:</label>
+                  </td>
+                  <td>
+                    <input
+                      className="inputText"
+                      name="address"
+                      type="text"
+                      placeholder="Nhập địa chỉ..."
+                      onChange={handleAddFormChange}
+                    />
+                  </td>
                 </tr>
                 <tr>
                   <td className="left-mentor">
@@ -239,18 +232,6 @@ export default function AddMentor() {
                       name="workplace"
                       type="text"
                       placeholder="Nhập nơi công tác..."
-                      onChange={handleAddFormChange}
-                    />
-                  </td>
-                  <td className="right-mentor">
-                    <label>Địa chỉ:</label>
-                  </td>
-                  <td>
-                    <input
-                      className="inputText"
-                      name="address"
-                      type="text"
-                      placeholder="Nhập địa chỉ..."
                       onChange={handleAddFormChange}
                     />
                   </td>

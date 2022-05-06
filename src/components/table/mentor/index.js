@@ -42,7 +42,7 @@ function TableMentor(props) {
     });
   }, {});
   useEffect(() => {
-    apiaxios.mentorDG("dg", "Get", null).then((res) => {
+    apiaxios.mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null).then((res) => {
       setdg(res.data.data);
     });
   }, []);
