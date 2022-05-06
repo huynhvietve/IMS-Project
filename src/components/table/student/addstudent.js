@@ -30,7 +30,7 @@ export default function AddStudent() {
       });
   }, {});
   useEffect(() => {
-    apiaxios.dg(`dg`).then((res) => {
+    apiaxios.dg(`dg?idInternshipCourse=${idBatch}`).then((res) => {
       setDg(res.data.data);
     });
   }, []);
@@ -124,7 +124,7 @@ export default function AddStudent() {
       idInternshipCourse: addFormData.idInternshipCourse,
     };
     apiaxios
-      .studentCreate("internship", newContact)
+      .studentCreate(`internship?idInternshipCourse=${idBatch}`, newContact)
       .then((res) => {
         const newBatch = [...posts];
         setPosts(newBatch);
@@ -211,16 +211,23 @@ export default function AddStudent() {
               </tr>
               <tr>
                 <td>
-                  <label>Ngày sinh: </label>
+                  <label>Trạng thái: </label>
                 </td>
                 <td>
-                  <input
-                    className="inputStudent"
-                    style={{width:"200px"}}
-                    type="date"
-                    name="dayOfBirth"
+                <select
+                    style={{height:"30px",width:"200px"}}
+                    className="input-TT"
+                    name="status"
+                    id="cars"
                     onChange={handleAddFormChange}
-                  ></input>
+                  >
+                    <option disabled selected hidden>
+                      Chọn...
+                    </option>
+                    <option value="Full time">Full time</option>
+                    <option value="Part time">Part time</option>
+                    <option value="N/A">N/A</option>
+                  </select>
                 </td>
                 <td style={{ paddingLeft: "20px" }}>
                   <label>Trường đại học: </label>
@@ -353,7 +360,7 @@ export default function AddStudent() {
                   <br></br>
                 </td>
                 <td style={{ paddingLeft: "20px" }}>
-                  <label>Nghi thức truyền thông:</label>
+                  <label style={{width:"170px"}}>Nghi thức truyền thông:</label>
                 </td>
                 <td>
                   <input
@@ -367,7 +374,7 @@ export default function AddStudent() {
               </tr>
               <tr>
                 <td>
-                  <label>Kỉ năng thuyết trình:</label>
+                  <label style={{width:"150px"}}>Kỹ năng thuyết trình:</label>
                 </td>
                 <td>
                   <input
@@ -516,48 +523,9 @@ export default function AddStudent() {
                 </td>
               </tr>
               <tr>
-                <td>
-                  <label>Trạng thái:</label>
-                </td>
-                <td>
-                <select
-                    style={{height:"30px",width:"200px"}}
-                    className="input-TT"
-                    name="status"
-                    id="cars"
-                    onChange={handleAddFormChange}
-                  >
-                    <option disabled selected hidden>
-                      Chọn...
-                    </option>
-                    <option value="Full time">Full time</option>
-                    <option value="Part time">Part time</option>
-                    <option value="N/A">N/A</option>
-                  </select>
-                  <br></br>
-                </td>
-                <td style={{ paddingLeft: "20px" }}>
-                  <label>Khóa thực tập:</label>
-                </td>
-                <td>
-                  <select
-                    style={{height:"30px",width:"200px"}}
-                    className="input-Batchh"
-                    name="idInternshipCourse"
-                    id="cars"
-                    onChange={handleAddFormChange}
-                  >
-                    <option disabled selected hidden>
-                      Chọn...
-                    </option>
-                    {student?.map((itemBatch) => (
-                      <option value={itemBatch.idInternshipCourse}>
-                        {itemBatch.nameCoure}
-                      </option>
-                    ))}
-                  </select>
-                  <br></br>
-                </td>
+                
+                
+                
               </tr>
               <div className="modal-footer">
                 <button

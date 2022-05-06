@@ -185,7 +185,7 @@ export default function Batch(props) {
                         />
                       </td>
                       <td style={{ paddingLeft: "20px" }}>
-                        <label>Loại thực tập : </label>
+                        <label>Trạng thái : </label>
                       </td>
                       <td>
                         <select
@@ -203,7 +203,7 @@ export default function Batch(props) {
                     </tr>
                     <tr>
                       <td>
-                        <label>Ngày bắt đầu : </label>
+                        <label>Ngày bắt đầu :</label>
                       </td>
                       <td>
                         <input
@@ -215,7 +215,7 @@ export default function Batch(props) {
                         ></input>
                       </td>
                       <td style={{ paddingLeft: "20px" }}>
-                        <label>Trạng thái : </label>
+                        <label>Loại thực tập : </label>
                       </td>
                       <td>
                         <select
@@ -232,7 +232,7 @@ export default function Batch(props) {
                     </tr>
                     <tr>
                       <td>
-                        <label>Ngày kết thúc:</label>
+                        <label>Ngày kết thúc : </label>
                       </td>
                       <td>
                         <input

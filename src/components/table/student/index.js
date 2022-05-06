@@ -36,7 +36,7 @@ export default function Student(props) {
   }, [idDG]);
   const [dg, setDg] = useState([]);
   useEffect(() => {
-    apiaxios.mentorDG("dg", "Get", null).then((res) => {
+    apiaxios.mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null).then((res) => {
       setDg(res.data.data);
     });
   }, []);
@@ -228,7 +228,7 @@ export default function Student(props) {
             <div className="row home-candidate--list">
               <span className="col l-2-8-student ">Họ tên</span>
               <span className="col l-2-8-student ">Email</span>
-              <span className="col l-2-8-student ">Trường đại học</span>
+              <span className="col l-2-8-student ">Trường </span>
               <span className="col l-2-8-student ">Loại máy tính</span>
               <span className="col l-2-8-student ">Số điện thoại</span>
               <span className="col l-2-8-student ">Tên DG</span>
@@ -347,19 +347,23 @@ export default function Student(props) {
                             </tr>
                             <tr>
                               <td>
-                                <label>Ngày sinh: </label>
+                                <label>Trạng thái: </label>
                               </td>
                               <td>
-                                <input
-                                  className="inputEditStudent"
-                                  style={{ width: "200px" }}
-                                  type="date"
-                                  name="dayOfBirth"
-                                  value={dayjs(values.dayOfBirth).format(
-                                    "YYYY-MM-DD"
-                                  )}
+                              <select
+                                  className="inputText"
+                                  name="status"
+                                  id="cars"
                                   onChange={handleEditFormChange}
-                                ></input>
+                                  value={values.status}
+                                >
+                                  <option disabled selected hidden>
+                                    Chọn...
+                                  </option>
+                                  <option value="Full time">Full time</option>
+                                  <option value="Part time">Part time</option>
+                                  <option value="N/A">N/A</option>
+                                </select>
                               </td>
                               <td style={{ paddingLeft: "20px" }}>
                                 <label>Trường đại học: </label>
@@ -521,7 +525,7 @@ export default function Student(props) {
                             </tr>
                             <tr>
                               <td>
-                                <label>Kỉ năng thuyết trình:</label>
+                                <label>Kỹ năng thuyết trình:</label>
                               </td>
                               <td>
                                 <input
@@ -689,41 +693,7 @@ export default function Student(props) {
                               </td>
                             </tr>
 
-                            <tr>
-                              <td>
-                                <label>Trạng thái:</label>
-                              </td>
-                              <td>
-                                <select
-                                  className="inputText"
-                                  name="status"
-                                  id="cars"
-                                  onChange={handleEditFormChange}
-                                  value={values.status}
-                                >
-                                  <option disabled selected hidden>
-                                    Chọn...
-                                  </option>
-                                  <option value="Full time">Full time</option>
-                                  <option value="Part time">Part time</option>
-                                  <option value="N/A">N/A</option>
-                                </select>
-                                <br></br>
-                              </td>
-                              <td style={{ paddingLeft: "20px" }}>
-                                <label>Khóa thực tập:</label>
-                              </td>
-                              <td>
-                                <input
-                                  disabled
-                                  className="inputText"
-                                  type="text"
-                                  name="nameCoure"
-                                  onChange={handleEditFormChange}
-                                  value={values.nameCoure}
-                                ></input>
-                                <br></br>
-                              </td>
+                            <tr>                          
                             </tr>
 
                             <div className="modal-footer">
