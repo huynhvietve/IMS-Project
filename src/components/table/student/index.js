@@ -36,9 +36,11 @@ export default function Student(props) {
   }, [idDG]);
   const [dg, setDg] = useState([]);
   useEffect(() => {
-    apiaxios.mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null).then((res) => {
-      setDg(res.data.data);
-    });
+    apiaxios
+      .mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null)
+      .then((res) => {
+        setDg(res.data.data);
+      });
   }, []);
   const [values, setValues] = useState({
     idInternship: "",
@@ -113,6 +115,8 @@ export default function Student(props) {
       fullNameMentor: students.fullNameMentor,
       nameDG: students.nameDG,
     };
+    console.log(students);
+    console.log(formValues);
     setValues(formValues);
   };
 
@@ -131,7 +135,7 @@ export default function Student(props) {
       internshipProject: values.internshipProject,
       internshipAgreementPolicy: values.internshipAgreementPolicy,
       securityTest: values.securityTest,
-      idDG: idDG,
+      idDG: values.idDG,
       toeicScore: values.toeicScore,
       testDate: values.testDate,
       securityAwareness: values.securityAwareness,
@@ -229,7 +233,7 @@ export default function Student(props) {
               <span className="col l-2-8-student ">Họ tên</span>
               <span className="col l-2-8-student ">Email</span>
               <span className="col l-2-8-student ">Trường </span>
-              <span className="col l-2-8-student ">Loại máy tính</span>
+              <span className="col l-2-8-student ">Loại PC</span>
               <span className="col l-2-8-student ">Số điện thoại</span>
               <span className="col l-2-8-student ">Tên DG</span>
               <span className="col l-2-8-student ">Tên mentor</span>
@@ -350,7 +354,7 @@ export default function Student(props) {
                                 <label>Trạng thái: </label>
                               </td>
                               <td>
-                              <select
+                                <select
                                   className="inputText"
                                   name="status"
                                   id="cars"
@@ -567,16 +571,19 @@ export default function Student(props) {
                                 <br></br>
                               </td>
                               <td style={{ paddingLeft: "20px" }}>
-                                <label>Loại máy tính:</label>
+                                <label>Loại PC:</label>
                               </td>
                               <td>
-                                <input
+                                <select
                                   className="inputText"
                                   type="text"
                                   name="pcType"
                                   value={values.pcType}
                                   onChange={handleEditFormChange}
-                                ></input>
+                                >
+                                  <option value="PC">PC</option>
+                                  <option value="Laptop">Laptop</option>
+                                </select>
                                 <br></br>
                               </td>
                             </tr>
@@ -653,8 +660,10 @@ export default function Student(props) {
                                   style={{ width: "200px", height: "30px" }}
                                   name="idDG"
                                   id="cars"
+                                  value={values.idDG}
                                   onChange={(e) => {
                                     setIdDG(e.currentTarget.value);
+                                    handleEditFormChange(e);
                                   }}
                                 >
                                   <option disabled selected hidden>
@@ -678,6 +687,7 @@ export default function Student(props) {
                                   style={{ width: "200px", height: "30px" }}
                                   name="idMentor"
                                   id="cars"
+                                  value={values.idMentor}
                                   onChange={handleEditFormChange}
                                 >
                                   <option disabled selected hidden>
@@ -693,8 +703,7 @@ export default function Student(props) {
                               </td>
                             </tr>
 
-                            <tr>                          
-                            </tr>
+                            <tr></tr>
 
                             <div className="modal-footer">
                               <button

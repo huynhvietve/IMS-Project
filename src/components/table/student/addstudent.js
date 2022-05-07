@@ -11,7 +11,7 @@ export default function AddStudent() {
   const [titleBatch, settitleBatch] = useState([]);
   const idBatch = localStorage.getItem("idBatch");
   const [student, setStudent] = useState([]);
-  console.log(idDG)
+  console.log(idDG);
   useEffect(() => {
     apiaxios.batchAPI("internshipcourse").then((res) => {
       setStudent(res.data.data);
@@ -37,12 +37,23 @@ export default function AddStudent() {
   const [mentor, setmentor] = useState([]);
   useEffect(() => {
     const fetchDatas = async () => {
-      apiaxios.mentorAPI(`mentor/batch/${idBatch}?idDG=${idDG}`, null).then((res) => {
-        setmentor(res.data.data);
-    });
-  }
+      apiaxios
+        .mentorAPI(`mentor/batch/${idBatch}?idDG=${idDG}`, null)
+        .then((res) => {
+          setmentor(res.data.data);
+        });
+    };
     fetchDatas();
-  },[idDG]);
+  }, [idDG]);
+  const handleCancelFormSubmit = () => {
+    setAddFormData({});
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    Array.from(document.querySelectorAll("select")).forEach(
+      (select) => (select.value = "Chọn...")
+    );
+  };
   const closeModal = () => {
     const modals = document.getElementById("exampleModalStudent");
     modals.style.display = "none";
@@ -130,6 +141,7 @@ export default function AddStudent() {
         setPosts(newBatch);
         handleCloseModal();
         closeModal();
+        handleCancelFormSubmit();
       })
       .catch((error) => {
         if (error.response) {
@@ -214,8 +226,8 @@ export default function AddStudent() {
                   <label>Trạng thái: </label>
                 </td>
                 <td>
-                <select
-                    style={{height:"30px",width:"200px"}}
+                  <select
+                    style={{ height: "30px", width: "200px" }}
                     className="input-TT"
                     name="status"
                     id="cars"
@@ -326,7 +338,7 @@ export default function AddStudent() {
                 <td>
                   <input
                     className="inputStudent"
-                    style={{width:"200px"}}
+                    style={{ width: "200px" }}
                     type="date"
                     name="testDate"
                     onChange={handleAddFormChange}
@@ -360,7 +372,9 @@ export default function AddStudent() {
                   <br></br>
                 </td>
                 <td style={{ paddingLeft: "20px" }}>
-                  <label style={{width:"170px"}}>Nghi thức truyền thông:</label>
+                  <label style={{ width: "170px" }}>
+                    Nghi thức truyền thông:
+                  </label>
                 </td>
                 <td>
                   <input
@@ -374,7 +388,9 @@ export default function AddStudent() {
               </tr>
               <tr>
                 <td>
-                  <label style={{width:"150px"}}>Kỹ năng thuyết trình:</label>
+                  <label style={{ width: "150px" }}>
+                    Kỹ năng thuyết trình:
+                  </label>
                 </td>
                 <td>
                   <input
@@ -412,15 +428,18 @@ export default function AddStudent() {
                   <br></br>
                 </td>
                 <td style={{ paddingLeft: "20px" }}>
-                  <label>Loại máy tính:</label>
+                  <label>Loại PC:</label>
                 </td>
                 <td>
-                  <input
+                  <select
                     className="inputText"
                     type="text"
                     name="pcType"
                     onChange={handleAddFormChange}
-                  ></input>
+                  >
+                    <option value="PC">PC</option>
+                    <option value="Laptop">Laptop</option>
+                  </select>
                   <br></br>
                 </td>
               </tr>
@@ -459,7 +478,7 @@ export default function AddStudent() {
                 <td>
                   <input
                     className="inputStudent"
-                    style={{width:"200px"}}
+                    style={{ width: "200px" }}
                     type="date"
                     name="certificationDate"
                     onChange={handleAddFormChange}
@@ -488,7 +507,9 @@ export default function AddStudent() {
                     style={{ width: "200px", height: "30px" }}
                     className="input-Student"
                     name="idDG"
-                    onChange={(e) => {setIdDG(e.currentTarget.value)}}
+                    onChange={(e) => {
+                      setIdDG(e.currentTarget.value);
+                    }}
                   >
                     <option disabled selected hidden>
                       Chọn...
@@ -522,16 +543,13 @@ export default function AddStudent() {
                   <br></br>
                 </td>
               </tr>
-              <tr>
-                
-                
-                
-              </tr>
+              <tr></tr>
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-secondary btn-Batch-Cancel"
                   data-dismiss="modal"
+                  onClick={handleCancelFormSubmit}
                 >
                   Hủy
                 </button>

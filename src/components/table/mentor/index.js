@@ -42,9 +42,11 @@ function TableMentor(props) {
     });
   }, {});
   useEffect(() => {
-    apiaxios.mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null).then((res) => {
-      setdg(res.data.data);
-    });
+    apiaxios
+      .mentorDG(`dg?idInternshipCourse=${idBatch}`, "Get", null)
+      .then((res) => {
+        setdg(res.data.data);
+      });
   }, []);
   useEffect(() => {
     apiaxios.mentorAPI(`mentor/batch/${idBatch}`, null).then((res) => {
@@ -65,6 +67,7 @@ function TableMentor(props) {
     email: "",
     position: "",
     idDG: "",
+    nameDG: "",
     idMentor: "",
     workplace: "",
     idInternshipCourse: "",
@@ -79,11 +82,14 @@ function TableMentor(props) {
       email: mentor.email,
       position: mentor.position,
       idDG: mentor.idDG,
+      nameDG: mentor.nameDG,
       idMentor: mentor.idMentor,
       workplace: mentor.workplace,
       idInternshipCourse: mentor.idInternshipCourse,
       nameCoure: mentor.nameCoure,
     };
+    console.log(mentor);
+    console.log(formValues);
     setValues(formValues);
   };
   const handleEditFormChange = (event) => {
@@ -368,7 +374,7 @@ function TableMentor(props) {
         </div>
       </div>
       <Pagination
-      className="pagination"
+        className="pagination"
         mentorPerPage={mentorPerPage}
         totalMentor={mentors.length}
         paginate={paginate}

@@ -26,7 +26,7 @@ function TableCandidate() {
   const [candiPerPage, setCandiPerPage] = useState();
   const paginate = (pageNumber) => setCurrPage(pageNumber);
   const idBatch = localStorage.getItem("idBatch");
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     apiaxios
@@ -35,16 +35,16 @@ function TableCandidate() {
         setCandi(res.data.data);
         setCandiPerPage(res.data.total);
       });
-  }, [currPage]);
+  }, [candi]);
   useEffect(() => {
-  const  fetchData = () => {
-    apiaxios
-      .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
-      .then((res) => {
-        setCandi(res.data.data);
-      });
-    } 
-    fetchData()
+    const fetchData = () => {
+      apiaxios
+        .candidateAPI(`candidate/batch/${idBatch}?fullName=${search}`)
+        .then((res) => {
+          setCandi(res.data.data);
+        });
+    };
+    fetchData();
   }, [search]);
 
   useEffect(() => {
@@ -232,7 +232,9 @@ function TableCandidate() {
         );
         apiaxios
           .deleteCandi(`candidate/${idCandidate}`, "DELETE", newContacts)
-          .then((res) => {setCandi(newContacts);});
+          .then((res) => {
+            setCandi(newContacts);
+          });
         newContacts.splice(index, 1);
       }
     });
@@ -292,7 +294,11 @@ function TableCandidate() {
       <div className="input-toolbar">
         <div className="uploader-candi">
           <form style={{ marginLeft: "7px" }} onSubmit={handleSubmit}>
-            <input className="inputUpload" type="file" onChange={handleChange} />
+            <input
+              className="inputUpload"
+              type="file"
+              onChange={handleChange}
+            />
             <button className="btn-upload" type="submit">
               Upload
             </button>
@@ -337,9 +343,7 @@ function TableCandidate() {
                   <i
                     className="fa fa-trash-o fa-trash-o1"
                     aria-hidden="true"
-                    onClick={() =>
-                      handleDeleteClick(candidate.idCandidate)
-                    }
+                    onClick={() => handleDeleteClick(candidate.idCandidate)}
                   ></i>
                   <i
                     className="fa fa-pencil-square-o fa-pencil-square-o1"
@@ -701,7 +705,7 @@ function TableCandidate() {
                                 className="btn btn-danger-del"
                                 onClick={editSubmit}
                               >
-                                Sửa
+                                Cập nhật
                               </button>{" "}
                             </div>
                           </div>
@@ -1141,7 +1145,9 @@ function TableCandidate() {
                                       value={
                                         values.covidVaccinationiInformation
                                       }
-                                      title={values.covidVaccinationiInformation}
+                                      title={
+                                        values.covidVaccinationiInformation
+                                      }
                                       disabled
                                     />
                                   </td>

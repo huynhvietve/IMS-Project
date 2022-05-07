@@ -10,7 +10,7 @@ function InsertInterview(posts, setPosts) {
   const idBatch = localStorage.getItem("idBatch");
   const handleSubmit = (id) => {
     Swal.fire({
-      title: "Bạn có muốn insert danh sách này ?",
+      title: "Bạn có muốn thêm danh sách này ?",
       text: "",
       icon: "warning",
       showCancelButton: true,

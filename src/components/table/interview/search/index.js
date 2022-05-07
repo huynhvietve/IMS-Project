@@ -18,6 +18,7 @@ function Index() {
   const [interviews, setinterviews] = useState([]);
   const [DG, setDG] = useState([]);
   const [idDG, setIdDG] = useState([]);
+  console.log(idDG);
   const [posts, setPosts] = useState([]);
   const [mentor, setMentor] = useState([]);
   const [status, setStatus] = useState([]);
@@ -34,7 +35,10 @@ function Index() {
   };
   useEffect(() => {
     const fetchDatas = async () => {
-      mentorAPI(`mentor/idDG?idDG=${idDG}&idInternshipCourse=${idBatch}`, null).then((res) => {
+      mentorAPI(
+        `mentor/idDG?idDG=${idDG}&idInternshipCourse=${idBatch}`,
+        null
+      ).then((res) => {
         setMentor(res.data.data);
       });
     };
@@ -115,6 +119,7 @@ function Index() {
     technicalScore: "",
     attitude: "",
     englishCommunication: "",
+    remarks: "",
   });
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -141,9 +146,10 @@ function Index() {
       technicalScore: interview.technicalScore,
       englishCommunication: interview.englishCommunication,
       status: interview.status,
-      idDG: interview.idDG,
+      idDG: idDG,
       idMentor: interview.idMentor,
       comments: interview.comments,
+      remarks: interview.remarks,
     };
     setValues(formValues);
   };
@@ -163,9 +169,10 @@ function Index() {
       technicalScore: values.technicalScore,
       englishCommunication: values.englishCommunication,
       status: values.status,
-      idDG: values.idDG,
+      idDG: idDG,
       idMentor: values.idMentor,
       comments: values.comments,
+      remarks: values.remarks,
     };
 
     updateinterviewAPI(`internview/${valuesId}`, editBatch)
@@ -357,30 +364,6 @@ function Index() {
                     </tr>
                     <tr>
                       <td className="left-modal">
-                        <label>Thái độ:</label>
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="attitude"
-                          value={values.attitude}
-                          onChange={handleEditFormChange}
-                        />
-                      </td>
-                      <td className="right-modal">
-                        <label>Comments:</label>
-                      </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="comments"
-                          value={values.comments}
-                          onChange={handleEditFormChange}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="left-modal">
                         <label>Nhận xét kỹ thuật:</label>
                       </td>
                       <td>
@@ -445,7 +428,19 @@ function Index() {
                         </select>
                       </td>
                     </tr>
-
+                    <tr>
+                      <td className="left-modal">
+                        <label>Thái độ:</label>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="attitude"
+                          value={values.attitude}
+                          onChange={handleEditFormChange}
+                        />
+                      </td>
+                    </tr>
                     <td>
                       <input
                         type="hidden"
