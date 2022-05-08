@@ -446,7 +446,7 @@ function TableCandidate() {
                 className="row sm-gutter sm-gutter--list"
                 key={candidate.idCandidate}
               >
-                <li className="col l-2-8-candi">{candidate.fullName}</li>
+                <li className="col l-2-8-candi" style={{paddingLeft:"16px"}}>{candidate.fullName}</li>
                 <li className="col l-2-8-candi">{candidate.emailCandidate}</li>
                 <li className="col l-2-8-candi">{candidate.studentID}</li>
                 <li className="col l-2-8-candi">{candidate.university}</li>

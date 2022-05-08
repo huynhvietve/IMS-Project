@@ -243,7 +243,7 @@ function Index() {
                 className="row sm-gutter sm-gutter--list"
                 key={interview.idCandidate}
               >
-                <li className="col1 l-2-9">{interview.fullName}</li>
+                <li className="col1 l-2-9" style={{paddingLeft:"15px"}}>{interview.fullName}</li>
                 <li className="col1 l-2-9">{interview.emailCandidate}</li>
                 <li element="li" name="interviewDate" className="col1 l-2-9">
                   {dayjs(interview.interviewDate).format("DD/MM/YYYY")}

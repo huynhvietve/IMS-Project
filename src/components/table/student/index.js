@@ -643,7 +643,7 @@ export default function Student(props) {
                                 <br></br>
                               </td>
                               <td style={{ paddingLeft: "20px" }}>
-                                <label>Miền thực tập:</label>
+                                <label>Vị trí thực tập:</label>
                               </td>
                               <td>
                                 <input
@@ -773,7 +773,7 @@ export default function Student(props) {
                                       disabled
                                     />
                                   </td>
-                                  <td className="right-modal">
+                                  <td className="right-modal" >
                                     <label>Địa chỉ:</label>
                                   </td>
                                   <td>
@@ -1025,7 +1025,7 @@ export default function Student(props) {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Miền thực tập:</label>
+                                    <label>Vị trí thực tập:</label>
                                   </td>
                                   <td>
                                     <input
