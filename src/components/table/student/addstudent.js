@@ -101,6 +101,9 @@ export default function AddStudent() {
   const handleCloseModal = () => {
     setOpen(false);
   };
+  const tai_lai_trang = (event) => {
+    window.location.reload();
+  };
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
     const newContact = {
@@ -137,11 +140,12 @@ export default function AddStudent() {
     apiaxios
       .studentCreate(`internship?idInternshipCourse=${idBatch}`, newContact)
       .then((res) => {
-        const newBatch = [...posts];
+        const newBatch = [...posts,newContact];
         setPosts(newBatch);
         handleCloseModal();
         closeModal();
         handleCancelFormSubmit();
+        tai_lai_trang();
       })
       .catch((error) => {
         if (error.response) {
@@ -437,6 +441,9 @@ export default function AddStudent() {
                     name="pcType"
                     onChange={handleAddFormChange}
                   >
+                    <option disabled selected hidden>
+                                    Chọn...
+                                  </option>
                     <option value="PC">PC</option>
                     <option value="Laptop">Laptop</option>
                   </select>

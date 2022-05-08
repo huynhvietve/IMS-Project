@@ -15,7 +15,7 @@ export default function Student(props) {
     apiaxios.student(`internship/batch/${idBatch}`).then((res) => {
       setPosts(res.data.data);
     });
-  }, [posts]);
+  }, []);
   useEffect(() => {
     apiaxios
       .batchAPI(`internshipcourse/${idBatch}`, "Get", null)
@@ -119,7 +119,9 @@ export default function Student(props) {
     console.log(formValues);
     setValues(formValues);
   };
-
+  const tai_lai_trang = (event) => {
+    window.location.reload();
+  };
   const [valuesId, setValuesId] = useState(null);
   const editSubmit = (event) => {
     event.preventDefault();
@@ -168,6 +170,7 @@ export default function Student(props) {
         setPosts(newBatch);
         settitleBatch(newBatch);
         handleCloseModal();
+        tai_lai_trang();
       })
       .catch((error) => {
         if (error.response) {
@@ -291,7 +294,10 @@ export default function Student(props) {
                       className="fa fa-eye fa-eye1"
                       aria-hidden="true"
                       data-toggle="modal"
-                      data-target="#exampleModal4"
+                      data-target="#exampleModalDetail"
+                      onClick={() => {
+                        handleEditClick(students);
+                      }}
                     ></i>
                   </li>
                 </ul>
@@ -731,6 +737,345 @@ export default function Student(props) {
             </form>
           </div>
           {AddStudent()}
+          <div>
+          <div
+                        className="modal fade"
+                        id="exampleModalDetail"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-lg">
+                          <div className="modal-content modal-content-top">
+                            <div className="modal-header">
+                              <div className="container d-flex pl-0">
+                                <h4
+                                  className="modal-title ml-2"
+                                  id="exampleModalLabel"
+                                  style={{ color: "#007bff" }}
+                                >
+                                  CHI TIẾT SINH VIÊN
+                                </h4>
+                              </div>{" "}
+                            </div>
+                            <div className="modal-body">
+                              <table>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Họ tên:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.fullNameInternship}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Địa chỉ:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.address }
+                                      title={values.tel}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Trạng thái:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.status }
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Trường đại học:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.university}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Email:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.email}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Số điện thoại:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.telInternship }
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Dự án thực tập:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.internshipProject}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label style={{width: "180px"}}>Thỏa thuận thực tập:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.internshipAgreementPolicy}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Điểm bảo mật:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.securityTest}
+                                      
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Điểm Toeic:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.toeicScore}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Ngày test Toeic:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={dayjs(values.testDate).format(
+                                        "DD-MM-YYYY"
+                                      )}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Nhận thức bảo mật:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.securityAwareness}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label style={{width: "160px"}}>Phương pháp Agile:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.pmtoolsAgileMethodology}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Nghi thức truyền thông:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.workEtiquetteProfessionalCommunication}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Kỹ năng thuyết trình:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      type="text"
+                                      value={values.presentationSkills}
+
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Tham dự khóa đào tạo:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.trainingAttendance}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Bình luận:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.remark}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Loại PC:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.pcType}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Lịch thực tập:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      type="text"
+                                      value={dayjs(values.internshipSchedule).format(
+                                        "DD-MM-YYYY"
+                                      )}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Thông tin covid:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.covidVaccinationiInformation}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Ngày chứng nhận:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={dayjs(values.certificationDate).format(
+                                        "DD-MM-YYYY"
+                                      )}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Miền thực tập:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.internshipDomain}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className="left-modal">
+                                    <label>Tên DG:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.nameDG}
+                                      disabled
+                                    />
+                                  </td>
+                                  <td className="right-modal">
+                                    <label>Tên Mentor:</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.fullNameMentor}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                            <div className="modal-footer">
+                              {" "}
+                              <button
+                                type="button"
+                                className="btn btn-light"
+                                data-dismiss="modal"
+                              >
+                                Hủy
+                              </button>{" "}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+          </div>
           <button
             id="md-them"
             type="button"
