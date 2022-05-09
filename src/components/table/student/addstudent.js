@@ -493,7 +493,7 @@ export default function AddStudent() {
                   <br></br>
                 </td>
                 <td style={{ paddingLeft: "20px" }}>
-                  <label>Miền thực tập:</label>
+                  <label>Vị trí thực tập:</label>
                 </td>
                 <td>
                   <input
