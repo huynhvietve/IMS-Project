@@ -131,3 +131,6 @@ h4{
 ::-webkit-scrollbar {
     overflow: scroll;
 }
+.modal-content-hiden{
+  overflow: hidden;
+}

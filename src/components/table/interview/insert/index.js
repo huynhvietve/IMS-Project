@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import {
   insertinterviewAPI,
   updateinsertinterviewAPI,
+  internshipStatusUpdate,
 } from "../../../../api/service";
 
 function InsertInterview(posts, setPosts) {
@@ -31,6 +32,8 @@ function InsertInterview(posts, setPosts) {
           updateinsertinterviewAPI(`internview/updateInsert/${id}`).then(
             (res) => {}
           );
+          internshipStatusUpdate(`internship/`).then((res) => {
+          });
           for (let i = 0; i < newContacts.length; i) {
             newContacts.splice(index, 1);
           }

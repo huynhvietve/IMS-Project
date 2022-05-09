@@ -72,6 +72,7 @@ export default function Student(props) {
     nameCoure: "",
     fullNameMentor: "",
     nameDG: "",
+    internshipStatus: ""
   });
   const handleEditFormChange = (event) => {
     event.preventDefault();
@@ -114,6 +115,7 @@ export default function Student(props) {
       nameCoure: students.nameCoure,
       fullNameMentor: students.fullNameMentor,
       nameDG: students.nameDG,
+      internshipStatus: students.internshipStatus,
     };
     console.log(students);
     console.log(formValues);
@@ -158,6 +160,7 @@ export default function Student(props) {
       dateStart: values.dateStart,
       dateEnd: values.dateEnd,
       nameCoure: values.nameCoure,
+      internshipStatus: values.internshipStatus,
     };
     apiaxios
       .editStudent(`internship/${valuesId}`, editBatch)
@@ -236,7 +239,7 @@ export default function Student(props) {
               <span className="col l-2-8-student ">Họ tên</span>
               <span className="col l-2-8-student ">Email</span>
               <span className="col l-2-8-student ">Trường </span>
-              <span className="col l-2-8-student ">Loại PC</span>
+              <span className="col l-2-8-student ">Trang thái</span>
               <span className="col l-2-8-student ">Số điện thoại</span>
               <span className="col l-2-8-student ">Tên DG</span>
               <span className="col l-2-8-student ">Tên mentor</span>
@@ -252,9 +255,9 @@ export default function Student(props) {
                   <li className="col l-2-8-student">{students.university}</li>
                   <li
                     className="col l-2-8-student"
-                    style={{ marginLeft: "10px" }}
+                    style={{ textAlign: "center" }}
                   >
-                    {students.pcType}
+                    {students.internshipStatus}
                   </li>
                   <li className="col l-2-8-student">
                     {students.telInternship}
@@ -315,7 +318,7 @@ export default function Student(props) {
                     aria-hidden="true"
                   >
                     <div className="modal-dialog modal-lg" role="document">
-                      <div className="modal-content">
+                      <div className="modal-content modal-content-hiden">
                         <div className="modal-header">
                           <h4 id="exampleModalLongTitle">SỬA THỰC TẬP SINH</h4>
                           <button
@@ -709,7 +712,33 @@ export default function Student(props) {
                               </td>
                             </tr>
 
-                            <tr></tr>
+                            <tr>
+                            <td     style={{ width: "200px", height: "30px" }}>
+                                <label>Trạng Thái thực tập:</label>
+                              </td>
+                              <td>
+                              <select
+                                  className="input_Student"
+                                  style={{ width: "200px", height: "30px" }}
+                                  name="internshipStatus"
+                                  id="cars"
+                                  value={values.internshipStatus}
+                                  onChange={
+                                    handleEditFormChange
+                                  }
+                                >
+                                  <option value="Dừng thực tập">
+                                  Dừng thực tập
+                                  </option>
+                                  <option value="Đang thực tập">
+                                  Đang thực tập
+                                  </option>
+                                 
+                                </select>
+                                <br></br>
+                              </td>
+
+                            </tr>
 
                             <div className="modal-footer">
                               <button
@@ -747,7 +776,7 @@ export default function Student(props) {
                         aria-hidden="true"
                       >
                         <div className="modal-dialog modal-lg">
-                          <div className="modal-content modal-content-top">
+                          <div className="modal-content modal-content-top modal-content-hiden">
                             <div className="modal-header">
                               <div className="container d-flex pl-0">
                                 <h4
@@ -1025,7 +1054,7 @@ export default function Student(props) {
                                     />
                                   </td>
                                   <td className="right-modal">
-                                    <label>Miền thực tập:</label>
+                                    <label>Vị trí TT:</label>
                                   </td>
                                   <td>
                                     <input
@@ -1056,6 +1085,19 @@ export default function Student(props) {
                                       tabindex="-1"
                                       className="inputDetail"
                                       value={values.fullNameMentor}
+                                      disabled
+                                    />
+                                  </td>
+                                </tr>
+                                <tr>
+                                <td className="left-modal">
+                                    <label>Trạng Thái TT</label>
+                                  </td>
+                                  <td>
+                                    <input
+                                      tabindex="-1"
+                                      className="inputDetail"
+                                      value={values.internshipStatus}
                                       disabled
                                     />
                                   </td>

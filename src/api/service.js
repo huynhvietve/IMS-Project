@@ -81,6 +81,9 @@ export function updateinterviewAPI(endpoint, body) {
 export function insertinterviewAPI(endpoint) {
   return api.post(`${API_BASE}/${endpoint}`, null);
 }
+export function internshipStatusUpdate(endpoint, body) {
+  return api.put(`${API_BASE}/${endpoint}`, body);
+}
 export function updateinsertinterviewAPI(endpoint, body) {
   return api.put(`${API_BASE}/${endpoint}`, body);
 }
