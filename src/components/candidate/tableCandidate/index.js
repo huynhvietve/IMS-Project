@@ -4,8 +4,7 @@ import * as constTable from "../../../constant/constTable";
 import * as constCandi from "../../../constant/constCandidate";
 import Pagination from "../pagination/index";
 import { withRouter } from "react-router-dom";
-import { candidateAPI, batchAPI, UploadAPI } from "../../../api/service";
-import AddCandidate from "../addCandidate/index";
+import {  batchAPI, UploadAPI } from "../../../api/service";
 import CalendarInterview from "../../calendarinterview/create/index";
 import { popUpActions } from "../../../redux/store/popup";
 import Preview from "../../calendarinterview/review";
@@ -51,13 +50,14 @@ function TableCandidate() {
     preferredInternshipStartDate: "",
     preferredInternshipDuration: "",
     internshipSchedule: "",
-    idInternshipCourse: "",
+    idInternshipCourse: idBatch,
     projectExperience: "",
     expectedGraduationSchedule: "",
     covidVaccinationiInformation: "",
     remainingSubjects: "",
     covidVaccinationCertificate: "",
     certificationDate: "",
+    status: "",
   });
   const closeModal = () => {
     const modals = document.getElementById("exampleModalAdd");
@@ -72,7 +72,7 @@ function TableCandidate() {
     newFormData[fieldName] = fieldValue;
     setAddCandi(newFormData);
   };
-
+  const statusaass = 'Waiting for results'
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
     const newCadidate = {
@@ -98,11 +98,12 @@ function TableCandidate() {
       remainingSubjects: addCandi.remainingSubjects,
       covidVaccinationCertificate: addCandi.covidVaccinationCertificate,
       certificationDate: addCandi.certificationDate,
+      status: statusaass,
     };
     apiaxios
     .candidatePost("candidate/create", newCadidate)
       .then((res) => {
-        const newCadidates = [...candi, newCadidate];
+        const newCadidates = [ newCadidate,...candi];
         setCandi(newCadidates);
         handleReset();
         closeModal();
@@ -1587,39 +1588,6 @@ function TableCandidate() {
                   </tr>
                   <tr>
                     <td className="left-modal">
-                      <label>{constCandidate.INTERNBATCH}</label>
-                    </td>
-                    <td>
-                      <select
-                        style={{ width:"189.04px", height:"29.98px"}}
-                        className="inputTextCandi"
-                        name="idInternshipCourse"
-                        id="cars"
-                        onChange={handleAddFormChange}
-                      >
-                        <option disabled selected hidden>
-                          Chọn...
-                        </option>
-                        {batch?.map((itemBatch) => (
-                          <option value={itemBatch.idInternshipCourse}>
-                            {itemBatch.nameCoure}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                    <td className="right-modal">
-                      <label>{constCandidate.CVIDINFO}</label>
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        name="covidVaccinationiInformation"
-                        onChange={handleAddFormChange}
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="left-modal">
                       <label>{constCandidate.CVIDCERT}</label>
                     </td>
                     <td>
@@ -1636,6 +1604,19 @@ function TableCandidate() {
                       <input
                         type="date"
                         name="certificationDate"
+                        onChange={handleAddFormChange}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                   
+                    <td className="left-modal">
+                      <label>{constCandidate.CVIDINFO}</label>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="covidVaccinationiInformation"
                         onChange={handleAddFormChange}
                       />
                     </td>

@@ -160,14 +160,14 @@ export default function Internships(props) {
                     {products.status}
                   </li>
                   <li className="col l-2-8-TacVu ">
-                    <i
+                    {/* <i
                       className="fa fa-trash-o"
                       style={{ marginLeft: "10px" }}
                       aria-hidden="true"
                       onClick={() =>
                         handleDeleteClick(products.idInternshipCourse)
                       }
-                    ></i>
+                    ></i> */}
                     <i
                       data-target="#myModalBatch"
                       data-toggle="modal"

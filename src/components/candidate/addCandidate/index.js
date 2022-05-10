@@ -16,7 +16,7 @@ export default function AddCandidate() {
         setCandi(res.data.data);
         setCandiPerPage(res.data.total);
       });
-  }, [currPage]);
+  }, [candi]);
 
   const [batch, setBatch] = useState([]);
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function AddCandidate() {
     preferredInternshipStartDate: "",
     preferredInternshipDuration: "",
     internshipSchedule: "",
-    idInternshipCourse: "",
+    idInternshipCourse: idBatch,
     projectExperience: "",
     expectedGraduationSchedule: "",
     covidVaccinationiInformation: "",
@@ -102,7 +102,7 @@ export default function AddCandidate() {
     apiaxios
     .candidatePost("candidate/create", newCadidate)
       .then((res) => {
-        const newCadidates = [...candi, newCadidate];
+        const newCadidates = [newCadidate,...candi];
         setCandi(newCadidates);
         handleReset();
         closeModal();
