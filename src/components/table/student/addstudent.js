@@ -140,7 +140,7 @@ export default function AddStudent() {
     apiaxios
       .studentCreate(`internship?idInternshipCourse=${idBatch}`, newContact)
       .then((res) => {
-        const newBatch = [...posts,newContact];
+        const newBatch = [newContact,...posts];
         setPosts(newBatch);
         handleCloseModal();
         closeModal();
@@ -377,7 +377,7 @@ export default function AddStudent() {
                 </td>
                 <td style={{ paddingLeft: "20px" }}>
                   <label style={{ width: "170px" }}>
-                    Nghi thức truyền thông:
+                  Kỹ năng mềm:
                   </label>
                 </td>
                 <td>

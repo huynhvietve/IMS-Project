@@ -48,11 +48,15 @@ function TableMentor(props) {
         setdg(res.data.data);
       });
   }, []);
+ 
+  const tai_lai_trang = (event) => {
+    window.location.reload();
+  };
   useEffect(() => {
     apiaxios.mentorAPI(`mentor/batch/${idBatch}`, null).then((res) => {
       setMentor(res.data.data);
     });
-  }, [mentors]);
+  }, []);
 
   const handleOpenModal = () => {
     setOpen(true);
@@ -122,6 +126,7 @@ function TableMentor(props) {
         setPosts(newMentor);
         handleCloseModal();
         setMentor(newMentor);
+        tai_lai_trang();
       })
       .catch((error) => {
         if (error.response) {

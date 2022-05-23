@@ -4,7 +4,7 @@ import axios from "axios";
 import * as Config from "./config";
 
 export const loginAPI = (username, password) => {
-  return api.post(`${Config.API_BASE}/auth/login`, {
+  return api.post(`${Config.API_BASE}/login`, {
     username: username,
     password: password,
   });

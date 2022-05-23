@@ -38,12 +38,14 @@ export default function AddMentor() {
       setdg(res.data.data);
     });
   }, []);
-
+  const tai_lai_trang = (event) => {
+    window.location.reload();
+  };
   useEffect(() => {
     apiaxios.mentorAPI(`mentor/batch/${idBatch}`, null).then((res) => {
       setMentor(res.data.data);
     });
-  }, [mentors]);
+  }, []);
 
   const [addFormData, setAddFormData] = useState({
     fullNameMentor: "",
@@ -92,6 +94,8 @@ export default function AddMentor() {
         setMentor(res.data);
         handleReset();
         closeModal();
+        tai_lai_trang();
+        
       })
       .catch((error) => {
         if (error.response) {

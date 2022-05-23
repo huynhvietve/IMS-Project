@@ -433,8 +433,8 @@ export default function Student(props) {
                                 ></input>
                                 <br></br>
                               </td>
-                              <td style={{ paddingLeft: "20px" }}>
-                                <label>Thỏa thuận thực tập:</label>
+                              <td  style={{ paddingLeft: "20px" }}>
+                                <label style={{ width: "170px" }}>Thỏa thuận thực tập:</label>
                               </td>
                               <td>
                                 <input
@@ -521,7 +521,7 @@ export default function Student(props) {
                                 <br></br>
                               </td>
                               <td style={{ paddingLeft: "20px" }}>
-                                <label>Nghi thức truyền thông:</label>
+                                <label>Kỹ năng mềm:</label>
                               </td>
                               <td>
                                 <input

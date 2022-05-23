@@ -34,6 +34,9 @@ export const getMentor = () => {
       });
   };
 };
+const tai_lai_trang = (event) => {
+  window.location.reload();
+};
 export const deleteMentor = (id) => {
   return (dispatch) => {
     Swal.fire({
@@ -51,6 +54,7 @@ export const deleteMentor = (id) => {
           mentorService.deleteMentor(id).then((res) => {
             dispatch(createAction(DELETE_MENTOR, res.data));
             dispatch(getMentor());
+            tai_lai_trang();
           });
         }
       })

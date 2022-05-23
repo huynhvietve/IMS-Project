@@ -331,6 +331,9 @@ function Index() {
                             setIdDG(e.currentTarget.value);
                           }}
                         >
+                          <option disabled selected hidden value="">
+                            Chọn...
+                          </option>
                           {DG?.map((itemDG) => (
                             <option value={itemDG.idDG}>{itemDG.nameDG}</option>
                           ))}
@@ -426,10 +429,9 @@ function Index() {
                             </option>
                           ))}
                         </select>
+                        
                       </td>
-                    </tr>
-                    <tr>
-                      <td className="left-modal">
+                      <td className="right-modal">
                         <label>Thái độ:</label>
                       </td>
                       <td>
